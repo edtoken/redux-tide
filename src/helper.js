@@ -7,8 +7,7 @@ const config = require('./config')
 let START_UNIQ_PREFIX = 0
 
 export const uniqPrefix = (() => {
-  const uniq = () => {
-  }
+  const uniq = () => {}
   uniq.toString = uniq.valueOf = () => {
     START_UNIQ_PREFIX += 1
     return `uniq${START_UNIQ_PREFIX}`
@@ -37,7 +36,6 @@ export const parseError = err => {
 export const denormalize = (input, schema, entities) => {
   return config.setDenormalize.denormalize(input, schema, entities)
 }
-
 
 /**
  * Action success response default mapper

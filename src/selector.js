@@ -2,9 +2,9 @@
  * @namespace selector
  */
 
-import {createSelector} from 'reselect'
-import {denormalize} from './helper'
-import {ACTIONS_REDUCER_NAME, ENTITIES_REDUCER_NAME} from './config'
+import { createSelector } from 'reselect'
+import { denormalize } from './helper'
+import { ACTIONS_REDUCER_NAME, ENTITIES_REDUCER_NAME } from './config'
 
 import './tmp'
 // import {denormalize} from 'normalizr'
@@ -14,11 +14,15 @@ const defaultActionDataOutput = {
   time: '',
   hasError: '',
   errorText: '',
-  isFetching: false,
+  isFetching: false
 }
 
-const _makeGetActionData = (action, actionId, entityName, actionEntitySchema) => {
-
+const _makeGetActionData = (
+  action,
+  actionId,
+  entityName,
+  actionEntitySchema
+) => {
   return createSelector(
     [
       state => state[ACTIONS_REDUCER_NAME].get(actionId),
@@ -26,7 +30,6 @@ const _makeGetActionData = (action, actionId, entityName, actionEntitySchema) =>
       state => state[ENTITIES_REDUCER_NAME]
     ],
     (actionState, entityState, entities) => {
-
       let output = Object.assign({}, defaultActionDataOutput)
 
       if (!actionState) {
@@ -39,26 +42,41 @@ const _makeGetActionData = (action, actionId, entityName, actionEntitySchema) =>
         time: actionState.get('time'),
         hasError: actionState.get('hasError'),
         errorText: actionState.get('errorText'),
-        isFetching: actionState.get('isFetching'),
+        isFetching: actionState.get('isFetching')
       })
 
       const actionPayloadIsArray = actionState.get('isArrayData')
       const actionDataKey = actionState.get('actionDataKey')
 
-      const actionPayloadIds = !actionDataKey ? undefined : actionPayloadIsArray ? actionState.get(actionDataKey) : [actionState.get(actionDataKey)]
-      const actionPrevPayloadIds = !actionDataKey ? undefined : actionPayloadIsArray ? actionState.get(`prev${actionDataKey}`) : [actionState.get(`prev${actionDataKey}`)]
+      const actionPayloadIds = !actionDataKey
+        ? undefined
+        : actionPayloadIsArray
+          ? actionState.get(actionDataKey)
+          : [actionState.get(actionDataKey)]
+      const actionPrevPayloadIds = !actionDataKey
+        ? undefined
+        : actionPayloadIsArray
+          ? actionState.get(`prev${actionDataKey}`)
+          : [actionState.get(`prev${actionDataKey}`)]
 
       if (actionDataKey) {
         output = Object.assign(output, {
           payload: actionPayloadIsArray ? [] : '',
-          prevPayload: actionPayloadIsArray ? [] : '',
+          prevPayload: actionPayloadIsArray ? [] : ''
         })
       }
 
-      if (actionDataKey && entityState && (actionPrevPayloadIds || actionPayloadIds)) {
-
-        let prevData = !actionPrevPayloadIds ? [] : denormalize(actionPrevPayloadIds, [actionEntitySchema], entities)
-        let currentData = !actionPayloadIds ? [] : denormalize(actionPayloadIds, [actionEntitySchema], entities)
+      if (
+        actionDataKey &&
+        entityState &&
+        (actionPrevPayloadIds || actionPayloadIds)
+      ) {
+        let prevData = !actionPrevPayloadIds
+          ? []
+          : denormalize(actionPrevPayloadIds, [actionEntitySchema], entities)
+        let currentData = !actionPayloadIds
+          ? []
+          : denormalize(actionPayloadIds, [actionEntitySchema], entities)
 
         prevData = prevData.filter(v => v) // todo remove undefined values
         currentData = currentData.filter(v => v) // todo remove undefined values
@@ -68,7 +86,7 @@ const _makeGetActionData = (action, actionId, entityName, actionEntitySchema) =>
 
         output = Object.assign(output, {
           payload: actionPayloadIsArray ? currentData : currentData[0],
-          prevPayload: actionPayloadIsArray ? prevData : prevData[0],
+          prevPayload: actionPayloadIsArray ? prevData : prevData[0]
         })
       }
 
@@ -83,7 +101,12 @@ export const getActionData = action => {
   const actionEntitySchema = action.getSchema()
 
   return (state, props) => {
-    const selectorGetActionData = _makeGetActionData(action, actionId, entityName, actionEntitySchema)
+    const selectorGetActionData = _makeGetActionData(
+      action,
+      actionId,
+      entityName,
+      actionEntitySchema
+    )
     return selectorGetActionData(state, props)
   }
 }

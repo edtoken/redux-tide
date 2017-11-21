@@ -2,14 +2,18 @@
  * @namespace reducer
  */
 
-import {fromJS} from 'immutable'
-import {normalize} from 'normalizr'
+import { fromJS } from 'immutable'
+import { normalize } from 'normalizr'
 
-import {ACTION_TYPE_PREFIX, ACTIONS_REDUCER_NAME, ENTITIES_REDUCER_NAME} from './config'
+import {
+  ACTION_TYPE_PREFIX,
+  ACTIONS_REDUCER_NAME,
+  ENTITIES_REDUCER_NAME
+} from './config'
 
 const defaultEmptyActionData = {
-  'array': [],
-  'notArray': ''
+  array: [],
+  notArray: ''
 }
 
 /**
@@ -38,15 +42,16 @@ const defaultEmptyActionData = {
  * @returns {Object} - {[ACTIONS_REDUCER_NAME]:Function, [ENTITIES_REDUCER_NAME]:Function}
  */
 export const createReducers = (...appSchema) => {
-
   // default state for actions
   const defaultActionsState = fromJS({})
 
   // default state for entities
-  const defaultEntitiesState = fromJS(appSchema.reduce((memo, item) => {
-    memo[item.key] = {}
-    return memo
-  }, {}))
+  const defaultEntitiesState = fromJS(
+    appSchema.reduce((memo, item) => {
+      memo[item.key] = {}
+      return memo
+    }, {})
+  )
 
   return {
     [ACTIONS_REDUCER_NAME]: function(state = defaultActionsState, action) {
@@ -68,17 +73,22 @@ export const createReducers = (...appSchema) => {
         actionDataKey
       } = action
 
-      const emptyData = actionDataKey ? defaultEmptyActionData[isArrayData ? 'array' : 'notArray'] : undefined
+      const emptyData = actionDataKey
+        ? defaultEmptyActionData[isArrayData ? 'array' : 'notArray']
+        : undefined
 
       let actionState = state.get(actionId)
 
       // when action state is not defined need set new value
       if (!actionState) {
-        state = state.set(actionId, fromJS({
-          status: '',
-          time: '',
-          errorText: ''
-        }))
+        state = state.set(
+          actionId,
+          fromJS({
+            status: '',
+            time: '',
+            errorText: ''
+          })
+        )
         actionState = state.get(actionId)
       }
 
@@ -94,7 +104,10 @@ export const createReducers = (...appSchema) => {
       })
 
       if (actionDataKey) {
-        actionState = actionState.set(`prev${actionDataKey}`, actionState.get(actionDataKey, emptyData))
+        actionState = actionState.set(
+          `prev${actionDataKey}`,
+          actionState.get(actionDataKey, emptyData)
+        )
       }
 
       if (sourceResult) {
@@ -108,7 +121,6 @@ export const createReducers = (...appSchema) => {
       return state.set(actionId, actionState)
     },
     [ENTITIES_REDUCER_NAME]: function(state = defaultEntitiesState, action) {
-
       if (!action.prefix || action.prefix !== ACTION_TYPE_PREFIX) {
         return state
       }
@@ -123,10 +135,14 @@ export const createReducers = (...appSchema) => {
 
       const normalizedPayloadSource =
         payloadSource && !hasError && !isFetching
-          ? normalize(isArrayData ? payloadSource : [payloadSource], [actionSchema])
+          ? normalize(isArrayData ? payloadSource : [payloadSource], [
+              actionSchema
+            ])
           : undefined
 
-      const newEntitiesItems = normalizedPayloadSource ? normalizedPayloadSource.entities : {}
+      const newEntitiesItems = normalizedPayloadSource
+        ? normalizedPayloadSource.entities
+        : {}
 
       // merge entity item data
       for (let entityName in newEntitiesItems) {

@@ -1,8 +1,10 @@
-import {uniqPrefix, parseError} from '../src/helper'
+import { uniqPrefix, parseError } from '../src/helper'
 
 describe('helper uniqPrefix', function() {
   it('created uniq prefixed', function() {
-    const result = new Set([uniqPrefix, uniqPrefix, uniqPrefix, uniqPrefix].map(p => p.toString()))
+    const result = new Set(
+      [uniqPrefix, uniqPrefix, uniqPrefix, uniqPrefix].map(p => p.toString())
+    )
     result.should.be.size(4)
   })
 })

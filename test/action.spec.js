@@ -1,6 +1,10 @@
 import 'should'
 
-import {_defaultResponseMapper, _makeActionHandler, _makeActionUniqId} from '../src/action'
+import {
+  _defaultResponseMapper,
+  _makeActionHandler,
+  _makeActionUniqId
+} from '../src/action'
 
 describe('action _defaultResponseMapper ', function() {
   it('_defaultResponseMapper returns simple object', function() {
@@ -24,7 +28,6 @@ describe('action _defaultResponseMapper ', function() {
           }
         }
       }
-
     }
     const result = _defaultResponseMapper(data)
     result.should.be.deepEqual(data)
@@ -33,7 +36,12 @@ describe('action _defaultResponseMapper ', function() {
 
 describe('action _makeActionUniqId ', function() {
   it('_makeActionUniqId returns uniquie ids', function() {
-    const result = new Set([_makeActionUniqId('name'), _makeActionUniqId('name'), _makeActionUniqId('name'), _makeActionUniqId('name')])
+    const result = new Set([
+      _makeActionUniqId('name'),
+      _makeActionUniqId('name'),
+      _makeActionUniqId('name'),
+      _makeActionUniqId('name')
+    ])
     result.should.be.size(4)
   })
 })

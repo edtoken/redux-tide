@@ -62,7 +62,6 @@ export const ACTIONS_REDUCER_NAME = `${ACTION_TYPE_PREFIX}-actions`
  */
 export const ENTITIES_REDUCER_NAME = `${ACTION_TYPE_PREFIX}-entities`
 
-
 /**
  * replaced default response mapper to callback
  *
@@ -80,7 +79,7 @@ export const ENTITIES_REDUCER_NAME = `${ACTION_TYPE_PREFIX}-entities`
  * // this will be replaced all action success responces to resp.data
  *
  */
-export const setDefaultResponseMapper = (callback) => {
+export const setDefaultResponseMapper = callback => {
   setDefaultResponseMapper.callback = callback
 }
 

@@ -2,8 +2,14 @@
  * @namespace action
  */
 
-import {ACTION_ID_KEY, ACTION_IDS_KEY, ACTION_TYPE_PREFIX, IS_TEST_ENVIRONMENT, STATUSES} from './config'
-import {parseError, uniqPrefix, getDefaultResponseMapper} from './helper'
+import {
+  ACTION_ID_KEY,
+  ACTION_IDS_KEY,
+  ACTION_TYPE_PREFIX,
+  IS_TEST_ENVIRONMENT,
+  STATUSES
+} from './config'
+import { parseError, uniqPrefix, getDefaultResponseMapper } from './helper'
 
 /**
  * Created uniq prefix for action type
@@ -30,7 +36,13 @@ const _makeActionUniqId = name => {
  * @returns {Function} - action handler wrapper
  * @private
  */
-const _makeActionHandler = (Action, actionId, parentActionId, statusName, actionSchema) => {
+const _makeActionHandler = (
+  Action,
+  actionId,
+  parentActionId,
+  statusName,
+  actionSchema
+) => {
   /**
    * Action handler
    *
@@ -52,8 +64,8 @@ const _makeActionHandler = (Action, actionId, parentActionId, statusName, action
       !isFetching && error
         ? error
         : !isFetching && payloadSource === undefined
-        ? 'Empty data'
-        : error ? error : ''
+          ? 'Empty data'
+          : error ? error : ''
 
     // flag
     const hasError = Boolean(errorText)
@@ -74,8 +86,8 @@ const _makeActionHandler = (Action, actionId, parentActionId, statusName, action
     const payload =
       !isFetching && !hasError && payloadSource
         ? isArrayData
-        ? payloadSource.map(item => Action.getEntityId(item))
-        : Action.getEntityId(payloadSource)
+          ? payloadSource.map(item => Action.getEntityId(item))
+          : Action.getEntityId(payloadSource)
         : undefined
 
     /**
@@ -135,13 +147,14 @@ const _makeActionHandler = (Action, actionId, parentActionId, statusName, action
  * @returns {Action} - Action wrapper Function
  * @private
  */
-const _makeAction = (actionId,
-                     parentActionId,
-                     actionSchema,
-                     actionMethod,
-                     queryBuilder,
-                     responseMapper) => {
-
+const _makeAction = (
+  actionId,
+  parentActionId,
+  actionSchema,
+  actionMethod,
+  queryBuilder,
+  responseMapper
+) => {
   const _makeWithId = newActionId => {
     newActionId = newActionId.toString().trim()
 
@@ -175,18 +188,25 @@ const _makeAction = (actionId,
     const actionResponseMapper = responseMapper || getDefaultResponseMapper()
 
     const [pending, success, error] = STATUSES.map(statusName =>
-      _makeActionHandler(Action, actionId, parentActionId, statusName, actionSchema)
+      _makeActionHandler(
+        Action,
+        actionId,
+        parentActionId,
+        statusName,
+        actionSchema
+      )
     )
 
     const actionResultCallback = (dispatch, getState, err, result) => {
       try {
         let errorMessage = parseError(err)
-        let parsedResponse = errorMessage ? undefined : actionResponseMapper(result)
+        let parsedResponse = errorMessage
+          ? undefined
+          : actionResponseMapper(result)
 
         errorMessage
           ? dispatch(error(errorMessage, undefined))
           : dispatch(success(undefined, parsedResponse, result))
-
       } catch (e) {
         dispatch(error(String(`${e.message || e}`), undefined))
         throw e
@@ -194,45 +214,57 @@ const _makeAction = (actionId,
     }
 
     const _makeQueryBuilder = (level, dispatch, getState, args, method) => {
-
       let typeOfMethod = typeof method
 
-      if (typeOfMethod === 'string' || typeOfMethod === 'number' || typeOfMethod === 'object' || typeOfMethod === 'boolean') {
+      if (
+        typeOfMethod === 'string' ||
+        typeOfMethod === 'number' ||
+        typeOfMethod === 'object' ||
+        typeOfMethod === 'boolean'
+      ) {
         return method
       }
 
       if (method instanceof Promise) {
-        return method.apply(this, level === 0 ? args : [dispatch, getState]).then(resp => {
-          _makeQueryBuilder(level + 1, dispatch, getState, args, resp)
-        }).catch(err => {
-          throw  err
-        })
+        return method
+          .apply(this, level === 0 ? args : [dispatch, getState])
+          .then(resp => {
+            _makeQueryBuilder(level + 1, dispatch, getState, args, resp)
+          })
+          .catch(err => {
+            throw err
+          })
       }
 
       if (typeOfMethod === 'function') {
-        let result = method.apply(this, level === 0 ? args : [dispatch, getState])
+        let result = method.apply(
+          this,
+          level === 0 ? args : [dispatch, getState]
+        )
         return _makeQueryBuilder(level + 1, dispatch, getState, args, result)
       }
     }
 
     const _callActionMethod = (actionMethod, args, dispatch, getState) => {
-      args = Array.isArray(args)
-        ? args
-        : [args]
+      args = Array.isArray(args) ? args : [args]
 
       let actionResult = actionMethod.apply(this, args)
 
       if (actionResult instanceof Promise) {
         return actionResult
           .then(resp => actionResultCallback(dispatch, getState, false, resp))
-          .catch(err => actionResultCallback(dispatch, getState, err, undefined))
+          .catch(err =>
+            actionResultCallback(dispatch, getState, err, undefined)
+          )
       }
 
       if (typeof actionResult === 'function') {
         return actionResult
           .call(this, dispatch, getState)
           .then(resp => actionResultCallback(dispatch, getState, false, resp))
-          .catch(err => actionResultCallback(dispatch, getState, err, undefined))
+          .catch(err =>
+            actionResultCallback(dispatch, getState, err, undefined)
+          )
       }
 
       return actionResultCallback(dispatch, getState, false, actionResult)
@@ -243,20 +275,21 @@ const _makeAction = (actionId,
       dispatch(pending())
 
       try {
-
         let compiledActionArgs = queryBuilder
           ? _makeQueryBuilder(0, dispatch, getState, args, queryBuilder)
           : args
 
         if (compiledActionArgs instanceof Promise) {
           return compiledActionArgs
-            .then(resp => _callActionMethod(actionMethod, resp, dispatch, getState)).catch(err => {
+            .then(resp =>
+              _callActionMethod(actionMethod, resp, dispatch, getState)
+            )
+            .catch(err => {
               throw err
             })
         }
 
         _callActionMethod(actionMethod, compiledActionArgs, dispatch, getState)
-
       } catch (e) {
         actionResultCallback(dispatch, getState, e, undefined)
       }
@@ -307,7 +340,12 @@ const _makeAction = (actionId,
    * @returns {Action} - returns some action with new uniq id
    */
   Action.clone = () => {
-    return createAction(actionSchema, actionMethod, queryBuilder, responseMapper)
+    return createAction(
+      actionSchema,
+      actionMethod,
+      queryBuilder,
+      responseMapper
+    )
   }
 
   /**
@@ -382,11 +420,12 @@ const _makeAction = (actionId,
  *
  * @returns {Action} - Action handler function
  */
-export const createAction = (actionSchema,
-                             actionMethod,
-                             queryBuilder,
-                             responseMapper) => {
-
+export const createAction = (
+  actionSchema,
+  actionMethod,
+  queryBuilder,
+  responseMapper
+) => {
   if (!actionSchema) {
     throw 'actionSchema argument is required, must be normalizr actionSchema'
   }
