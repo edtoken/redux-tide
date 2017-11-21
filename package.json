@@ -44,7 +44,9 @@
     "test:cov": "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- --recursive",
     "prepublish": "npm run lint && npm run test && npm run clean && npm run build",
     "docs": "jsdoc -c jsdoc.json -p ./src -r ./README.md",
-    "docs:open": "npm run docs && open docs/index.html"
+    "docs:open": "npm run docs && open docs/index.html",
+    "predeploy": "npm run docs",
+    "deploy": "gh-pages -d docs"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.3.0 || ^16.0.0",

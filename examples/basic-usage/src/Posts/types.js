@@ -1,1 +1,0 @@
-export const OPEN_EDIT = 'OPEN_EDIT'
