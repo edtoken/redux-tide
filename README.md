@@ -2,7 +2,7 @@
 Simple library for redux-normalized state and actions/selectors for it
 
 ### Examples
-[example](https://github.com/edtoken/redux-tide/examples/basic-usage) - using with axios and REST api
+[example](https://edtoken.github.io/redux-tide-basic-usage/) - using with axios and REST api
 
 ### Future features
 * Create documentation
