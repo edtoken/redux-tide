@@ -1,9 +1,6 @@
 import 'should'
 
-import {
-  _makeActionHandler,
-  _makeActionUniqId
-} from '../src/action'
+import { _makeActionHandler, _makeActionUniqId } from '../src/action'
 
 describe('action _makeActionUniqId ', function() {
   it('_makeActionUniqId returns uniquie ids', function() {
