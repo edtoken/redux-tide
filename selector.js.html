@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>selector.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="action._makeAction.Action.html">Action</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.clone">Action.clone</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.getEntityId">Action.getEntityId</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.getEntityName">Action.getEntityName</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.getSchema">Action.getSchema</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.withName">Action.withName</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.withPrefix">Action.withPrefix</a></span></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="action.html">action</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action.html#._makeAction">_makeAction</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action.html#._makeActionHandler">_makeActionHandler</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action.html#._makeActionUniqId">_makeActionUniqId</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action.html#.exports.createAction">exports.createAction</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="config.html">config</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="config.html#.exports.setDefaultResponseMapper">exports.setDefaultResponseMapper</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="helper.html">helper</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="helper.html#._defaultResponseMapper">_defaultResponseMapper</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="reducer.html">reducer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="reducer.html#.exports.createReducers">exports.createReducers</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="selector.html">selector</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">selector.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @namespace selector
+ */
+
+import { createSelector } from 'reselect'
+import { denormalize } from './helper'
+import { ACTIONS_REDUCER_NAME, ENTITIES_REDUCER_NAME } from './config'
+
+import './tmp'
+// import {denormalize} from 'normalizr'
+
+const defaultActionDataOutput = {
+  status: '',
+  time: '',
+  hasError: '',
+  errorText: '',
+  isFetching: false
+}
+
+const _makeGetActionData = (
+  action,
+  actionId,
+  entityName,
+  actionEntitySchema
+) => {
+  return createSelector(
+    [
+      state => state[ACTIONS_REDUCER_NAME].get(actionId),
+      state => state[ENTITIES_REDUCER_NAME].get(entityName),
+      state => state[ENTITIES_REDUCER_NAME]
+    ],
+    (actionState, entityState, entities) => {
+      let output = Object.assign({}, defaultActionDataOutput)
+
+      if (!actionState) {
+        return output
+      }
+
+      output = Object.assign(output, {
+        actionId,
+        status: actionState.get('status'),
+        time: actionState.get('time'),
+        hasError: actionState.get('hasError'),
+        errorText: actionState.get('errorText'),
+        isFetching: actionState.get('isFetching')
+      })
+
+      const actionPayloadIsArray = actionState.get('isArrayData')
+      const actionDataKey = actionState.get('actionDataKey')
+
+      const actionPayloadIds = !actionDataKey
+        ? undefined
+        : actionPayloadIsArray
+          ? actionState.get(actionDataKey)
+          : [actionState.get(actionDataKey)]
+      const actionPrevPayloadIds = !actionDataKey
+        ? undefined
+        : actionPayloadIsArray
+          ? actionState.get(`prev${actionDataKey}`)
+          : [actionState.get(`prev${actionDataKey}`)]
+
+      if (actionDataKey) {
+        output = Object.assign(output, {
+          payload: actionPayloadIsArray ? [] : '',
+          prevPayload: actionPayloadIsArray ? [] : ''
+        })
+      }
+
+      if (
+        actionDataKey &amp;&amp;
+        entityState &amp;&amp;
+        (actionPrevPayloadIds || actionPayloadIds)
+      ) {
+        let prevData = !actionPrevPayloadIds
+          ? []
+          : denormalize(actionPrevPayloadIds, [actionEntitySchema], entities)
+        let currentData = !actionPayloadIds
+          ? []
+          : denormalize(actionPayloadIds, [actionEntitySchema], entities)
+
+        prevData = prevData.filter(v => v) // todo remove undefined values
+        currentData = currentData.filter(v => v) // todo remove undefined values
+
+        prevData = prevData.map(item => item.toJS())
+        currentData = currentData.map(item => item.toJS())
+
+        output = Object.assign(output, {
+          payload: actionPayloadIsArray ? currentData : currentData[0],
+          prevPayload: actionPayloadIsArray ? prevData : prevData[0]
+        })
+      }
+
+      return output
+    }
+  )
+}
+
+export const getActionData = action => {
+  const actionId = action.actionId()
+  const entityName = action.getEntityName()
+  const actionEntitySchema = action.getSchema()
+
+  return (state, props) => {
+    const selectorGetActionData = _makeGetActionData(
+      action,
+      actionId,
+      entityName,
+      actionEntitySchema
+    )
+    return selectorGetActionData(state, props)
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Nov 21 2017 19:51:05 GMT+0300 (MSK) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
