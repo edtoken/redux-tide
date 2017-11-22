@@ -38,6 +38,7 @@ const _makeGetActionData = (
 
       output = Object.assign(output, {
         actionId,
+        sourceResult: actionState.get('sourceResult'),
         status: actionState.get('status'),
         time: actionState.get('time'),
         hasError: actionState.get('hasError'),
