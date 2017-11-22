@@ -1,7 +1,7 @@
 {
   "name": "redux-tide",
   "description": "tiny factory for redux crud normalize",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "./lib/index.js",
   "files": [
     "lib"
@@ -46,7 +46,8 @@
     "docs": "jsdoc -c jsdoc.json -p ./src -r ./README.md",
     "docs:open": "npm run docs && open docs/index.html",
     "predeploy": "npm run lint && npm run build && npm run docs",
-    "deploy": "gh-pages -d docs"
+    "deploy": "gh-pages -d docs",
+    "postdeploy": "npm publish"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.3.0 || ^16.0.0",
