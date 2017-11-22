@@ -6,9 +6,6 @@ import { createSelector } from 'reselect'
 import { denormalize } from './helper'
 import { ACTIONS_REDUCER_NAME, ENTITIES_REDUCER_NAME } from './config'
 
-import './tmp'
-// import {denormalize} from 'normalizr'
-
 const defaultActionDataOutput = {
   status: '',
   time: '',
