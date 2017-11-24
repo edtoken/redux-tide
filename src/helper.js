@@ -18,7 +18,7 @@ export const uniqPrefix = (() => {
 export const parseError = err => {
   const typeOfError = typeof err
 
-  if (err === false) {
+  if (err === false || typeOfError === 'undefined') {
     return false
   }
   if (typeOfError === 'string') {

@@ -63,6 +63,15 @@ export const ACTIONS_REDUCER_NAME = `${ACTION_TYPE_PREFIX}-actions`
 export const ENTITIES_REDUCER_NAME = `${ACTION_TYPE_PREFIX}-entities`
 
 /**
+ * Action type name for clear action data
+ *
+ * @memberOf config
+ * @const
+ * @type {String}
+ */
+export const ACTION_CLEAR_TYPE_NAME = `${ACTION_TYPE_PREFIX}-clear`
+
+/**
  * replaced default response mapper to callback
  *
  * @memberOf config

@@ -6,6 +6,7 @@ import { fromJS } from 'immutable'
 import { normalize } from 'normalizr'
 
 import {
+  ACTION_CLEAR_TYPE_NAME,
   ACTION_TYPE_PREFIX,
   ACTIONS_REDUCER_NAME,
   ENTITIES_REDUCER_NAME
@@ -14,6 +15,14 @@ import {
 const defaultEmptyActionData = {
   array: [],
   notArray: ''
+}
+
+const actionDefaultData = {
+  isFetching: false,
+  hasError: false,
+  errorText: '',
+  status: '',
+  time: ''
 }
 
 /**
@@ -63,7 +72,6 @@ export const createReducers = (...appSchema) => {
         status,
         time,
         actionId,
-        error,
         payload,
         sourceResult,
         isFetching,
@@ -73,6 +81,14 @@ export const createReducers = (...appSchema) => {
         actionDataKey
       } = action
 
+      // action.clear
+      if (action.type === ACTION_CLEAR_TYPE_NAME) {
+        return state.set(
+          actionId,
+          fromJS(Object.assign({}, actionDefaultData, { time }))
+        )
+      }
+
       const emptyData = actionDataKey
         ? defaultEmptyActionData[isArrayData ? 'array' : 'notArray']
         : undefined
@@ -81,21 +97,13 @@ export const createReducers = (...appSchema) => {
 
       // when action state is not defined need set new value
       if (!actionState) {
-        state = state.set(
-          actionId,
-          fromJS({
-            status: '',
-            time: '',
-            errorText: ''
-          })
-        )
+        state = state.set(actionId, fromJS(actionDefaultData))
         actionState = state.get(actionId)
       }
 
       actionState = actionState.merge({
         status,
         time,
-        error,
         hasError,
         errorText,
         isFetching,

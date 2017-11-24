@@ -3,13 +3,14 @@
  */
 
 import {
+  ACTION_CLEAR_TYPE_NAME,
   ACTION_ID_KEY,
   ACTION_IDS_KEY,
   ACTION_TYPE_PREFIX,
   IS_TEST_ENVIRONMENT,
   STATUSES
 } from './config'
-import { parseError, uniqPrefix, getDefaultResponseMapper } from './helper'
+import { getDefaultResponseMapper, parseError, uniqPrefix } from './helper'
 
 /**
  * Created uniq prefix for action type
@@ -21,7 +22,7 @@ import { parseError, uniqPrefix, getDefaultResponseMapper } from './helper'
  * @private
  */
 const _makeActionUniqId = name => {
-  return `${name} ${uniqPrefix}`
+  return `${ACTION_TYPE_PREFIX} ${name} ${uniqPrefix}`
 }
 
 /**
@@ -111,7 +112,7 @@ const _makeActionHandler = (
      * }}
      */
     return Object.freeze({
-      type: `${ACTION_TYPE_PREFIX} ${actionId}`,
+      type: `${actionId}`,
       prefix: ACTION_TYPE_PREFIX,
       actionId,
       parentActionId,
@@ -259,12 +260,19 @@ const _makeAction = (
       }
 
       if (typeof actionResult === 'function') {
-        return actionResult
-          .call(this, dispatch, getState)
-          .then(resp => actionResultCallback(dispatch, getState, false, resp))
-          .catch(err =>
-            actionResultCallback(dispatch, getState, err, undefined)
-          )
+        actionResult = actionResult.call(this, dispatch, getState)
+
+        if (!actionResult) {
+          return actionResultCallback(dispatch, getState, undefined, undefined)
+        }
+
+        if (actionResult instanceof Promise) {
+          return actionResult
+            .then(resp => actionResultCallback(dispatch, getState, false, resp))
+            .catch(err =>
+              actionResultCallback(dispatch, getState, err, undefined)
+            )
+        }
       }
 
       return actionResultCallback(dispatch, getState, false, actionResult)
@@ -364,6 +372,28 @@ const _makeAction = (
    */
   Action.withName = name => {
     return _makeWithId(name)
+  }
+
+  /**
+   * Clear action store data
+   *
+   * @memberOf action._makeAction.Action
+   * @type {Function}
+   *
+   * @example
+   * store.dispatch(userLoginAction.clear())
+   *
+   * @returns {Undefined} - returns None, only clear action data
+   */
+  Action.clear = () => {
+    return (dispatch, getState) => {
+      dispatch({
+        time: new Date().getTime(),
+        type: ACTION_CLEAR_TYPE_NAME,
+        prefix: ACTION_TYPE_PREFIX,
+        actionId: Action.actionId()
+      })
+    }
   }
 
   return Action
