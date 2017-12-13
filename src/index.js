@@ -1,6 +1,13 @@
 import { createAction } from './action'
 import { createReducers } from './reducer'
-import { getActionData } from './selector'
+import {
+  denomalizeEntityItemById,
+  getActionData,
+  getEntityItemsByAction,
+  getEntityItemsByEntityName,
+  getEntityItemsBySchema,
+  getEntityReducer
+} from './selector'
 
 import {
   ACTION_ID_KEY,
@@ -8,8 +15,8 @@ import {
   ACTION_TYPE_PREFIX,
   ACTIONS_REDUCER_NAME,
   ENTITIES_REDUCER_NAME,
-  setDenormalize,
-  setDefaultResponseMapper
+  setDefaultResponseMapper,
+  setDenormalize
 } from './config'
 
 export {
@@ -18,9 +25,14 @@ export {
   ACTION_TYPE_PREFIX,
   ACTIONS_REDUCER_NAME,
   ENTITIES_REDUCER_NAME,
+  denomalizeEntityItemById,
   setDenormalize,
   setDefaultResponseMapper,
   createAction,
   createReducers,
-  getActionData
+  getActionData,
+  getEntityReducer,
+  getEntityItemsBySchema,
+  getEntityItemsByAction,
+  getEntityItemsByEntityName
 }

@@ -108,3 +108,27 @@ export const getActionData = action => {
     return selectorGetActionData(state, props)
   }
 }
+
+export const getEntityReducer = state => state[ENTITIES_REDUCER_NAME]
+
+export const getEntityItemsBySchema = entitySchema => {
+  return createSelector([getEntityReducer], entities => {
+    return entities.get(entitySchema.key)
+  })
+}
+
+export const getEntityItemsByAction = action => {
+  return createSelector([getEntityReducer], entities => {
+    return entities.get(action.getEntityName())
+  })
+}
+
+export const getEntityItemsByEntityName = name => {
+  return createSelector([getEntityReducer], entities => {
+    return entities.get(name)
+  })
+}
+
+export const denomalizeEntityItemById = (id, schema, entities) => {
+  return denormalize(id, schema, entities)
+}
