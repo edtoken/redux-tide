@@ -1,19 +1,17 @@
 import 'should'
-import {schema} from 'normalizr'
-import {fromJS} from 'immutable'
+import { schema } from 'normalizr'
+import { fromJS } from 'immutable'
 
-import {ENTITIES_REDUCER_NAME} from '../src/config'
+import { ENTITIES_REDUCER_NAME } from '../src/config'
 import {
   getEntityItemsByAction,
   getEntityItemsByEntityName,
   getEntityItemsBySchema,
   getEntityReducer
 } from '../src/selector'
-import {createAction} from '../src/action';
+import { createAction } from '../src/action'
 
-
-it('selector getActionData', function() {
-})
+it('selector getActionData', function() {})
 
 it('selector getEntityReducer', function() {
   const reducerState = fromJS({})
@@ -28,7 +26,7 @@ it('selector getEntityItemsBySchema', function() {
 
   const state = {
     [ENTITIES_REDUCER_NAME]: fromJS({
-      'users': {}
+      users: {}
     })
   }
 
@@ -38,13 +36,10 @@ it('selector getEntityItemsBySchema', function() {
 
 it('selector getEntityItemsByAction', function() {
   const actionSchema = new schema.Entity('users', {})
-  const action = createAction(
-    actionSchema,
-    () => ({})
-  )
+  const action = createAction(actionSchema, () => ({}))
   const state = {
     [ENTITIES_REDUCER_NAME]: fromJS({
-      'users': {}
+      users: {}
     })
   }
 
@@ -53,14 +48,12 @@ it('selector getEntityItemsByAction', function() {
 })
 
 it('selector getEntityItemsByEntityName', function() {
-
   const state = {
     [ENTITIES_REDUCER_NAME]: fromJS({
-      'users': {}
+      users: {}
     })
   }
 
   const result = getEntityItemsByEntityName('users')(state)
   result.should.deepEqual(state[ENTITIES_REDUCER_NAME].get('users'))
-
 })
