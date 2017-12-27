@@ -19,8 +19,12 @@ describe('helper parseError', function() {
     result.should.be.equal('string value')
   })
   it('parseError Error object', function() {
-    const result = parseError(new Error('error message'))
-    result.should.be.equal('error message')
+    try {
+      const result = parseError(new Error('error message'))
+      result.should.be.equal('error message')
+    } catch (e) {
+      throw e
+    }
   })
   it('parseError common data', function() {
     const result = parseError(123123123)

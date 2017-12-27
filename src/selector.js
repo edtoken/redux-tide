@@ -4,7 +4,11 @@
 
 import { createSelector } from 'reselect'
 import { denormalize } from './helper'
-import { ACTIONS_REDUCER_NAME, ENTITIES_REDUCER_NAME } from './config'
+import {
+  ACTIONS_REDUCER_NAME,
+  ENTITIES_REDUCER_NAME,
+  IS_TEST_ENVIRONMENT
+} from './config'
 
 const defaultActionDataOutput = {
   status: '',
@@ -131,4 +135,9 @@ export const getEntityItemsByEntityName = name => {
 
 export const denomalizeEntityItemById = (id, schema, entities) => {
   return denormalize(id, schema, entities)
+}
+
+if (IS_TEST_ENVIRONMENT) {
+  module.exports.defaultActionDataOutput = defaultActionDataOutput
+  module.exports._makeGetActionData = _makeGetActionData
 }
