@@ -4,6 +4,8 @@
 Simple library for redux-normalized state and actions/selectors for it
 
 ## Motivation
+You don't need create reducers for rest-api data
+You should create reducers only for business front-end logic
 
 ### Examples
 [example](https://edtoken.github.io/redux-tide-basic-usage/) - using with axios and REST api  
