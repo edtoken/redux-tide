@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="action._makeAction.Action.html">Action</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.clone">Action.clone</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.empty">Action.empty</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.getEntityId">Action.getEntityId</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.getEntityName">Action.getEntityName</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.getSchema">Action.getSchema</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.withName">Action.withName</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.withPrefix">Action.withPrefix</a></span></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="action.html">action</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action.html#._makeAction">_makeAction</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action.html#._makeActionHandler">_makeActionHandler</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action.html#._makeActionUniqId">_makeActionUniqId</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action.html#.exports.createAction">exports.createAction</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="config.html">config</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="config.html#.exports.setDefaultResponseMapper">exports.setDefaultResponseMapper</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="helper.html">helper</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="helper.html#._defaultResponseMapper">_defaultResponseMapper</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="reducer.html">reducer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="reducer.html#.exports.createReducers">exports.createReducers</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="selector.html">selector</a></span></li>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><h1>Redux tide</h1><p><a href="https://edtoken.github.io/redux-tide/docs">docs</a><br><a href="https://edtoken.github.io/redux-tide/coverage/Icov-report">coverage-report</a><br>Simple library for redux-normalized state and actions/selectors for it</p>
+<p><a href="https://travis-ci.org/edtoken/redux-tide"><img src="https://api.travis-ci.org/edtoken/redux-tide.svg?branch=master" alt="Build Status"></a></p>
+<p><a href="https://nodei.co/npm/redux-tide/"><img src="https://nodei.co/npm/redux-tide.png?downloads=true&amp;downloadRank=true&amp;stars=true" alt="NPM"></a></p>
+<p><a href="https://nodei.co/npm/redux-tide/"><img src="https://nodei.co/npm-dl/redux-tide.png?height=3" alt="NPM"></a></p>
+<h2>Motivation</h2><p>You don't need to create reducers for rest-api data<br>You should create reducers only for business front-end logic  </p>
+<h2>Examples</h2><p><a href="https://edtoken.github.io/redux-tide/blog">blog</a> - using with axios and REST api<br><a href="https://edtoken.github.io/redux-tide/counter">counter (soon)</a><br><a href="https://edtoken.github.io/redux-tide/todos">todos (soon)</a><br><a href="https://cl.ly/3d183v352O24">video</a> - short video for demonstration</p>
+<h2>Features</h2><ul>
+<li>Improve documentation</li>
+<li>Improve tests</li>
+<li>Refactor code</li>
+<li>Delete it <code>setDenormalize(denormalize)</code> in your store.js file :) </li>
+<li>Add new selectors</li>
+<li>Maybe? make redux-tide-storage (make storage) and redux-tide-orm (only selectors) packages</li>
+</ul>
+<h2>Installation</h2><pre class="prettyprint source"><code>npm install redux-tide --save</code></pre><h2>4 Steps for using redux-tide</h2><ol>
+<li>your project must have: <a href="https://github.com/paularmstrong/normalizr">normalizr</a>, <a href="https://redux.js.org/">redux</a>, <a href="https://github.com/reactjs/react-redux">react-redux</a>, <a href="https://github.com/gaearon/redux-thunk">redux-thunk</a></li>
+<li>install redux-tide <code>npm install redux-tide --save</code></li>
+<li><p>define your entity-schema</p>
+<pre class="prettyprint source lang-javascript"><code> // entity-schema.js
+ import {schema} from 'normalizr'
+
+ const postsSchema = new schema.Entity('posts')
+ const commentsSchema = new schema.Entity('comments')
+
+ postsSchema.define({
+   comments: [commentsSchema]
+ })
+ commentsSchema.define({
+   post: commentsSchema
+ })
+
+ const appSchema = {
+   commentsSchema,
+   postsSchema
+ }
+
+ export {
+     postsSchema,
+     commentsSchema,
+     appSchema
+ }</code></pre></li>
+<li><p>modify your store.js file </p>
+<pre class="prettyprint source lang-javascript"><code> // store.js
+ import {denormalize} from 'normalizr';
+ import {createReducers, setDefaultResponseMapper, setDenormalize} from 'redux-tide';
+ import {appSchema} from './entity-schema'
+
+ // required
+ setDenormalize(denormalize)
+
+ // not required
+ setDefaultResponseMapper((resp) => {
+   // your response
+   return resp.data
+ })
+
+ // your store
+ export default createStore(
+   combineReducers({
+     // your reducers
+     ...createReducers(...appSchema)
+   }),
+   initialState,
+   composedEnhancers
+ )</code></pre></li>
+<li><p>READY! Now you can create actions and use it</p>
+</li>
+</ol>
+<h1>What is next?</h1><h2>Create actions</h2><pre class="prettyprint source lang-javascript"><code>import {createAction} from 'redux-tide';
+import {del, get, post, put} from '../RESTApi'
+import {postsSchema} from 'entity-schema';
+import {OPEN_EDIT} from './action-types'
+
+/**
+* createAction argumnents
+*
+* @param {String|Object} actionSchema - normalizr actionSchema item
+* @param {Function|Promise} actionMethod
+* @param {String|Function} [queryBuilder=undefined]
+* @param {Function} [responseMapper=_defaultResponseMapper||callback from setDefaultResponseMapper]
+**/
+
+export const getAllPosts = createAction(
+    postsSchema, 
+    get, 
+    `posts?_embed=comments&_order=desc` // simple static url
+)
+
+export const getPostById = createAction(
+    postsSchema, 
+    get, 
+    postId => `posts/${postId}?_embed=comments` // url with property postId
+)
+
+export const delPostById = createAction(
+    postsSchema, 
+    del, 
+    postId => `posts/${postId}` // url with property postId
+)
+
+export const updatePostById = createAction(
+    postsSchema, 
+    put, 
+    (postId, data) => [
+        `posts/${postId}`, // url with property
+        undefined, // query params
+        data // put body
+    ]
+)
+
+export const createNewPost = createAction(
+    postsSchema, 
+    post, 
+    data => [
+        `posts`, // static url
+        undefined, // query params
+        data // post body
+    ]
+)
+
+// basic redux action can be use
+export const openEditPost = (postId) => {
+  return {
+    type:OPEN_EDIT,
+    postId
+  }
+}</code></pre><h2>Using selectors</h2><pre class="prettyprint source lang-javascript"><code>import {getActionData} from 'redux-tide';
+import {
+    createNewPost, 
+    delPostById, 
+    getAllPosts, 
+    openEditPost
+} from './actions';
+
+export default connect(
+  (state, props) => getActionData(getAllPosts)
+)(SomeComponent)
+
+export default connect(
+  (state, props) => ({
+    table: getActionData(getAllPosts)(state, props)
+  })
+)(SomeComponent)
+
+// create custom selectors
+const makeGetMergedActionData = (postId) => {
+    return createSelector(
+      [
+        getActionData(updatePostById.withPrefix(postId)),
+        getActionData(getPostById.withPrefix(postId)),
+        someSelector // your selector
+      ],
+      (updateData, fetchData, someData) => {
+
+        updateData = updateData || {}
+        fetchData = fetchData || {}
+
+        const sortedDataByUpdateTime = [updateData, fetchData].sort(item => item.time)
+
+        return sortedDataByUpdateTime.reduce((memo, item) => {
+          return Object.assign(memo, item)
+        }, {someData})
+      }
+    )</code></pre><h3>Selector response properties</h3><pre class="prettyprint source"><code>{String} actionId - your action id
+{*} sourceResult - your source response from server (not mapped response)
+{String} status - pending|success|error
+{Number} time - timestamp of action
+{Boolean} hasError - has error or not
+{String} errorText - text of error
+{Boolean} isFetching - status === 'pending'
+{Object|Array} payload - denormalized response for current action
+{Object|Array} prevPayload - denormalized previous response</code></pre><h2>Create middleware</h2><pre class="prettyprint source lang-javascript"><code>import {
+    createNewPost, 
+    delPostById, 
+    getAllPosts, 
+    openEditPost
+} from './actions';
+
+const createNewPostActionId = createNewPost.actionId()
+
+// delete post using with prefix (post id query parameter), so need check parentActionId
+const delPostByIdParentActionId = delPostById.actionId() 
+
+// action id if you called delPostById.withPrefix(postId), where postId === 5
+const delPostId5ActionId = delPostById.withPrefix(5).actionId()
+
+export const middleware = store => next => action => {
+
+    const result = next(action)
+
+    switch (action.actionId) {
+        // all actions createNew post
+        case createNewPostActionId:
+            if (action.status === 'success') {
+                store.dispatch(openEditPost(action.payload))
+                store.dispatch(getAllPosts())
+            }
+            break
+
+        case delPostId5ActionId:
+            if (action.status === 'success') {
+                // post with id 5 is was deleted success 
+            }
+
+    }
+
+    // we used action delPostById with prefix postId
+    // for example dispatch(delPostById.withPrefix(postId)(postId)
+    // so, actionId has postId in actionId
+    // and if you want track all calls with any postId you hould used parentActionId property
+    // parentActionId - it's actionId from action which was called .withPrefix(*)
+    // so if you called delPostById.withPrefix()..., parrent action id - it's action id delPostById
+
+    switch (action.parentActionId) {
+        case delPostByIdParentActionId:
+            if (action.status === 'success') {
+                store.dispatch(getAllPosts())
+
+                let delPostCurrentActionId = delPostById.withPrefix(action.payload).actionId()
+                // it's actionid current deleted post === action.actionId
+
+            }
+            break
+    }
+}</code></pre><h1>Other options to create an action?</h1><h2>Can i use custom server response mapper?</h2><pre class="prettyprint source lang-javascript"><code>// YES!
+// calling url 'user' but replace backend success response to resp.data
+// You always can be get source response data 
+// from selector getActionData property sourceResult
+export const getUserAction = createAction(
+    user, 
+    get, 
+    'user', 
+    (resp) => {resp.data}
+)</code></pre><h2>Whats else?</h2><pre class="prettyprint source lang-javascript"><code>// actions.js 
+
+export const get = (url) => {// returns Promise ajax call}
+
+// calling url 'user' used method get
+export const getUserAction = createAction(
+    user, 
+    get, 
+    'user'
+)
+
+// simple action used custom method for getting data
+export const getUserAction = createAction(user, () => {
+ return new Promise((resolve, reject) => {
+   // cookie|local storage|other get data
+   resolve({
+     //data
+   })
+ })
+})
+
+// calling url 'user/${userId}'
+export const getUserAction = createAction(
+    user, 
+    get, 
+    (userId) => `user/${userId}`
+)
+
+// if you want to beautiful action store name in redux, 
+// you should used this pattern
+// calling url 'user/${userId}'
+export const getUserAction = createAction(
+    user, 
+    get, 
+    (userId) => `user/${userId}`
+).withName('UsersAction')
+
+
+// calling url 'user/${userId}' 
+// and post data (if you are using axios) {name, phone, email}
+export const getUserAction = createAction(
+    user, 
+    get, 
+    (userId) => [
+        `user/${userId}`,
+        undefined,
+        {name, phone, email}
+    ]
+)
+
+
+// you can pass multi level functions or promises 
+// (args) => (dispatch, getState) => (dispatch, getState) => (dispatch, getState) => ...
+// calling url 'user/${userId}'
+export const getUserAction = createAction(
+    user, 
+    get, 
+    (userId) => {
+        return (dispatch, getState)=>{
+            return new Promise((resolve) => {
+                resolve(`user/${userId}`)
+            })
+        }
+    }
+)
+
+// calling url 'user' but replace backend success response to resp.data
+export const getUserAction = createAction(
+    user, 
+    get, 
+    'user', 
+    (resp) => {resp.data}
+)
+
+
+// using with multiple entity ids (make two action ids and stores from simgle action)
+export const getUserByIdAction = createAction(
+    user, 
+    get, 
+    userId => `users/${userId}`
+)
+
+
+class UserComponent extends Component {
+    // ...
+}
+
+const UserContainer = connect(
+    (state)=>({
+        userData: getActionData(getUserByIdAction.withPrefix(userId))(state, props)
+    }),
+    (dispatch)=>({
+        getUser:(userId) => (dispatch(getUserByIdAction.withPrefix(userId)(userId))
+    })
+)(UserComponent)</code></pre><h2>Additional information, createAction public methods</h2><pre class="prettyprint source lang-javascript"><code>// when you did action, you can use action public methods 
+export const getAllPosts = createAction(
+    postsSchema, 
+    get, 
+    `posts?_embed=comments&_order=desc` // simple static url
+)
+
+// you can call: 
+// getAllPosts.type()
+// getAllPosts.getEntityId(postObj)
+// getAllPosts.getSchema() 
+// getAllPosts.clone()
+// getAllPosts.withPrefix(customPrefixId) // customPrefixId might be postId 
+// getAllPosts.withName(yourCustomName)
+// getAllPosts.clear()
+
+
+/**
+   * 
+   * @type {Function}
+   * @returns {Function} - returns action id
+   */
+  Action.type = Action.actionId = Action.toString = Action.valueOf = () => {
+    return actionId
+  }
+
+  /**
+   * 
+   * @param {Object} item - source entity data
+   *
+   * @type {Function}
+   * @returns {Function} - returns id from source
+   */
+  Action.getEntityId = item => {
+    return actionSchema.getId(item)
+  }
+
+  /**
+   * 
+   * @type {Function}
+   * @returns {Object} - returns actionSchema of action
+   */
+  Action.getSchema = () => {
+    return actionSchema
+  }
+
+  /**
+   * 
+   * @type {Function}
+   * @returns {Function} - returns entity uniq name (id)
+   */
+  Action.getEntityName = () => {
+    return actionSchema.key
+  }
+
+  /**
+   * 
+   * @type {Function}
+   * @returns {Action} - returns some action with new uniq id
+   */
+  Action.clone = () => {
+    return createAction(
+      actionSchema,
+      actionMethod,
+      queryBuilder,
+      responseMapper
+    )
+  }
+
+  /**
+   * 
+   * @type {Function}
+   * @returns {Action} - returns some action with prefix-id
+   */
+  Action.withPrefix = (...prefix) => {
+    return _makeWithId(prefix.join('-'))
+  }
+
+  /**
+   *
+   * @type {Function}
+   * @returns {Action} - returns some action with name-id (see prefix)
+   */
+  Action.withName = name => {
+    return _makeWithId(name)
+  }
+
+  /**
+   * Clear action store data
+   *
+   * @memberOf action._makeAction.Action
+   * @type {Function}
+   *
+   * @example
+   * store.dispatch(userLoginAction.empty())
+   *
+   * @returns {Undefined} - returns None, only clear action data
+   */
+  Action.empty = () => {
+    return (dispatch, getState) => {
+      // ...
+    }
+  }</code></pre><h2>Contributions</h2><p>Use <a href="https://github.com/edtoken/redux-tide/issues">GitHub issues</a> for requests.<br>I actively welcome pull requests; learn how to contribute.   </p>
+<h2>Changelog</h2><h3>Drink tea :)</h3></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Jan 10 2018 17:21:04 GMT+0300 (MSK) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

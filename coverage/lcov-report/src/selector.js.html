@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/selector.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">src/</a> selector.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">40.68% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>24/59</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">3.13% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>1/32</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">35% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>7/20</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">41.18% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>21/51</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * @namespace selector
+ */
+&nbsp;
+import { createSelector } from 'reselect'
+import { denormalize } from './helper'
+import {
+  ACTIONS_REDUCER_NAME,
+  ENTITIES_REDUCER_NAME,
+  IS_TEST_ENVIRONMENT
+} from './config'
+&nbsp;
+const defaultActionDataOutput = {
+  status: '',
+  time: '',
+  hasError: '',
+  errorText: '',
+  isFetching: false
+}
+&nbsp;
+const _makeGetActionData = <span class="fstat-no" title="function not covered" >(</span>
+  action,
+  actionId,
+  entityName,
+  actionEntitySchema
+) =&gt; {
+<span class="cstat-no" title="statement not covered" >  r</span>eturn createSelector(
+    [
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      s</span></span>tate =&gt; state[ACTIONS_REDUCER_NAME].get(actionId),
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      s</span></span>tate =&gt; state[ENTITIES_REDUCER_NAME].get(entityName),
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      s</span></span>tate =&gt; state[ENTITIES_REDUCER_NAME]
+    ],
+<span class="fstat-no" title="function not covered" >    (actionState, entityState, entities) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      l</span>et output = Object.assign({}, defaultActionDataOutput)
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (!actionState) {</span>
+<span class="cstat-no" title="statement not covered" >        r</span>eturn output
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      o</span>utput = Object.assign(output, {
+        actionId,
+        sourceResult: actionState.get('sourceResult'),
+        status: actionState.get('status'),
+        time: actionState.get('time'),
+        hasError: actionState.get('hasError'),
+        errorText: actionState.get('errorText'),
+        isFetching: actionState.get('isFetching')
+      })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      c</span>onst actionPayloadIsArray = actionState.get('isArrayData')
+<span class="cstat-no" title="statement not covered" >      c</span>onst actionDataKey = actionState.get('actionDataKey')
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      c</span>onst actionPayloadIds = !actionDataKey
+        ? undefined
+        : actionPayloadIsArray
+          ? actionState.get(actionDataKey)
+          : [actionState.get(actionDataKey)]
+<span class="cstat-no" title="statement not covered" >      c</span>onst actionPrevPayloadIds = !actionDataKey
+        ? undefined
+        : actionPayloadIsArray
+          ? actionState.get(`prev${actionDataKey}`)
+          : [actionState.get(`prev${actionDataKey}`)]
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (actionDataKey) {</span>
+<span class="cstat-no" title="statement not covered" >        o</span>utput = Object.assign(output, {
+          payload: actionPayloadIsArray ? [] : '',
+          prevPayload: actionPayloadIsArray ? [] : ''
+        })
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (</span>
+        actionDataKey &amp;&amp;
+        entityState &amp;&amp;
+        (actionPrevPayloadIds || actionPayloadIds)
+      ) {
+<span class="cstat-no" title="statement not covered" >        l</span>et prevData = !actionPrevPayloadIds
+          ? []
+          : denormalize(actionPrevPayloadIds, [actionEntitySchema], entities)
+<span class="cstat-no" title="statement not covered" >        l</span>et currentData = !actionPayloadIds
+          ? []
+          : denormalize(actionPayloadIds, [actionEntitySchema], entities)
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        prevData = prevData.filter(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >v</span></span> =&gt; v) // todo remove undefined values</span>
+<span class="cstat-no" title="statement not covered" >        currentData = currentData.filter(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >v</span></span> =&gt; v) // todo remove undefined values</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        p</span>revData = prevData.map(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >i</span></span>tem =&gt; item.toJS())
+<span class="cstat-no" title="statement not covered" >        c</span>urrentData = currentData.map(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >i</span></span>tem =&gt; item.toJS())
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        o</span>utput = Object.assign(output, {
+          payload: actionPayloadIsArray ? currentData : currentData[0],
+          prevPayload: actionPayloadIsArray ? prevData : prevData[0]
+        })
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      r</span>eturn output
+    }
+  )
+}
+&nbsp;
+export const getActionData = <span class="fstat-no" title="function not covered" >action =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  c</span>onst actionId = action.actionId()
+<span class="cstat-no" title="statement not covered" >  c</span>onst entityName = action.getEntityName()
+<span class="cstat-no" title="statement not covered" >  c</span>onst actionEntitySchema = action.getSchema()
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  r</span>eturn <span class="fstat-no" title="function not covered" >(state, props) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    c</span>onst selectorGetActionData = _makeGetActionData(
+      action,
+      actionId,
+      entityName,
+      actionEntitySchema
+    )
+<span class="cstat-no" title="statement not covered" >    r</span>eturn selectorGetActionData(state, props)
+  }
+}
+&nbsp;
+export const getActionsReducer = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >s</span></span>tate =&gt; state[ACTIONS_REDUCER_NAME]
+&nbsp;
+export const getEntityReducer = state =&gt; state[ENTITIES_REDUCER_NAME]
+&nbsp;
+export const getEntityItemsBySchema = entitySchema =&gt; {
+  return createSelector([getEntityReducer], entities =&gt; {
+    return entities.get(entitySchema.key)
+  })
+}
+&nbsp;
+export const getEntityItemsByAction = action =&gt; {
+  return createSelector([getEntityReducer], entities =&gt; {
+    return entities.get(action.getEntityName())
+  })
+}
+&nbsp;
+export const getEntityItemsByEntityName = name =&gt; {
+  return createSelector([getEntityReducer], entities =&gt; {
+    return entities.get(name)
+  })
+}
+&nbsp;
+export const denomalizeEntityItemById = <span class="fstat-no" title="function not covered" >(id, schema, entities) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  r</span>eturn denormalize(id, schema, entities)
+}
+&nbsp;
+<span class="missing-if-branch" title="else path not taken" >E</span>if (IS_TEST_ENVIRONMENT) {
+  module.exports.defaultActionDataOutput = defaultActionDataOutput
+  module.exports._makeGetActionData = _makeGetActionData
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jan 10 2018 17:16:48 GMT+0300 (MSK)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
