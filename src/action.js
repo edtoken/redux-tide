@@ -3,7 +3,7 @@
  */
 
 import {
-  ACTION_CLEAR_TYPE_NAME,
+  ACTION_EMPTY_TYPE_NAME,
   ACTION_ID_KEY,
   ACTION_IDS_KEY,
   ACTION_TYPE_PREFIX,
@@ -11,6 +11,7 @@ import {
   STATUSES
 } from './config'
 import { getDefaultResponseMapper, parseError, uniqPrefix } from './helper'
+import { getEntityReducer, getActionsReducer } from './selector'
 
 /**
  * Created uniq prefix for action type
@@ -381,15 +382,15 @@ const _makeAction = (
    * @type {Function}
    *
    * @example
-   * store.dispatch(userLoginAction.clear())
+   * store.dispatch(userLoginAction.empty())
    *
    * @returns {Undefined} - returns None, only clear action data
    */
-  Action.clear = () => {
+  Action.empty = () => {
     return (dispatch, getState) => {
       dispatch({
         time: new Date().getTime(),
-        type: ACTION_CLEAR_TYPE_NAME,
+        type: ACTION_EMPTY_TYPE_NAME,
         prefix: ACTION_TYPE_PREFIX,
         actionId: Action.actionId()
       })

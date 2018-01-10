@@ -1,85 +1,102 @@
 # Redux tide
 
-[DOCS](https://edtoken.github.io/redux-tide/)  
+[website](https://edtoken.github.io/redux-tide)  
+[docs](https://edtoken.github.io/redux-tide/docs)  
+[coverage-report](https://edtoken.github.io/redux-tide/coverage/lcov-report/index.html)  
 Simple library for redux-normalized state and actions/selectors for it
 
-## Motivation
-You don't need create reducers for rest-api data
-You should create reducers only for business front-end logic
+[![Build Status](https://api.travis-ci.org/edtoken/redux-tide.svg?branch=master)](https://travis-ci.org/edtoken/redux-tide)
+[![npm version](https://badge.fury.io/js/redux-tide.svg)](https://badge.fury.io/js/redux-tide)
+[![Coverage Status](https://coveralls.io/repos/github/edtoken/redux-tide/badge.svg?branch=master)](https://coveralls.io/github/edtoken/redux-tide?branch=master)
+[![Inline docs](https://inch-ci.org/github/edtoken/redux-tide.svg?branch=master)](https://inch-ci.org/github/edtoken/redux-tide)
+[![HitCount](http://hits.dwyl.com/edtoken/redux-tide.svg)](http://hits.dwyl.com/edtoken/redux-tide)
 
-### Examples
-[example](https://edtoken.github.io/redux-tide-basic-usage/) - using with axios and REST api  
+[![NPM](https://nodei.co/npm/redux-tide.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/redux-tide/)
+
+[![NPM](https://nodei.co/npm-dl/redux-tide.png?height=3)](https://nodei.co/npm/redux-tide/)
+
+
+
+## Motivation
+You don't need to create reducers for rest-api data  
+You should create reducers only for business front-end logic  
+
+## Examples
+[blog](https://edtoken.github.io/redux-tide/?ex=blog) - using with axios and REST api  
+[blog-source](https://github.com/edtoken/redux-tide/tree/master/website/src/blog) - blog demo source code    
+[counter (soon)](https://edtoken.github.io/redux-tide/?ex=counter)  
+[todos (soon)](https://edtoken.github.io/redux-tide/?ex=todos)  
 [video](https://cl.ly/3d183v352O24) - short video for demonstration
 
-### Future features
-* Create documentation
-* Refactor code
-* Add new selectors
+## Installation
+```
+npm install redux-tide --save
+```
 
-### 4 Steps for using redux-tide
+## 4 Steps for using redux-tide
 1. your project must have: [normalizr](https://github.com/paularmstrong/normalizr), [redux](https://redux.js.org/), [react-redux](https://github.com/reactjs/react-redux), [redux-thunk](https://github.com/gaearon/redux-thunk)
 2. install redux-tide `npm install redux-tide --save`
 3. define your entity-schema
-    ```
-        // entity-schema.js
-        import {schema} from 'normalizr'
-        
-        const postsSchema = new schema.Entity('posts')
-        const commentsSchema = new schema.Entity('comments')
-        
-        postsSchema.define({
-          comments: [commentsSchema]
-        })
-        commentsSchema.define({
-          post: commentsSchema
-        })
-           
-        const appSchema = {
-          commentsSchema,
-          postsSchema
-        }
-                
-        export {
-            postsSchema,
-            commentsSchema,
-            appSchema
-        }
+    ```javascript
+    // entity-schema.js
+    import {schema} from 'normalizr'
+    
+    const postsSchema = new schema.Entity('posts')
+    const commentsSchema = new schema.Entity('comments')
+    
+    postsSchema.define({
+      comments: [commentsSchema]
+    })
+    commentsSchema.define({
+      post: commentsSchema
+    })
+       
+    const appSchema = {
+      commentsSchema,
+      postsSchema
+    }
+            
+    export {
+        postsSchema,
+        commentsSchema,
+        appSchema
+    }
          
     ```
 4. modify your store.js file 
+    ```javascript
+    // store.js
+    import {denormalize} from 'normalizr';
+    import {createReducers, setDefaultResponseMapper, setDenormalize} from 'redux-tide';
+    import {appSchema} from './entity-schema'
+    
+    // required
+    setDenormalize(denormalize)
+    
+    // not required
+    setDefaultResponseMapper((resp) => {
+      // your response
+      return resp.data
+    })
+    
+    // your store
+    export default createStore(
+      combineReducers({
+        // your reducers
+        ...createReducers(...appSchema)
+      }),
+      initialState,
+      composedEnhancers
+    )
+        
     ```
-        // store.js
-        import {denormalize} from 'normalizr';
-        import {createReducers, setDefaultResponseMapper, setDenormalize} from 'redux-tide';
-        import {appSchema} from './entity-schema'
-        
-        // required
-        setDenormalize(denormalize)
-        
-        // not required
-        setDefaultResponseMapper((resp) => {
-          // your response
-          return resp.data
-        })
-        
-        // your store
-        export default createStore(
-          combineReducers({
-            // your reducers
-            ...createReducers(...appSchema)
-          }),
-          initialState,
-          composedEnhancers
-        )
-        
-    ```
 
-5. READY! You can create actions und use it
+5. READY! Now you can create actions and use it
 
-## What is next?
+# What is next?
 
-### Create actions
-```
+## Create actions
+```javascript
 import {createAction} from 'redux-tide';
 import {del, get, post, put} from '../RESTApi'
 import {postsSchema} from 'entity-schema';
@@ -132,7 +149,7 @@ export const createNewPost = createAction(
     ]
 )
 
-// basic redux action can be used
+// basic redux action can be use
 export const openEditPost = (postId) => {
   return {
     type:OPEN_EDIT,
@@ -142,8 +159,8 @@ export const openEditPost = (postId) => {
 
 ```
 
-### Using selectors
-```
+## Using selectors
+```javascript
 import {getActionData} from 'redux-tide';
 import {
     createNewPost, 
@@ -185,7 +202,7 @@ const makeGetMergedActionData = (postId) => {
     
 ```
 
-#### Selector response properties
+### Selector response properties
 ```
 {String} actionId - your action id
 {*} sourceResult - your source response from server (not mapped response)
@@ -201,8 +218,8 @@ const makeGetMergedActionData = (postId) => {
 
 
 
-### Create middleware
-```
+## Create middleware
+```javascript
 import {
     createNewPost, 
     delPostById, 
@@ -260,10 +277,10 @@ export const middleware = store => next => action => {
 
 ```
 
-### What other options are there to create an action? 
+# Other options to create an action? 
 
-#### Can i used custom server response mapper?
-```
+## Can i use custom server response mapper?
+```javascript
 // YES!
 // calling url 'user' but replace backend success response to resp.data
 // You always can be get source response data 
@@ -277,9 +294,9 @@ export const getUserAction = createAction(
 
  
 ```
-#### Whats else?
+## Whats else?
 
-``` 
+```javascript
 // actions.js 
 
 export const get = (url) => {// returns Promise ajax call}
@@ -377,9 +394,9 @@ const UserContainer = connect(
 )(UserComponent)
 ```
 
-### Additional information, createAction public methods
-```
-// when you did action, you can used action public methods 
+## Additional information, createAction public methods
+```javascript
+// when you did action, you can use action public methods 
 export const getAllPosts = createAction(
     postsSchema, 
     get, 
@@ -469,14 +486,33 @@ export const getAllPosts = createAction(
   /**
    * Clear action store data
    *
+   * @memberOf action._makeAction.Action
    * @type {Function}
    *
    * @example
-   * store.dispatch(userLoginAction.clear())
+   * store.dispatch(userLoginAction.empty())
    *
    * @returns {Undefined} - returns None, only clear action data
    */
-  Action.clear = () => {
-  } 
+  Action.empty = () => {
+    return (dispatch, getState) => {
+      // ...
+    }
+  }
 ```
-### Drink a tea :)
+
+## Contributions
+Use [GitHub issues](https://github.com/edtoken/redux-tide/issues) for requests.   
+I actively welcome pull requests; learn how to contribute.   
+
+## Changelog
+
+## Future
+* Improve documentation
+* Improve tests
+* Refactor code
+* Delete it ``` setDenormalize(denormalize) ``` in your store.js file :) 
+* Add new selectors
+* Maybe? make redux-tide-storage (make storage) and redux-tide-orm (only selectors) packages
+
+### Drink tea :)

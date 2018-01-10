@@ -6,7 +6,7 @@ import { fromJS } from 'immutable'
 import { normalize } from 'normalizr'
 
 import {
-  ACTION_CLEAR_TYPE_NAME,
+  ACTION_EMPTY_TYPE_NAME,
   ACTION_TYPE_PREFIX,
   ACTIONS_REDUCER_NAME,
   ENTITIES_REDUCER_NAME
@@ -78,14 +78,17 @@ export const createReducers = (...appSchema) => {
         errorText,
         hasError,
         isArrayData,
-        actionDataKey
+        actionDataKey,
+        actionSchema
       } = action
 
+      const entityKey = actionSchema.key
+
       // action.clear
-      if (action.type === ACTION_CLEAR_TYPE_NAME) {
+      if (action.type === ACTION_EMPTY_TYPE_NAME) {
         return state.set(
           actionId,
-          fromJS(Object.assign({}, actionDefaultData, { time }))
+          fromJS(Object.assign({ entityKey }, actionDefaultData, { time }))
         )
       }
 

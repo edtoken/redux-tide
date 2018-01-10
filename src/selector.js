@@ -113,6 +113,8 @@ export const getActionData = action => {
   }
 }
 
+export const getActionsReducer = state => state[ACTIONS_REDUCER_NAME]
+
 export const getEntityReducer = state => state[ENTITIES_REDUCER_NAME]
 
 export const getEntityItemsBySchema = entitySchema => {

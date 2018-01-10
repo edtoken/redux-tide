@@ -2,14 +2,9 @@
 
 # dependencies
 /node_modules
-/examples/**/*/node_modules
-/examples/**/*/build
 
 # testing
 /coverage
-
-# docs
-/docs
 
 # production
 /build
@@ -24,10 +19,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# developers (non-standard)
-db.mock.json
-package-lock.json
-.old
-.idea
-.vscode
