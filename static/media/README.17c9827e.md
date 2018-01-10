@@ -1,5 +1,6 @@
 # Redux tide
 
+[website](https://edtoken.github.io/redux-tide)  
 [docs](https://edtoken.github.io/redux-tide/docs)  
 [coverage-report](https://edtoken.github.io/redux-tide/coverage/Icov-report)  
 Simple library for redux-normalized state and actions/selectors for it
