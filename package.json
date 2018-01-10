@@ -1,7 +1,7 @@
 {
   "name": "redux-tide",
   "description": "tiny factory for redux crud normalize",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "./lib/index.js",
   "files": [
     "lib"
@@ -60,12 +60,12 @@
   },
   "dependencies": {
     "immutable": "^3.8.2",
-    "minami": "^1.2.3",
     "normalizr": "^3.2.4",
-    "raw-loader": "^0.5.1",
     "reselect": "^3.0.1"
   },
   "devDependencies": {
+    "minami": "^1.2.3",
+    "raw-loader": "^0.5.1",
     "axios": "^0.17.1",
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
