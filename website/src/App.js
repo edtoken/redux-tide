@@ -8,6 +8,8 @@ const README = require('../../README.md')
 const exampleName = document.location.search.replace('?ex=', '')
 const exampleComponents = {
   'blog': require('./blog'),
+  'different-entity-id': require('./different-entity-id'),
+  'merged-actions-data': require('./merged-actions-data'),
   'counter': require('./counter'),
   'todos': require('./todos'),
 }
@@ -20,13 +22,15 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header" style={{height: 'auto'}}>
-          <a href="https://edtoken.github.io/redux-tide/"><img src={logo} className="App-logo" alt="logo"/></a>
+          <a href={`${process.env.PUBLIC_URL}/redux-tide/`}>
+            <img src={logo} className="App-logo" alt="logo"/>
+          </a>
           <h1 className="App-title">Welcome to Redux Tide examples</h1>
 
 
           <a
             className="github-button"
-            href="https://github.com/edtoken/redux-tide"
+            href={`${process.env.PUBLIC_URL}`}
             data-icon="octicon-star"
             data-size="large"
             data-show-count="true"
@@ -46,16 +50,23 @@ class App extends Component {
           <div>
             <Navbar>
               <Nav>
-                <NavItem href="https://edtoken.github.io/redux-tide/">
+                <NavItem href={`${process.env.PUBLIC_URL}/redux-tide/`}>
                   Index
                 </NavItem>
-                <NavItem href="https://edtoken.github.io/redux-tide?ex=blog">
+                <NavItem href={`${process.env.PUBLIC_URL}/redux-tide?ex=blog`}>
                   Blog example
                 </NavItem>
-                <NavItem href="https://edtoken.github.io/redux-tide?ex=counter">
+                <NavItem href={`${process.env.PUBLIC_URL}/redux-tide?ex=different-entity-id`}>
+                  Different entity id
+                </NavItem>
+                <NavItem href={`${process.env.PUBLIC_URL}/redux-tide?ex=merged-actions-data`}>
+                  Merged actions data
+                </NavItem>
+
+                <NavItem href={`${process.env.PUBLIC_URL}/redux-tide?ex=counter`}>
                   Counter example (soon)
                 </NavItem>
-                <NavItem href="https://edtoken.github.io/redux-tide?ex=todos">
+                <NavItem href={`${process.env.PUBLIC_URL}/redux-tide?ex=todos`}>
                   Todos example (soon)
                 </NavItem>
               </Nav>

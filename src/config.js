@@ -95,3 +95,7 @@ export const setDefaultResponseMapper = callback => {
 export const setDenormalize = denormalize => {
   setDenormalize.denormalize = denormalize
 }
+
+if (IS_TEST_ENVIRONMENT) {
+  setDenormalize.denormalize = require('normalizr').denormalize
+}

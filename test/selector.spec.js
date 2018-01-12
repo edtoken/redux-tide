@@ -2,8 +2,9 @@ import 'should'
 import { schema } from 'normalizr'
 import { fromJS } from 'immutable'
 
-import { ENTITIES_REDUCER_NAME } from '../src/config'
+import { ENTITIES_REDUCER_NAME, ACTIONS_REDUCER_NAME } from '../src/config'
 import {
+  getActionData,
   getEntityItemsByAction,
   getEntityItemsByEntityName,
   getEntityItemsBySchema,
@@ -11,7 +12,53 @@ import {
 } from '../src/selector'
 import { createAction } from '../src/action'
 
-it('selector getActionData', function() {})
+it('selector getActionData', function() {
+  const entitySchema = new schema.Entity('users', {})
+
+  const action = createAction(entitySchema, new Promise(() => {}))
+
+  const actionId = action.actionId()
+
+  const state = {
+    [ACTIONS_REDUCER_NAME]: fromJS({
+      [actionId]: {
+        actionId,
+        status: '',
+        time: '',
+        hasError: '',
+        errorText: '',
+        actionDataKey: 'id',
+        id: 5,
+        isFetching: false,
+        sourceResult: undefined,
+        prevPayload: undefined,
+        payload: undefined
+      }
+    }),
+    [ENTITIES_REDUCER_NAME]: fromJS({
+      users: {
+        5: {
+          id: 5,
+          name: 'vasya'
+        }
+      }
+    })
+  }
+
+  const result = getActionData(action)(state)
+
+  result.should.be.deepEqual({
+    status: '',
+    time: '',
+    hasError: '',
+    errorText: '',
+    isFetching: false,
+    actionId: '@@tide users uniq1',
+    sourceResult: undefined,
+    payload: { id: 5, name: 'vasya' },
+    prevPayload: undefined
+  })
+})
 
 it('selector getEntityReducer', function() {
   const reducerState = fromJS({})

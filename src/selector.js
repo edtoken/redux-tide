@@ -113,6 +113,19 @@ export const getActionData = action => {
   }
 }
 
+export const getMergedActionsData = (...actions) => {
+  return createSelector(
+    actions.map(action => getActionData(action)),
+    (...actionsData) => {
+      const sortedByUpate = actionsData.sort((a, b) => a.time - b.time)
+
+      return sortedByUpate.reduce((memo, item) => {
+        return Object.assign(memo, item)
+      })
+    }
+  )
+}
+
 export const getActionsReducer = state => state[ACTIONS_REDUCER_NAME]
 
 export const getEntityReducer = state => state[ENTITIES_REDUCER_NAME]

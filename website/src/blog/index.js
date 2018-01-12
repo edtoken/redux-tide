@@ -9,7 +9,6 @@ import DevTools from '../DevTools'
 import store, {history} from './store'
 import {getAllPost, fetchPost, updatePost} from "./actions";
 import {getActionData} from "../../../src";
-import {mergeFetchUpdatePostData} from './selectors'
 
 class BlogPostFormComponent extends Component {
 
@@ -17,7 +16,7 @@ class BlogPostFormComponent extends Component {
     super(props)
 
     this.state = {
-      saving: false,
+      saved: false,
       form: props.payload || {}
     }
 
@@ -34,10 +33,10 @@ class BlogPostFormComponent extends Component {
     }
 
     //when post saved without errors - hide modal
-    if (this.state.saving && this.props.status === 'success') {
-      this.props.onHide()
-      return
-    }
+    // if (this.state.saved && this.props.status === 'success') {
+    //   this.props.onHide()
+    //   return
+    // }
 
     this.setState({form: this.props.payload || {}})
   }
@@ -50,77 +49,91 @@ class BlogPostFormComponent extends Component {
     const form = Object.assign({}, this.state.form, {
       [e.target.name]: e.target.value
     })
-    this.setState({form})
+    this.setState({saved: false, form})
   }
 
   _handleSubmit(e) {
     e.preventDefault()
 
-    this.setState({saving: true}, () => {
+    this.setState({saved: true}, () => {
       this.props.update(this.props.postId, this.state.form)
     })
   }
 
   render() {
     const {isFetching, hasError, errorText, payload} = this.props
-    const {form} = this.state
+    const {saved, form} = this.state
+    const disableEdit = isFetching
+    const completed = saved && this.props.status === 'success'
 
     return (<div className="static-modal">
-      <Modal show={true} onHide={this.props.onHide}>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            <small><span className="label label-primary">Edit Post</span></small>
-            <br/>
-            {!isFetching ? form.title : ''}
-          </Modal.Title>
-        </Modal.Header>
+        <Modal show={true} onHide={this.props.onHide}>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              <small><span className="label label-primary">Edit Post</span></small>
+              <br/>
+              {!isFetching ? form.title : ''}
+            </Modal.Title>
+          </Modal.Header>
 
-        <Modal.Body>
-          <Alert bsStyle="warning">
-            After you are save post changes, please look into the table <br/>
-            Your changes also apply to the table (without data reload), <br/>
-            but you are calling only <b>PUT post/postId</b>
-          </Alert>
+          <Modal.Body>
+            <Alert bsStyle="warning">
+              <b>Your modal component connected only to fetchPost</b> <br/>
+              After you are save post changes, <br/>
+              please look into the <b>Table</b> and modal section <b>Payload</b> <br/>
+              <br/>
+              Your changes also apply to the <b>table</b> and <b>selector fetchPost response</b> (without data reload), <br/>
+              But you are calling only <b>PUT post/postId</b>
+            </Alert>
 
-          {isFetching && <div>
-            <span className="label label-primary">Loading...</span>
-          </div>}
-          {!isFetching && <div>
-            <ControlLabel>Post Title</ControlLabel>
-            <FormControl
-              type="text"
-              name="title"
-              defaultValue={form.title}
-              placeholder="Enter text"
-              onChange={(e) => (this._handleChange(e))}
-            />
-            <br/>
-            <ControlLabel>Post Body</ControlLabel>
-            <FormControl
-              componentClass="textarea"
-              name="body"
-              defaultValue={form.body}
-              placeholder="Enter text"
-              onChange={(e) => (this._handleChange(e))}
-            />
-          </div>}
+            <h3>fetchPost payload:</h3>
+            <pre><code>{JSON.stringify(payload, null, 2)}</code></pre>
 
-        </Modal.Body>
+            {isFetching && <div>
+              <span className="label label-primary">Loading...</span>
+            </div>}
+            {!isFetching && <div>
+              <ControlLabel>Post Title</ControlLabel>
+              <FormControl
+                type="text"
+                name="title"
+                defaultValue={form.title}
+                placeholder="Enter text"
+                onChange={(e) => (this._handleChange(e))}
+                disabled={disableEdit}
+              />
+              <br/>
+              <ControlLabel>Post Body</ControlLabel>
+              <FormControl
+                componentClass="textarea"
+                name="body"
+                defaultValue={form.body}
+                placeholder="Enter text"
+                onChange={(e) => (this._handleChange(e))}
+                disabled={disableEdit}
+              />
+            </div>}
 
-        <Modal.Footer>
-          <Button onClick={this.props.onHide}>Close</Button>
-          <Button bsStyle="primary" onClick={this._handleSubmit}>Save changes</Button>
-        </Modal.Footer>
-      </Modal>
-    </div>)
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button onClick={this.props.onHide}>Close</Button>
+            <Button bsStyle={completed ? 'primary' : 'success'} onClick={this._handleSubmit} disabled={completed}>
+              {completed && 'Saved'}
+              {!completed && 'Save changes'}
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    )
   }
 }
 
 const BlogPostForm = connect(
-  (state, props) => (mergeFetchUpdatePostData(state, props)),
+  state => getActionData(fetchPost),
   dispatch => ({
-    fetch: (postId) => (dispatch(fetchPost.withPrefix(postId)(postId))),
-    update: (postId, data) => (dispatch(updatePost.withPrefix(postId)(postId, data))),
+    fetch: (postId) => (dispatch(fetchPost(postId))),
+    update: (postId, data) => (dispatch(updatePost(postId, data))),
   })
 )(BlogPostFormComponent)
 
@@ -150,8 +163,6 @@ class BlogPostsTableComponent extends Component {
 
   render() {
     const {isFetching, hasError, errorText, payload} = this.props
-    const {activePostId} = this.state
-
     const hasPayload = (payload && payload.length)
     const progress = isFetching ? 20 : hasError ? 90 : 100
 
@@ -262,7 +273,7 @@ class BlogExampleComponent extends Component {
     const {activePostId} = this.state
 
     return (<div>
-      <h1>BlogExampleComponent</h1>
+      <h1>Blog Example</h1>
 
       <Alert bsStyle="info">
         Demonstrate how to create list and single item requests, sync data between it, witout reducers

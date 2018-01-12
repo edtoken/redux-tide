@@ -6,6 +6,7 @@
 Simple library for redux-normalized state and actions/selectors for it
 
 [![Build Status](https://api.travis-ci.org/edtoken/redux-tide.svg?branch=master)](https://travis-ci.org/edtoken/redux-tide)
+[![Maintainability](https://api.codeclimate.com/v1/badges/5952e9edfa038e49658f/maintainability)](https://codeclimate.com/github/edtoken/redux-tide/maintainability)
 [![npm version](https://badge.fury.io/js/redux-tide.svg)](https://badge.fury.io/js/redux-tide)
 [![Coverage Status](https://coveralls.io/repos/github/edtoken/redux-tide/badge.svg?branch=master)](https://coveralls.io/github/edtoken/redux-tide?branch=master)
 [![Inline docs](https://inch-ci.org/github/edtoken/redux-tide.svg?branch=master)](https://inch-ci.org/github/edtoken/redux-tide)
@@ -22,10 +23,16 @@ You don't need to create reducers for rest-api data
 You should create reducers only for business front-end logic  
 
 ## Examples
+*Please, look how to work blog and different-entity-id-example, abd merged-actions-data*     
 [blog](https://edtoken.github.io/redux-tide/?ex=blog) - using with axios and REST api  
 [blog-source](https://github.com/edtoken/redux-tide/tree/master/website/src/blog) - blog demo source code    
-[counter (soon)](https://edtoken.github.io/redux-tide/?ex=counter)  
-[todos (soon)](https://edtoken.github.io/redux-tide/?ex=todos)  
+[different-entity-id-example](https://edtoken.github.io/redux-tide?ex=different-entity-id)    
+[different-entity-id-source](https://github.com/edtoken/redux-tide/tree/master/website/src/different-entity-id)  
+[merged-actions-data-example](https://edtoken.github.io/redux-tide?ex=merged-actions-data)    
+[merged-actions-data-source](https://github.com/edtoken/redux-tide/tree/master/website/src/merged-actions-data)  
+
+[counter (soon)](https://edtoken.github.io/redux-tide/?ex=counter)    
+[todos (soon)](https://edtoken.github.io/redux-tide/?ex=todos)    
 [video](https://cl.ly/3d183v352O24) - short video for demonstration
 
 ## Installation
@@ -33,65 +40,71 @@ You should create reducers only for business front-end logic
 npm install redux-tide --save
 ```
 
-## 4 Steps for using redux-tide
-1. your project must have: [normalizr](https://github.com/paularmstrong/normalizr), [redux](https://redux.js.org/), [react-redux](https://github.com/reactjs/react-redux), [redux-thunk](https://github.com/gaearon/redux-thunk)
-2. install redux-tide `npm install redux-tide --save`
-3. define your entity-schema
-    ```javascript
-    // entity-schema.js
-    import {schema} from 'normalizr'
-    
-    const postsSchema = new schema.Entity('posts')
-    const commentsSchema = new schema.Entity('comments')
-    
-    postsSchema.define({
-      comments: [commentsSchema]
-    })
-    commentsSchema.define({
-      post: commentsSchema
-    })
-       
-    const appSchema = {
-      commentsSchema,
-      postsSchema
-    }
-            
-    export {
-        postsSchema,
-        commentsSchema,
-        appSchema
-    }
-         
-    ```
-4. modify your store.js file 
-    ```javascript
-    // store.js
-    import {denormalize} from 'normalizr';
-    import {createReducers, setDefaultResponseMapper, setDenormalize} from 'redux-tide';
-    import {appSchema} from './entity-schema'
-    
-    // required
-    setDenormalize(denormalize)
-    
-    // not required
-    setDefaultResponseMapper((resp) => {
-      // your response
-      return resp.data
-    })
-    
-    // your store
-    export default createStore(
-      combineReducers({
-        // your reducers
-        ...createReducers(...appSchema)
-      }),
-      initialState,
-      composedEnhancers
-    )
-        
-    ```
+------
 
-5. READY! Now you can create actions and use it
+## 4 Steps for using redux-tide
+### 4.1 install required libraries
+Your project must have: [normalizr](https://github.com/paularmstrong/normalizr), [redux](https://redux.js.org/), [react-redux](https://github.com/reactjs/react-redux), [redux-thunk](https://github.com/gaearon/redux-thunk)
+
+### 4.2 install library 
+`npm install redux-tide --save`
+
+### 4.3 Define entity-schema
+```javascript
+// entity-schema.js
+import {schema} from 'normalizr'
+
+const postsSchema = new schema.Entity('posts')
+const commentsSchema = new schema.Entity('comments')
+
+postsSchema.define({
+  comments: [commentsSchema]
+})
+commentsSchema.define({
+  post: postsSchema
+})
+   
+const appSchema = {
+  commentsSchema,
+  postsSchema
+}
+        
+export {
+    postsSchema,
+    commentsSchema,
+    appSchema
+}
+     
+```
+### 4.4 Modify your store.js file 
+```javascript
+// store.js
+import {denormalize} from 'normalizr';
+import {createReducers, setDefaultResponseMapper, setDenormalize} from 'redux-tide';
+import {appSchema} from './entity-schema'
+
+// required
+setDenormalize(denormalize)
+
+// not required
+setDefaultResponseMapper((resp) => {
+  // your response
+  return resp.data
+})
+
+// your store
+export default createStore(
+  combineReducers({
+    // your reducers
+    ...createReducers(...appSchema)
+  }),
+  initialState,
+  composedEnhancers
+)
+    
+```
+### READY! Now you can create actions and use it
+------
 
 # What is next?
 
@@ -111,24 +124,28 @@ import {OPEN_EDIT} from './action-types'
 * @param {Function} [responseMapper=_defaultResponseMapper||callback from setDefaultResponseMapper]
 **/
 
+// simple action
 export const getAllPosts = createAction(
     postsSchema, 
     get, 
     `posts?_embed=comments&_order=desc` // simple static url
 )
 
+// warning, please read "Create one action for different entity id" section
 export const getPostById = createAction(
     postsSchema, 
     get, 
     postId => `posts/${postId}?_embed=comments` // url with property postId
 )
 
+// warning, please read "Create one action for different entity id" section
 export const delPostById = createAction(
     postsSchema, 
     del, 
     postId => `posts/${postId}` // url with property postId
 )
 
+// warning, please read "Create one action for different entity id" section
 export const updatePostById = createAction(
     postsSchema, 
     put, 
@@ -158,6 +175,81 @@ export const openEditPost = (postId) => {
 }
 
 ```
+
+## How to use with array of connected components ? 
+Please read **Create one action for different entity id** section  
+And look examples:    
+[different-entity-id-example](https://edtoken.github.io/redux-tide?ex=different-entity-id)  
+[different-entity-id-source](https://github.com/edtoken/redux-tide/tree/master/website/src/different-entity-id)
+
+## Create one action for different entity id
+### Warning! 
+If you want to create 1 action get || post || put || delete   
+for work with single entity but multiple entity ids, **for example: `GET post/:postId`**     
+**You should be use action.withPrefix method** - it's generate new uniq action id and **new uniq action reducer state**  
+
+**For details you can look example:**   
+[different-entity-id-example](https://edtoken.github.io/redux-tide?ex=different-entity-id)  
+[different-entity-id-source](https://github.com/edtoken/redux-tide/tree/master/website/src/different-entity-id)
+
+*if you dont't make it - your next call* `dispatch(getPostById(nextPostId))`   
+*overwrite your preview call data*  `dispatch(getPostById(prevPostId))`
+  
+
+```javascript
+// actions.js
+import {createAction} from 'redux-tide';
+import {del, get, post, put} from '../RESTApi'
+import {postsSchema} from 'entity-schema';
+
+// write main action
+export const getPostById = createAction(
+    postsSchema, 
+    get, 
+    postId => `posts/${postId}?_embed=comments` // url with property postId
+)
+
+// component.js
+import {getActionData} from 'redux-tide';
+import {getPostById} from './actions';
+
+// WRONG connect!
+export default connect(
+  // your selector does not have uniq post Id, so data is rewrited
+  (state, props) => getActionData(getPostById),
+  dispatch => {
+    // your selector does not have uniq post Id, so data is rewrited
+    fetch: (postId) => dispatch(getPostById(postId))
+  }
+)(SomeComponent)
+
+// CORRECT connect
+// you can use this connect with different postId
+export default connect(
+  // selector get state of getPostById but reducer key named with postId
+  (state, props) => getActionData(getPostById.withPrefix(props.postId)), 
+  dispatch => {
+    // action call getPostById but dispatch TYPE make with prefix postId
+    fetch: (postId) => dispatch(getPostById.withPrefix(postId)(postId))
+  }
+)(SomeComponent)
+
+// common-component.js
+import React, {Component} from 'react'
+import {PostFormComponent} from './component'
+
+export default class ComponentWrapper extends Component {
+  render(){
+    return(<PostFormComponent postId={this.props.postId}/>)
+  }
+}
+```
+
+Sorry, but it's required
+
+--- 
+
+# Other information
 
 ## Using selectors
 ```javascript
@@ -279,9 +371,40 @@ export const middleware = store => next => action => {
 
 # Other options to create an action? 
 
-## Can i use custom server response mapper?
+### How to use `.withPrefix`, `.withName`, `.clone` methods?
+**For details you can look example:**   
+[different-entity-id-example](https://edtoken.github.io/redux-tide?ex=different-entity-id)   
+[different-entity-id-source](https://github.com/edtoken/redux-tide/tree/master/website/src/different-entity-id)
+  
+This methods returns same action     
+But generate new uniq dispatch type and new uniq action state    
+You should be call `.withPrefix`, `.withName`, `.clone` when you are dispatch event and use getActionData
 ```javascript
-// YES!
+
+dispatch(getUserAction.withPrefix(userId)(userId))
+connect(
+  (state)=> getActionData(getUserAction.withPrefix(userId))
+)
+
+// And this methods can chain calls
+export const getUserAction = createAction(
+    user, 
+    get, 
+    'user', 
+    (resp) => {resp.data}
+).withName('user')
+
+dispatch(getUserAction.withPrefix(userId)) // action type id and state key name includes user + userId
+
+// OR
+dispatch(getUser.withName('user').withPrefix(userId))
+
+// AND selector
+getActionData(getUser.withName('user').withPrefix(userId))
+```
+
+### Custom server response mapper
+```javascript
 // calling url 'user' but replace backend success response to resp.data
 // You always can be get source response data 
 // from selector getActionData property sourceResult
@@ -291,8 +414,24 @@ export const getUserAction = createAction(
     'user', 
     (resp) => {resp.data}
 )
+```
 
- 
+### Call dispatch or getState in query builder method
+```javascript
+
+// you can pass multi level functions or promises 
+// (args) => (dispatch, getState) => (dispatch, getState) => (dispatch, getState) => ...
+// calling url 'user/${userId}'
+
+export const getUserAction = createAction(
+    user, 
+    get, 
+    (userId) => {
+        return (dispatch, getState)=>{
+            // return Promise (axios call or other)
+        }
+    }
+)
 ```
 ## Whats else?
 
@@ -300,13 +439,6 @@ export const getUserAction = createAction(
 // actions.js 
 
 export const get = (url) => {// returns Promise ajax call}
-
-// calling url 'user' used method get
-export const getUserAction = createAction(
-    user, 
-    get, 
-    'user'
-)
 
 // simple action used custom method for getting data
 export const getUserAction = createAction(user, () => {
@@ -318,14 +450,7 @@ export const getUserAction = createAction(user, () => {
  })
 })
 
-// calling url 'user/${userId}'
-export const getUserAction = createAction(
-    user, 
-    get, 
-    (userId) => `user/${userId}`
-)
-
-// if you want to beautiful action store name in redux, 
+// if you want to best action store name in redux, 
 // you should used this pattern
 // calling url 'user/${userId}'
 export const getUserAction = createAction(
@@ -339,7 +464,7 @@ export const getUserAction = createAction(
 // and post data (if you are using axios) {name, phone, email}
 export const getUserAction = createAction(
     user, 
-    get, 
+    post, 
     (userId) => [
         `user/${userId}`,
         undefined,
@@ -394,7 +519,7 @@ const UserContainer = connect(
 )(UserComponent)
 ```
 
-## Additional information, createAction public methods
+## Additional information, "createAction" public methods
 ```javascript
 // when you did action, you can use action public methods 
 export const getAllPosts = createAction(
@@ -410,7 +535,7 @@ export const getAllPosts = createAction(
 // getAllPosts.clone()
 // getAllPosts.withPrefix(customPrefixId) // customPrefixId might be postId 
 // getAllPosts.withName(yourCustomName)
-// getAllPosts.clear()
+// getAllPosts.empty()
 
 
 /**
@@ -506,6 +631,7 @@ Use [GitHub issues](https://github.com/edtoken/redux-tide/issues) for requests.
 I actively welcome pull requests; learn how to contribute.   
 
 ## Changelog
+[CHANGELOG.md](https://github.com/edtoken/redux-tide/blob/master/CHANGELOG.md).
 
 ## Future
 * Improve documentation

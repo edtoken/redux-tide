@@ -3,6 +3,7 @@ import { createReducers } from './reducer'
 import {
   denomalizeEntityItemById,
   getActionData,
+  getMergedActionsData,
   getEntityItemsByAction,
   getEntityItemsByEntityName,
   getEntityItemsBySchema,
@@ -31,6 +32,7 @@ export {
   createAction,
   createReducers,
   getActionData,
+  getMergedActionsData,
   getEntityReducer,
   getEntityItemsBySchema,
   getEntityItemsByAction,

@@ -1,7 +1,7 @@
 {
   "name": "redux-tide",
   "description": "tiny factory for redux crud normalize",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "./lib/index.js",
   "files": [
     "lib"
@@ -44,6 +44,7 @@
     "test:watch": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --recursive --watch",
     "test:cov": "cross-env NODE_ENV=test babel-node ./node_modules/.bin/isparta cover _mocha -- --compilers js:babel-core/register --recursive",
     "test:fix:cov": "npm run lint:fix && npm run test:cov",
+    "test:fix:cov:open": "npm run test:fix:cov && open ./coverage/lcov-report/index.html",
     "prepublish": "npm run lint && npm run test && npm run clean && npm run build",
     "docs": "jsdoc -c jsdoc.json -p ./src -r ./README.md",
     "docs:open": "npm run docs && open docs/index.html",
@@ -64,8 +65,6 @@
     "reselect": "^3.0.1"
   },
   "devDependencies": {
-    "minami": "^1.2.3",
-    "raw-loader": "^0.5.1",
     "axios": "^0.17.1",
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
@@ -80,8 +79,10 @@
     "isparta": "^4.0.0",
     "jsdoc": "^3.5.5",
     "json-server": "^0.12.1",
+    "minami": "^1.2.3",
     "mocha": "^4.1.0",
     "prettier": "^1.9.2",
+    "raw-loader": "^0.5.1",
     "react": "^16.2.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
@@ -89,6 +90,8 @@
     "redux-devtools-dock-monitor": "^1.1.3",
     "redux-devtools-log-monitor": "^1.4.0",
     "redux-thunk": "^2.2.0",
-    "should": "^13.2.0"
+    "should": "^13.2.0",
+    "should-sinon": "0.0.6",
+    "sinon": "^4.1.4"
   }
 }

@@ -25,7 +25,7 @@ export const parseError = err => {
     return err
   }
   if (err instanceof Error) {
-    if (err.stack) {
+    if (err.stack && !config.IS_TEST_ENVIRONMENT) {
       console.error(err)
     }
     return err.message || err.toString()
