@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">89.66% </span>
+        <span class="strong">96.55% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>26/29</span>
+        <span class='fraction'>28/29</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">80.77% </span>
+        <span class="strong">89.29% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>21/26</span>
+        <span class='fraction'>25/28</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">55.56% </span>
+        <span class="strong">88.89% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>5/9</span>
+        <span class='fraction'>8/9</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">88.46% </span>
+        <span class="strong">96.15% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>23/26</span>
+        <span class='fraction'>25/26</span>
       </div>
       <div class='fl pad1y'>
         <span class="strong">1 statement, 1 function, 7 branches</span>
@@ -114,33 +114,33 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">9×</span>
-<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">5×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4×</span>
-<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -153,11 +153,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * @namespace helper
@@ -186,16 +186,16 @@ export const parseError = err =&gt; {
     return err
   }
   if (err instanceof Error) {
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (err.stack) {
-      console.error(err)
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (err.stack &amp;&amp; !config.IS_TEST_ENVIRONMENT) {
+<span class="cstat-no" title="statement not covered" >      c</span>onsole.error(err)
     }
     r</span>eturn err.message || <span class="branch-1 cbranch-no" title="branch not covered" >err.toString()
   }
   return `Error: ${String(err)}`
 }
 &nbsp;
-export const denormalize = <span class="fstat-no" title="function not covered" >(input, schema, entities) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  r</span>eturn config.setDenormalize.denormalize(input, schema, entities)
+export const denormalize = (input, schema, entities) =&gt; {
+  return config.setDenormalize.denormalize(input, schema, entities)
 }
 &nbsp;
 /**
@@ -208,12 +208,12 @@ export const denormalize = <span class="fstat-no" title="function not covered" >
  * @returns {*} - returns original resp
  * @private
  */
-const _defaultResponseMapper = <span class="fstat-no" title="function not covered" >resp =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  r</span>eturn resp
+const _defaultResponseMapper = resp =&gt; {
+  return resp
 }
 &nbsp;
-export const getDefaultResponseMapper = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  r</span>eturn config.setDefaultResponseMapper.callback || _defaultResponseMapper
+export const getDefaultResponseMapper = () =&gt; {
+  return config.setDefaultResponseMapper.callback || _defaultResponseMapper
 }
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -221,7 +221,7 @@ export const getDefaultResponseMapper = <span class="fstat-no" title="function n
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jan 10 2018 23:20:52 GMT+0300 (MSK)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Jan 12 2018 19:25:45 GMT+0300 (MSK)
 </div>
 </div>
 <script src="../prettify.js"></script>
