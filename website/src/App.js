@@ -9,9 +9,7 @@ const exampleName = document.location.search.replace('?ex=', '')
 const exampleComponents = {
   'blog': require('./blog'),
   'different-entity-id': require('./different-entity-id'),
-  'merged-actions-data': require('./merged-actions-data'),
-  'counter': require('./counter'),
-  'todos': require('./todos'),
+  'merged-actions-data': require('./merged-actions-data')
 }
 
 class App extends Component {
@@ -61,13 +59,6 @@ class App extends Component {
                 </NavItem>
                 <NavItem href={`${process.env.PUBLIC_URL}/redux-tide?ex=merged-actions-data`}>
                   Merged actions data
-                </NavItem>
-
-                <NavItem href={`${process.env.PUBLIC_URL}/redux-tide?ex=counter`}>
-                  Counter example (soon)
-                </NavItem>
-                <NavItem href={`${process.env.PUBLIC_URL}/redux-tide?ex=todos`}>
-                  Todos example (soon)
                 </NavItem>
               </Nav>
             </Navbar>

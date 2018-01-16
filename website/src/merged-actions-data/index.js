@@ -97,6 +97,8 @@ class DifferentEntityIdExampleComponent extends Component {
 
     return (<div>
       <h1>Merged Actions Data</h1>
+      <p>Source code <a href="https://github.com/edtoken/redux-tide/tree/master/website/src/merged-actions-data" target='_blank'>source</a></p>
+
       <Alert bsStyle="info">
         Demonstrate how to use `getMergedActionsData` selector<br/>
         Please click <b>fetch</b> and <b>update</b> on every post and look where label "is fetching" will appear <br/>

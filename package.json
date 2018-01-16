@@ -4,7 +4,8 @@
   "version": "0.1.2",
   "main": "./lib/index.js",
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "repository": {
     "type": "git",
@@ -37,9 +38,10 @@
     "clean": "rimraf lib",
     "build": "./node_modules/.bin/babel --presets es2015 -d lib src",
     "build:watch": "./node_modules/.bin/babel --watch --presets es2015 -d lib src",
-    "lint": "eslint src test website/src website/public",
-    "lint:fix": "eslint src test website/src website/public --fix",
+    "lint": "eslint src test ",
+    "lint:fix": "eslint src test --fix",
     "lint:fix:test": "npm run lint:fix && npm run test",
+    "lint:fix:website": "eslint src test website/src website/public --fix",
     "test": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --recursive",
     "test:watch": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --recursive --watch",
     "test:cov": "cross-env NODE_ENV=test babel-node ./node_modules/.bin/isparta cover _mocha -- --compilers js:babel-core/register --recursive",

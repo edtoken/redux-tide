@@ -23,7 +23,7 @@ You don't need to create reducers for rest-api data
 You should create reducers only for business front-end logic  
 
 ## Examples
-*Please, look how to work blog and different-entity-id-example, abd merged-actions-data*     
+*Please, look how to work this examples          
 [blog](https://edtoken.github.io/redux-tide/?ex=blog) - using with axios and REST api  
 [blog-source](https://github.com/edtoken/redux-tide/tree/master/website/src/blog) - blog demo source code    
 [different-entity-id-example](https://edtoken.github.io/redux-tide?ex=different-entity-id)    
@@ -31,8 +31,6 @@ You should create reducers only for business front-end logic
 [merged-actions-data-example](https://edtoken.github.io/redux-tide?ex=merged-actions-data)    
 [merged-actions-data-source](https://github.com/edtoken/redux-tide/tree/master/website/src/merged-actions-data)  
 
-[counter (soon)](https://edtoken.github.io/redux-tide/?ex=counter)    
-[todos (soon)](https://edtoken.github.io/redux-tide/?ex=todos)    
 [video](https://cl.ly/3d183v352O24) - short video for demonstration
 
 ## Installation
@@ -174,6 +172,17 @@ export const openEditPost = (postId) => {
   }
 }
 
+```
+
+## How to reset action store data?
+When you need to force a clear state of action, please use
+ 
+```javascript
+dispatch(createNewPost.empty())
+```
+OR 
+```javascript
+dispatch(getPostById.withPrefix(props.postId))
 ```
 
 ## How to use with array of connected components ? 
@@ -537,94 +546,9 @@ export const getAllPosts = createAction(
 // getAllPosts.withName(yourCustomName)
 // getAllPosts.empty()
 
-
-/**
-   * 
-   * @type {Function}
-   * @returns {Function} - returns action id
-   */
-  Action.type = Action.actionId = Action.toString = Action.valueOf = () => {
-    return actionId
-  }
-
-  /**
-   * 
-   * @param {Object} item - source entity data
-   *
-   * @type {Function}
-   * @returns {Function} - returns id from source
-   */
-  Action.getEntityId = item => {
-    return actionSchema.getId(item)
-  }
-
-  /**
-   * 
-   * @type {Function}
-   * @returns {Object} - returns actionSchema of action
-   */
-  Action.getSchema = () => {
-    return actionSchema
-  }
-
-  /**
-   * 
-   * @type {Function}
-   * @returns {Function} - returns entity uniq name (id)
-   */
-  Action.getEntityName = () => {
-    return actionSchema.key
-  }
-
-  /**
-   * 
-   * @type {Function}
-   * @returns {Action} - returns some action with new uniq id
-   */
-  Action.clone = () => {
-    return createAction(
-      actionSchema,
-      actionMethod,
-      queryBuilder,
-      responseMapper
-    )
-  }
-
-  /**
-   * 
-   * @type {Function}
-   * @returns {Action} - returns some action with prefix-id
-   */
-  Action.withPrefix = (...prefix) => {
-    return _makeWithId(prefix.join('-'))
-  }
-
-  /**
-   *
-   * @type {Function}
-   * @returns {Action} - returns some action with name-id (see prefix)
-   */
-  Action.withName = name => {
-    return _makeWithId(name)
-  }
-
-  /**
-   * Clear action store data
-   *
-   * @memberOf action._makeAction.Action
-   * @type {Function}
-   *
-   * @example
-   * store.dispatch(userLoginAction.empty())
-   *
-   * @returns {Undefined} - returns None, only clear action data
-   */
-  Action.empty = () => {
-    return (dispatch, getState) => {
-      // ...
-    }
-  }
 ```
+
+For details, please look [source](https://github.com/edtoken/redux-tide/blob/master/src/action.js#L348)
 
 ## Contributions
 Use [GitHub issues](https://github.com/edtoken/redux-tide/issues) for requests.   
