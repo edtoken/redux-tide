@@ -274,6 +274,7 @@ class BlogExampleComponent extends Component {
 
     return (<div>
       <h1>Blog Example</h1>
+      <p>Source code <a href="https://github.com/edtoken/redux-tide/tree/master/website/src/blog" target='_blank'>source</a></p>
 
       <Alert bsStyle="info">
         Demonstrate how to create list and single item requests, sync data between it, witout reducers

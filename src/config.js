@@ -69,7 +69,7 @@ export const ENTITIES_REDUCER_NAME = `${ACTION_TYPE_PREFIX}-entities`
  * @const
  * @type {String}
  */
-export const ACTION_EMPTY_TYPE_NAME = `${ACTION_TYPE_PREFIX}-clear`
+export const ACTION_EMPTY_TYPE_NAME = `${ACTION_TYPE_PREFIX}-empty`
 
 /**
  * replaced default response mapper to callback

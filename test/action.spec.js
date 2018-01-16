@@ -5,31 +5,31 @@ import { schema } from 'normalizr'
 require('should-sinon')
 
 import {
-  _makeActionHandler,
-  _makeActionUniqId,
-  _makeAction,
+  makeActionHandler,
+  makeActionUniqId,
+  makeAction,
   createAction
 } from '../src/action'
 
-describe('action _makeActionUniqId ', function() {
-  it('_makeActionUniqId returns uniquie ids', function() {
+describe('action makeActionUniqId ', function() {
+  it('makeActionUniqId returns uniquie ids', function() {
     const result = new Set([
-      _makeActionUniqId('name'),
-      _makeActionUniqId('name'),
-      _makeActionUniqId('name'),
-      _makeActionUniqId('name')
+      makeActionUniqId('name'),
+      makeActionUniqId('name'),
+      makeActionUniqId('name'),
+      makeActionUniqId('name')
     ])
     result.should.be.size(4)
   })
 })
 
-describe('action _makeActionHandler ', function() {
-  it('_makeActionHandler should be called', function() {
-    const result = _makeActionHandler('', '', '', {}, {})
+describe('action makeActionHandler ', function() {
+  it('makeActionHandler should be called', function() {
+    const result = makeActionHandler('', '', '', {}, {})
     result.should.not.be.undefined()
   })
-  it('_makeActionHandler returns freeze object', function() {
-    const result = _makeActionHandler(
+  it('makeActionHandler returns freeze object', function() {
+    const result = makeActionHandler(
       '',
       '',
       '',
@@ -38,22 +38,22 @@ describe('action _makeActionHandler ', function() {
     )()
     try {
       result.payload = ['rewrite custom payload']
-      throw new Error('You can rewrite action response')
+      throw new Error(`You can rewrite action response ${result.payload}`)
     } catch (e) {
       e.message.should.be.equal(
         "Cannot assign to read only property 'payload' of object '#<Object>'"
       )
     }
   })
-  it('_makeActionHandler should be return valid key names and count', function() {
-    const result = _makeActionHandler('', '', '', {}, {})()
+  it('makeActionHandler should be return valid key names and count', function() {
+    const result = makeActionHandler('', '', '', {}, {})()
     Object.keys(result).should.be.deepEqual([
+      'time',
       'type',
       'prefix',
       'actionId',
       'parentActionId',
       'status',
-      'time',
       'isArrayData',
       'actionDataKey',
       'entityName',
@@ -68,18 +68,18 @@ describe('action _makeActionHandler ', function() {
   })
 })
 
-describe('action _makeAction ', function() {
-  const makeAction = () => _makeAction('', '', {}, () => {}, () => '')
-  it('_makeAction should be called', function() {
-    const result = makeAction()
+describe('action makeAction ', function() {
+  const actionInst = () => createAction({}, () => {}, () => '')
+  it('makeAction should be called', function() {
+    const result = actionInst()
     result.should.not.be.undefined()
   })
-  it('_makeAction should be returned function', function() {
-    const result = typeof makeAction()
+  it('makeAction should be returned function', function() {
+    const result = typeof actionInst()
     result.should.be.equal('function')
   })
-  it('_makeAction raise error if actionId withPrefix is empty', function() {
-    const result = makeAction()
+  it('makeAction raise error if actionId withPrefix is empty', function() {
+    const result = actionInst()
     try {
       result.withPrefix()
       throw new Error('raise error if actionId withPrefix is empty')
@@ -87,8 +87,8 @@ describe('action _makeAction ', function() {
       // console.log(e)
     }
   })
-  it('_makeAction raise error if actionId withName is empty', function() {
-    const result = makeAction()
+  it('makeAction raise error if actionId withName is empty', function() {
+    const result = actionInst()
     try {
       result.withName()
       throw new Error('raise error if actionId withName is empty')
@@ -162,23 +162,23 @@ describe('action createAction init params', function() {
 })
 
 describe('action createAction uniq action ids', function() {
-  const makeAction = () => createAction({ key: '' }, () => {}, ``)
+  const actionInst = () => createAction({ key: '' }, () => {}, ``)
 
   it('type should be equal actionId toString valueOf', function() {
-    const action1 = makeAction()
+    const action1 = actionInst()
     action1.type().should.be.equal(action1.actionId())
     action1.type().should.be.equal(action1.toString())
     action1.type().should.be.equal('' + action1)
   })
 
   it('clone should be returned new uniq id', function() {
-    const action1 = makeAction()
+    const action1 = actionInst()
     const action2 = action1.clone()
     action1.actionId().should.not.equal(action2.actionId())
   })
 
   it('withPrefix should be returned new uniq id', function() {
-    const action1 = makeAction()
+    const action1 = actionInst()
     const action2 = action1.withPrefix('withPrefix')
 
     action1.actionId().should.not.equal(action2.actionId())

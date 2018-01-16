@@ -18,12 +18,93 @@ const defaultActionDataOutput = {
   isFetching: false
 }
 
-const _makeGetActionData = (
-  action,
-  actionId,
-  entityName,
-  actionEntitySchema
+const deepCopy = obj => {
+  return JSON.parse(JSON.stringify(obj))
+}
+
+const makeDefaultActionData = () => {
+  return deepCopy(defaultActionDataOutput)
+}
+
+const getPayloadIds = (dataKey, isArray, actionState, stateKey) => {
+  if (!dataKey) {
+    return undefined
+  }
+
+  const payloadIds = actionState.get(stateKey || dataKey)
+
+  if (!payloadIds) {
+    return undefined
+  }
+
+  return isArray ? payloadIds : [payloadIds]
+}
+
+const makeActionDenormalizedPayload = (
+  isArray,
+  payloadIds,
+  schema,
+  entities
 ) => {
+  if (!payloadIds) {
+    return undefined
+  }
+
+  const result = denormalize(payloadIds, [schema], entities)
+    .filter(v => v)
+    .map(item => item.toJS())
+  return isArray ? result : result[0]
+}
+
+const makeActionDenormalizedPayloads = (
+  isFetching,
+  actionSchema,
+  entities,
+  payloadIsArray,
+  actionDataKey,
+  entityState,
+  actionState
+) => {
+  if (!actionDataKey) {
+    return {}
+  }
+
+  if (!entityState) {
+    return {
+      payload: payloadIsArray ? [] : undefined,
+      prevPayload: payloadIsArray ? [] : undefined
+    }
+  }
+
+  const actionPayloadIds = getPayloadIds(
+    actionDataKey,
+    payloadIsArray,
+    actionState
+  )
+  const actionPrevPayloadIds = getPayloadIds(
+    actionDataKey,
+    payloadIsArray,
+    actionState,
+    `prev${actionDataKey}`
+  )
+
+  return {
+    payload: makeActionDenormalizedPayload(
+      payloadIsArray,
+      actionPayloadIds,
+      actionSchema,
+      entities
+    ),
+    prevPayload: makeActionDenormalizedPayload(
+      payloadIsArray,
+      actionPrevPayloadIds,
+      actionSchema,
+      entities
+    )
+  }
+}
+
+const _makeGetActionData = (action, actionId, entityName, actionSchema) => {
   return createSelector(
     [
       state => state[ACTIONS_REDUCER_NAME].get(actionId),
@@ -31,68 +112,35 @@ const _makeGetActionData = (
       state => state[ENTITIES_REDUCER_NAME]
     ],
     (actionState, entityState, entities) => {
-      let output = Object.assign({}, defaultActionDataOutput)
-
       if (!actionState) {
-        return output
+        return makeDefaultActionData()
       }
 
-      output = Object.assign(output, {
-        actionId,
-        sourceResult: actionState.get('sourceResult'),
-        status: actionState.get('status'),
-        time: actionState.get('time'),
-        hasError: actionState.get('hasError'),
-        errorText: actionState.get('errorText'),
-        isFetching: actionState.get('isFetching')
-      })
+      const payloadIsArray = actionState.get('isArrayData')
+      const dataKey = actionState.get('actionDataKey')
+      const isFetching = actionState.get('status') === 'pending'
 
-      const actionPayloadIsArray = actionState.get('isArrayData')
-      const actionDataKey = actionState.get('actionDataKey')
-
-      const actionPayloadIds = !actionDataKey
-        ? undefined
-        : actionPayloadIsArray
-          ? actionState.get(actionDataKey)
-          : [actionState.get(actionDataKey)]
-      const actionPrevPayloadIds = !actionDataKey
-        ? undefined
-        : actionPayloadIsArray
-          ? actionState.get(`prev${actionDataKey}`)
-          : [actionState.get(`prev${actionDataKey}`)]
-
-      if (actionDataKey) {
-        output = Object.assign(output, {
-          payload: actionPayloadIsArray ? [] : '',
-          prevPayload: actionPayloadIsArray ? [] : ''
-        })
-      }
-
-      if (
-        actionDataKey &&
-        entityState &&
-        (actionPrevPayloadIds || actionPayloadIds)
-      ) {
-        let prevData = !actionPrevPayloadIds
-          ? []
-          : denormalize(actionPrevPayloadIds, [actionEntitySchema], entities)
-        let currentData = !actionPayloadIds
-          ? []
-          : denormalize(actionPayloadIds, [actionEntitySchema], entities)
-
-        prevData = prevData.filter(v => v) // todo remove undefined values
-        currentData = currentData.filter(v => v) // todo remove undefined values
-
-        prevData = prevData.map(item => item.toJS())
-        currentData = currentData.map(item => item.toJS())
-
-        output = Object.assign(output, {
-          payload: actionPayloadIsArray ? currentData : currentData[0],
-          prevPayload: actionPayloadIsArray ? prevData : prevData[0]
-        })
-      }
-
-      return output
+      return Object.assign(
+        makeDefaultActionData(),
+        {
+          actionId,
+          sourceResult: actionState.get('sourceResult'),
+          status: actionState.get('status'),
+          time: actionState.get('time'),
+          hasError: actionState.get('hasError'),
+          errorText: actionState.get('errorText'),
+          isFetching: actionState.get('isFetching')
+        },
+        makeActionDenormalizedPayloads(
+          isFetching,
+          actionSchema,
+          entities,
+          payloadIsArray,
+          dataKey,
+          entityState,
+          actionState
+        )
+      )
     }
   )
 }

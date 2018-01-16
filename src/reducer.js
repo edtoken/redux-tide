@@ -96,6 +96,20 @@ const makeActionsReducer = defaultActionsState => {
   }
 }
 
+const makeNormalizedPayloadSource = (
+  actionSchema,
+  payloadSource,
+  isArrayData,
+  isFetching,
+  hasError
+) => {
+  if (payloadSource && !hasError && !isFetching) {
+    const normalizeData = isArrayData ? payloadSource : [payloadSource]
+    return normalize(normalizeData, [actionSchema])
+  }
+  return undefined
+}
+
 const makeEntitiesReducer = defaultEntitiesState => {
   return function(state = defaultEntitiesState, action) {
     if (!action.prefix || action.prefix !== ACTION_TYPE_PREFIX) {
@@ -110,12 +124,13 @@ const makeEntitiesReducer = defaultEntitiesState => {
       actionSchema
     } = action
 
-    const normalizedPayloadSource =
-      payloadSource && !hasError && !isFetching
-        ? normalize(isArrayData ? payloadSource : [payloadSource], [
-            actionSchema
-          ])
-        : undefined
+    const normalizedPayloadSource = makeNormalizedPayloadSource(
+      actionSchema,
+      payloadSource,
+      isArrayData,
+      isFetching,
+      hasError
+    )
 
     const newEntitiesItems = normalizedPayloadSource
       ? normalizedPayloadSource.entities
@@ -137,7 +152,6 @@ const makeEntitiesReducer = defaultEntitiesState => {
     }
 
     // todo add isFetching attribute in entity item
-
     return state
   }
 }

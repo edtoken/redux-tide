@@ -113,6 +113,8 @@ class DifferentEntityIdExampleComponent extends Component {
 
     return (<div>
       <h1>Different entity Id</h1>
+      <p>Source code <a href="https://github.com/edtoken/redux-tide/tree/master/website/src/different-entity-id" target='_blank'>source</a></p>
+
       <Alert bsStyle="info">
         Demonstrate how to use `.withPrefix`, `.withName`, `.clone` methods <br/>
         If you are have 1 action to many components you should be use this methods <br/>
