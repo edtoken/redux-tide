@@ -24,7 +24,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="action._makeAction.Action.html">Action</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.clone">Action.clone</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.empty">Action.empty</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.getEntityId">Action.getEntityId</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.getEntityName">Action.getEntityName</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.getSchema">Action.getSchema</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.withName">Action.withName</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action._makeAction.Action.html#.Action.withPrefix">Action.withPrefix</a></span></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="action.html">action</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action.html#._makeAction">_makeAction</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action.html#._makeActionHandler">_makeActionHandler</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action.html#._makeActionUniqId">_makeActionUniqId</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action.html#.exports.createAction">exports.createAction</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="config.html">config</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="config.html#.exports.setDefaultResponseMapper">exports.setDefaultResponseMapper</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="helper.html">helper</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="helper.html#._defaultResponseMapper">_defaultResponseMapper</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="reducer.html">reducer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="reducer.html#.exports.createReducers">exports.createReducers</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="selector.html">selector</a></span></li>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="action.makeAction.this.actionId.html">this.actionId</a></span></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="action.html">action</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action.html#.exports.createAction">exports.createAction</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action.html#.makeAction">makeAction</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action.html#.makeActionHandler">makeActionHandler</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="action.html#.makeActionUniqId">makeActionUniqId</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="config.html">config</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="config.html#.exports.setDefaultResponseMapper">exports.setDefaultResponseMapper</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="helper.html">helper</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="helper.html#._defaultResponseMapper">_defaultResponseMapper</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="reducer.html">reducer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="reducer.html#.exports.createReducers">exports.createReducers</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="selector.html">selector</a></span></li>
 </nav>
 
 <div id="main">
@@ -122,7 +122,353 @@
 
     
 
-    <h4 class="name" id="._makeAction"><span class="type-signature">(private, static) </span>_makeAction<span class="signature">(actionId, parentActionId<span class="signature-attributes">opt</span>, actionSchema, actionMethod, queryBuilder, responseMapper<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Action}</span></h4>
+    <h4 class="name" id=".exports.createAction"><span class="type-signature">(static) </span>exports.createAction<span class="signature">(actionSchema, actionMethod, queryBuilder<span class="signature-attributes">opt</span>, responseMapper<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Action}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Action creator
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="action.js.html">action.js</a>, <a href="action.js.html#line503">line 503</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>actionSchema</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>String</code></span>
+|
+
+<span class="param-type"><code>Object</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">
+                normalizr actionSchema item
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>actionMethod</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>function</code></span>
+|
+
+<span class="param-type"><code>Promise</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">
+                
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>queryBuilder</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>String</code></span>
+|
+
+<span class="param-type"><code>function</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">
+                
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>responseMapper</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>function</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    _defaultResponseMapper||callback from setDefaultResponseMapper
+                
+                </td>
+            
+
+            <td class="description last">
+                
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>Action</code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    - Action handler function
+</div>
+
+    
+</div>
+
+
+
+<div class="section-examples">
+<h5>Example</h5>
+
+    <pre class="prettyprint"><code>// CREATE ACTION
+const get = (url) => {// returns Promise ajax call}
+
+const getUserAction = createAction(user, get, 'user')
+// calling url 'user'
+
+const getUserAction = createAction(user, () => {
+ return new Promise((resolve, reject) => {
+   // cookie|local storage|other get data
+   resolve({
+     //data
+   })
+ })
+})
+
+const getUserAction = createAction(user, get, (userId) => `user/${userId}`)
+// calling url 'user/${userId}'
+
+const getUserAction = createAction(user, get, (userId) => [
+ `user/${userId}`,
+ undefined,
+ {name, phone, email}
+])
+// calling url 'user/${userId}' and post data (if you are using axios) {name, phone, email}
+
+// you can pass multi level functions or promises (args) => (dispatch, getState) => (dispatch, getState) => (dispatch, getState) => ...
+const getUserAction = createAction(user, get, (userId) => {
+ return (dispatch, getState)=>{
+   return new Promise((resolve) => {resolve(`user/${userId}`)})
+ }
+})
+// calling url 'user/${userId}'
+
+const getUserAction = createAction(user, get, 'user', (resp) => {resp.data})
+// calling url 'user' but replace backend success response to resp.data</code></pre>
+
+</div>
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".makeAction"><span class="type-signature">(private, static) </span>makeAction<span class="signature">(actionId, parentActionId<span class="signature-attributes">opt</span>, actionSchema, actionMethod, queryBuilder, responseMapper<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Action}</span></h4>
 
     
 
@@ -165,7 +511,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="action.js.html">action.js</a>, <a href="action.js.html#line152">line 152</a>
+        <a href="action.js.html">action.js</a>, <a href="action.js.html#line275">line 275</a>
     </li></ul></dd>
     
 
@@ -507,7 +853,7 @@ or array [url:String, queryParams:Object (url params), queryBody:Object (post bo
 
     
 
-    <h4 class="name" id="._makeActionHandler"><span class="type-signature">(private, static) </span>_makeActionHandler<span class="signature">(Action, actionId, parentActionId, statusName, actionSchema)</span><span class="type-signature"> &rarr; {function}</span></h4>
+    <h4 class="name" id=".makeActionHandler"><span class="type-signature">(private, static) </span>makeActionHandler<span class="signature">(Action, actionId, parentActionId, status, actionSchema)</span><span class="type-signature"> &rarr; {function}</span></h4>
 
     
 
@@ -550,7 +896,7 @@ or array [url:String, queryParams:Object (url params), queryBody:Object (post bo
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="action.js.html">action.js</a>, <a href="action.js.html#line41">line 41</a>
+        <a href="action.js.html">action.js</a>, <a href="action.js.html#line71">line 71</a>
     </li></ul></dd>
     
 
@@ -672,7 +1018,7 @@ or array [url:String, queryParams:Object (url params), queryBody:Object (post bo
 
         <tr>
             
-                <td class="name"><code>statusName</code></td>
+                <td class="name"><code>status</code></td>
             
 
             <td class="type">
@@ -771,7 +1117,7 @@ or array [url:String, queryParams:Object (url params), queryBody:Object (post bo
 
     
 
-    <h4 class="name" id="._makeActionUniqId"><span class="type-signature">(private, static) </span>_makeActionUniqId<span class="signature">(name)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    <h4 class="name" id=".makeActionUniqId"><span class="type-signature">(private, static) </span>makeActionUniqId<span class="signature">(name)</span><span class="type-signature"> &rarr; {String}</span></h4>
 
     
 
@@ -814,7 +1160,7 @@ or array [url:String, queryParams:Object (url params), queryBody:Object (post bo
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="action.js.html">action.js</a>, <a href="action.js.html#line25">line 25</a>
+        <a href="action.js.html">action.js</a>, <a href="action.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -926,352 +1272,6 @@ or array [url:String, queryParams:Object (url params), queryBody:Object (post bo
 
 </div>
         
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id=".exports.createAction"><span class="type-signature">(static) </span>exports.createAction<span class="signature">(actionSchema, actionMethod, queryBuilder<span class="signature-attributes">opt</span>, responseMapper<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Action}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Action creator
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="action.js.html">action.js</a>, <a href="action.js.html#line454">line 454</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>actionSchema</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>String</code></span>
-|
-
-<span class="param-type"><code>Object</code></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">
-                normalizr actionSchema item
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>actionMethod</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>function</code></span>
-|
-
-<span class="param-type"><code>Promise</code></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">
-                
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>queryBuilder</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>String</code></span>
-|
-
-<span class="param-type"><code>function</code></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">
-                
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>responseMapper</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>function</code></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    _defaultResponseMapper||callback from setDefaultResponseMapper
-                
-                </td>
-            
-
-            <td class="description last">
-                
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code>Action</code></span>
-
-
-    </dd>
-</dl>
-
-
-<div class="param-desc">
-    - Action handler function
-</div>
-
-    
-</div>
-
-
-
-<div class="section-examples">
-<h5>Example</h5>
-
-    <pre class="prettyprint"><code>// CREATE ACTION
-const get = (url) => {// returns Promise ajax call}
-
-const getUserAction = createAction(user, get, 'user')
-// calling url 'user'
-
-const getUserAction = createAction(user, () => {
- return new Promise((resolve, reject) => {
-   // cookie|local storage|other get data
-   resolve({
-     //data
-   })
- })
-})
-
-const getUserAction = createAction(user, get, (userId) => `user/${userId}`)
-// calling url 'user/${userId}'
-
-const getUserAction = createAction(user, get, (userId) => [
- `user/${userId}`,
- undefined,
- {name, phone, email}
-])
-// calling url 'user/${userId}' and post data (if you are using axios) {name, phone, email}
-
-// you can pass multi level functions or promises (args) => (dispatch, getState) => (dispatch, getState) => (dispatch, getState) => ...
-const getUserAction = createAction(user, get, (userId) => {
- return (dispatch, getState)=>{
-   return new Promise((resolve) => {resolve(`user/${userId}`)})
- }
-})
-// calling url 'user/${userId}'
-
-const getUserAction = createAction(user, get, 'user', (resp) => {resp.data})
-// calling url 'user' but replace backend success response to resp.data</code></pre>
-
-</div>
-
-</div>
-        
     
 
     
@@ -1289,7 +1289,7 @@ const getUserAction = createAction(user, get, 'user', (resp) => {resp.data})
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Jan 12 2018 19:25:51 GMT+0300 (MSK) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jan 16 2018 19:26:27 GMT+0300 (MSK) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
