@@ -1,5 +1,7 @@
 # Redux tide
 
+[![Join the chat at https://gitter.im/redux-tide/Lobby](https://badges.gitter.im/redux-tide/Lobby.svg)](https://gitter.im/redux-tide/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [website](https://edtoken.github.io/redux-tide)  
 [docs](https://edtoken.github.io/redux-tide/docs)  
 [coverage-report](https://edtoken.github.io/redux-tide/coverage/lcov-report/index.html)  
