@@ -6,6 +6,8 @@ import './App.css';
 const README = require('../../README.md')
 
 const exampleName = document.location.search.replace('?ex=', '')
+const PUBLIC_URL = process.env.PUBLIC_URL || '/'
+
 const exampleComponents = {
   'blog': require('./blog'),
   'different-entity-id': require('./different-entity-id'),
@@ -20,7 +22,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header" style={{height: 'auto'}}>
-          <a href={`${process.env.PUBLIC_URL}/redux-tide/`}>
+          <a href={`${PUBLIC_URL}`}>
             <img src={logo} className="App-logo" alt="logo"/>
           </a>
           <h1 className="App-title">Welcome to Redux Tide examples</h1>
@@ -28,7 +30,7 @@ class App extends Component {
 
           <a
             className="github-button"
-            href={`${process.env.PUBLIC_URL}`}
+            href={`${PUBLIC_URL}`}
             data-icon="octicon-star"
             data-size="large"
             data-show-count="true"
@@ -48,16 +50,16 @@ class App extends Component {
           <div>
             <Navbar>
               <Nav>
-                <NavItem href={`${process.env.PUBLIC_URL}/redux-tide/`}>
+                <NavItem href={`${PUBLIC_URL}`}>
                   Index
                 </NavItem>
-                <NavItem href={`${process.env.PUBLIC_URL}/redux-tide?ex=blog`}>
+                <NavItem href={`${PUBLIC_URL}?ex=blog`}>
                   Blog example
                 </NavItem>
-                <NavItem href={`${process.env.PUBLIC_URL}/redux-tide?ex=different-entity-id`}>
+                <NavItem href={`${PUBLIC_URL}?ex=different-entity-id`}>
                   Different entity id
                 </NavItem>
-                <NavItem href={`${process.env.PUBLIC_URL}/redux-tide?ex=merged-actions-data`}>
+                <NavItem href={`${PUBLIC_URL}?ex=merged-actions-data`}>
                   Merged actions data
                 </NavItem>
               </Nav>
@@ -67,7 +69,7 @@ class App extends Component {
         {!ExampleComponent && <div>
           <div style={{
             textAlign: 'left',
-            maxWidth: '800px',
+            maxWidth: '980px',
             margin: '30px auto',
             padding: '30px',
             border: '1px solid #ddd'
@@ -77,8 +79,8 @@ class App extends Component {
         {ExampleComponent &&
         <div style={{
           textAlign: 'left',
-          maxWidth: '800px',
-          margin: '30px auto',
+          maxWidth: '980px',
+          margin: '30px auto 30px 30px',
           padding: '30px',
           border: '1px solid #ddd'
         }}>

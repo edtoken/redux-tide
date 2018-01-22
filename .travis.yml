@@ -8,3 +8,13 @@ node_js:
 before_script:
 - "npm run test:cov"
 - "npm install coveralls && cat ./coverage/lcov.info | coveralls"
+
+notifications:
+  webhooks:
+    urls:
+      https://webhooks.gitter.im/e/10f618367167e2d6f9cc
+
+notifications:
+  webhooks:
+    urls:
+      https://webhooks.gitter.im/e/10f618367167e2d6f9cc
