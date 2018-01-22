@@ -3,7 +3,8 @@ import {Provider} from 'react-redux'
 import {connect} from 'react-redux'
 
 import {ConnectedRouter} from 'react-router-redux'
-import {Table, Pager, ProgressBar, Modal, Button, FormControl, ControlLabel, Alert} from 'react-bootstrap'
+import {Table, Pager, Modal, Button, FormControl, ControlLabel, Alert} from 'react-bootstrap'
+import {Spinner} from "../Spinner";
 
 import DevTools from '../DevTools'
 import store, {history} from './store'
@@ -82,7 +83,8 @@ class BlogPostFormComponent extends Component {
               After you are save post changes, <br/>
               please look into the <b>Table</b> and modal section <b>Payload</b> <br/>
               <br/>
-              Your changes also apply to the <b>table</b> and <b>selector fetchPost response</b> (without data reload), <br/>
+              Your changes also apply to the <b>table</b> and <b>selector fetchPost response</b> (without data
+              reload), <br/>
               But you are calling only <b>PUT post/postId</b>
             </Alert>
 
@@ -90,7 +92,7 @@ class BlogPostFormComponent extends Component {
             <pre><code>{JSON.stringify(payload, null, 2)}</code></pre>
 
             {isFetching && <div>
-              <span className="label label-primary">Loading...</span>
+              <Spinner/>
             </div>}
             {!isFetching && <div>
               <ControlLabel>Post Title</ControlLabel>
@@ -164,7 +166,6 @@ class BlogPostsTableComponent extends Component {
   render() {
     const {isFetching, hasError, errorText, payload} = this.props
     const hasPayload = (payload && payload.length)
-    const progress = isFetching ? 20 : hasError ? 90 : 100
 
     return (<div>
       <h3>BlogPostsTable</h3>
@@ -177,11 +178,6 @@ class BlogPostsTableComponent extends Component {
 
       {hasError && <div>
         {errorText}
-      </div>}
-
-      {isFetching && <div>
-        <br/>
-        <ProgressBar striped bsStyle="success" now={progress}/>
       </div>}
 
       <div>
@@ -202,9 +198,18 @@ class BlogPostsTableComponent extends Component {
             <th>userId</th>
             <th>id</th>
             <th>title</th>
+            <th>actions</th>
           </tr>
           </thead>
           <tbody>
+
+          {isFetching && <tr>
+            <td colSpan={4}>
+              <br/>
+              <Spinner/>
+            </td>
+          </tr>}
+
           {hasPayload && payload.map((item, num) => {
             return <tr
               key={['table-post', item.id, num].join('-')}
@@ -212,6 +217,9 @@ class BlogPostsTableComponent extends Component {
               <td>{item.userId}</td>
               <td>{item.id}</td>
               <td>{item.title}</td>
+              <td>
+
+              </td>
             </tr>
           })}
           </tbody>
@@ -245,7 +253,8 @@ class BlogPostsTableComponent extends Component {
 const BlogPostsTable = connect(
   state => (getActionData(getAllPost)(state)),
   dispatch => ({
-    fetch: (query) => (dispatch(getAllPost(query)))
+    fetch: (query) => (dispatch(getAllPost(query))),
+    update: (postId, data) => (dispatch(updatePost(postId, data))),
   })
 )(BlogPostsTableComponent)
 
@@ -274,7 +283,8 @@ class BlogExampleComponent extends Component {
 
     return (<div>
       <h1>Blog Example</h1>
-      <p>Source code <a href="https://github.com/edtoken/redux-tide/tree/master/website/src/blog" target='_blank'>source</a></p>
+      <p>Source code <a href="https://github.com/edtoken/redux-tide/tree/master/website/src/blog"
+                        target='_blank'>source</a></p>
 
       <Alert bsStyle="info">
         Demonstrate how to create list and single item requests, sync data between it, witout reducers

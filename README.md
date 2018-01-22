@@ -1,29 +1,73 @@
 # Redux tide
+Simple library for helping created redux-normalized state.  
+ActionCreator + ActionSelector, reducers are created automatically    
+
+### Table of Contents
+- [Features](#features)
+- [Overview](#overview)
+- [Examples](#examples)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Action](#action)
+- [Reducer](#reducer)
+- [Middleware](#middleware)
+- [Selector](#selector)
+- [Contributions](#contributions)
+- [Changelog](#changelog)
+- [License](#license)
+
 
 [website](https://edtoken.github.io/redux-tide)  
 [docs](https://edtoken.github.io/redux-tide/docs)  
 [coverage-report](https://edtoken.github.io/redux-tide/coverage/lcov-report/index.html)  
-Simple library for redux-normalized state and actions/selectors for it
 
+
+[![Join the chat at https://gitter.im/practice-feature/redux-tide](https://badges.gitter.im/practice-feature/redux-tide.svg)](https://gitter.im/practice-feature/redux-tide?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  
+
+[![npm version](https://badge.fury.io/js/redux-tide.svg)](https://badge.fury.io/js/redux-tide)
 [![Build Status](https://api.travis-ci.org/edtoken/redux-tide.svg?branch=master)](https://travis-ci.org/edtoken/redux-tide)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5952e9edfa038e49658f/maintainability)](https://codeclimate.com/github/edtoken/redux-tide/maintainability)
-[![npm version](https://badge.fury.io/js/redux-tide.svg)](https://badge.fury.io/js/redux-tide)
-[![Coverage Status](https://coveralls.io/repos/github/edtoken/redux-tide/badge.svg?branch=master)](https://coveralls.io/github/edtoken/redux-tide?branch=master)
+[![npm downloads](https://img.shields.io/npm/dm/redux-tide.svg?style=flat-square)](https://www.npmjs.com/package/redux-tide)
 [![Inline docs](https://inch-ci.org/github/edtoken/redux-tide.svg?branch=master)](https://inch-ci.org/github/edtoken/redux-tide)
 [![HitCount](http://hits.dwyl.com/edtoken/redux-tide.svg)](http://hits.dwyl.com/edtoken/redux-tide)
 
 [![NPM](https://nodei.co/npm/redux-tide.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/redux-tide/)
 
-[![NPM](https://nodei.co/npm-dl/redux-tide.png?height=3)](https://nodei.co/npm/redux-tide/)
+--- 
 
-
-
-## Motivation
+### Motivation
 You don't need to create reducers for rest-api data  
 You should create reducers only for business front-end logic  
 
-## Examples
-*Please, look how to work this examples          
+### Features
+1. Simple actionCreator for any of your async library
+2. Normalization state
+3. Auto create reducers
+4. Simple single selector for all your actions
+
+### Overview
+*Redux-Tide* - Do not force you to use only it,    
+This is a small library helping you create normalization, actions, reducers and selector   
+You can use it with any of other libraries  
+You can add redux tide in any even old/new project  
+Redux tide - it's concept for save your backend data, normalize, and selector for it    
+```
+                                        ┌───────────┐
+                                        │   Some    │
+                                        │Reducers...│    ┌──────────┐
+                                        └───────────┘    │   Some   │    ┌───────────┐
+                                        ╔═══════════╗    │ Selector │    │   Some    │
+╔════════╗  ┌────────────┐  ┌────────┐┌▶║  Actions  ║    └──────────┘ ┌─▶│ Component │
+║ Action ╠──▶ Async Rest ├──▶Response├┤ ║   Meta    ╠─┐               │  └───────────┘
+╚════════╝  └────────────┘  └────────┘│ ╚═══════════╝ │  ╔══════════╗ │
+                                      │ ╔═══════════╗ ├─▶║ Selector ╠─┘
+                                      │ ║Normalized ║ │  ╚══════════╝
+                                      └▶║   Data    ║─┘
+                                        ╚═══════════╝
+```
+ 
+
+### Examples            
 [blog](https://edtoken.github.io/redux-tide/?ex=blog) - using with axios and REST api  
 [blog-source](https://github.com/edtoken/redux-tide/tree/master/website/src/blog) - blog demo source code    
 [different-entity-id-example](https://edtoken.github.io/redux-tide?ex=different-entity-id)    
@@ -31,82 +75,100 @@ You should create reducers only for business front-end logic
 [merged-actions-data-example](https://edtoken.github.io/redux-tide?ex=merged-actions-data)    
 [merged-actions-data-source](https://github.com/edtoken/redux-tide/tree/master/website/src/merged-actions-data)  
 
-[video](https://cl.ly/3d183v352O24) - short video for demonstration
+### Installation
+To install the stable version:
 
-## Installation
 ```
 npm install redux-tide --save
 ```
 
-------
-
-## 4 Steps for using redux-tide
-### 4.1 install required libraries
-Your project must have: [normalizr](https://github.com/paularmstrong/normalizr), [redux](https://redux.js.org/), [react-redux](https://github.com/reactjs/react-redux), [redux-thunk](https://github.com/gaearon/redux-thunk)
-
-### 4.2 install library 
-`npm install redux-tide --save`
-
-### 4.3 Define entity-schema
-```javascript
-// entity-schema.js
-import {schema} from 'normalizr'
-
-const postsSchema = new schema.Entity('posts')
-const commentsSchema = new schema.Entity('comments')
-
-postsSchema.define({
-  comments: [commentsSchema]
-})
-commentsSchema.define({
-  post: postsSchema
-})
-   
-const appSchema = {
-  commentsSchema,
-  postsSchema
-}
-        
-export {
-    postsSchema,
-    commentsSchema,
-    appSchema
-}
-     
+#### Complementary Packages
+Your project should have
+[normalizr](https://github.com/paularmstrong/normalizr), [redux](https://redux.js.org/), [react-redux](https://github.com/reactjs/react-redux), [redux-thunk](https://github.com/gaearon/redux-thunk)
 ```
-### 4.4 Modify your store.js file 
-```javascript
-// store.js
-import {denormalize} from 'normalizr';
-import {createReducers, setDefaultResponseMapper, setDenormalize} from 'redux-tide';
-import {appSchema} from './entity-schema'
+npm install normalizr --save
+npm install redux --save
+npm install react-redux --save
+npm install redux-thunk --save
+```
 
-// required
-setDenormalize(denormalize)
+------
+### Discussion
+You can connect to [Gitter chat room](https://gitter.im/practice-feature/redux-tide)  
+[![Join the chat at https://gitter.im/practice-feature/redux-tide](https://badges.gitter.im/practice-feature/redux-tide.svg)](https://gitter.im/practice-feature/redux-tide?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-// not required
-setDefaultResponseMapper((resp) => {
-  // your response
-  return resp.data
-})
-
-// your store
-export default createStore(
-  combineReducers({
-    // your reducers
-    ...createReducers(...appSchema)
-  }),
-  initialState,
-  composedEnhancers
-)
+### Usage
+1. You might install library    
+```
+npm install redux-tide --save 
+```  
+2. Install [normalizr](https://github.com/paularmstrong/normalizr), [redux](https://redux.js.org/), [react-redux](https://github.com/reactjs/react-redux), [redux-thunk](https://github.com/gaearon/redux-thunk), you can use help [Complementary Packages](#complementary-packages)
+  
+3. Define entity-schema   
+    ```javascript
+    // entity-schema.js
+    import {schema} from 'normalizr'
     
-```
-### READY! Now you can create actions and use it
+    const postsSchema = new schema.Entity('posts')
+    const commentsSchema = new schema.Entity('comments')
+    
+    postsSchema.define({
+      comments: [commentsSchema]
+    })
+    commentsSchema.define({
+      post: postsSchema
+    })
+       
+    const appSchema = {
+      commentsSchema,
+      postsSchema
+    }
+            
+    export {
+        postsSchema,
+        commentsSchema,
+        appSchema
+    }
+         
+    ```
+
+4. Modify your store.js file 
+    ```javascript
+    // store.js
+    import {denormalize} from 'normalizr';
+    import {createReducers, setDefaultResponseMapper, setDenormalize} from 'redux-tide';
+    import {appSchema} from './entity-schema'
+    
+    // required
+    setDenormalize(denormalize)
+    
+    // not required
+    setDefaultResponseMapper((resp) => {
+      // your response
+      return resp.data
+    })
+    
+    // your store
+    export default createStore(
+      combineReducers({
+        // your reducers
+        ...createReducers(...appSchema)
+      }),
+      initialState,
+      composedEnhancers
+    )
+        
+    ```
+5. Ready! Now you can use it. [Create action](#action)
 ------
+### Discussion
+You can connect to [Gitter chat room](https://gitter.im/practice-feature/redux-tide)  
+[![Join the chat at https://gitter.im/practice-feature/redux-tide](https://badges.gitter.im/practice-feature/redux-tide.svg)](https://gitter.im/practice-feature/redux-tide?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-# What is next?
+### Action
+Example of RestApi class [source](https://github.com/edtoken/redux-tide/blob/master/website/src/RESTApi.js#L3)  
+You can look *entity-schema.js* example from [Usage section](#usage)
 
-## Create actions
 ```javascript
 import {createAction} from 'redux-tide';
 import {del, get, post, put} from '../RESTApi'
@@ -174,7 +236,7 @@ export const openEditPost = (postId) => {
 
 ```
 
-## How to reset action store data?
+#### How to reset action store data?
 When you need to force a clear state of action, please use
  
 ```javascript
@@ -182,17 +244,16 @@ dispatch(createNewPost.empty())
 ```
 OR 
 ```javascript
-dispatch(getPostById.withPrefix(props.postId))
+dispatch(getPostById.withPrefix(props.postId).empty())
 ```
 
-## How to use with array of connected components ? 
-Please read **Create one action for different entity id** section  
+#### How to use one action with array of connected components ? 
+Please read [Create one action for different entity id](#create-one-action-for-different-entity-id) section and [Other options to create an action](#other-options-to-create-an-action)  
 And look examples:    
 [different-entity-id-example](https://edtoken.github.io/redux-tide?ex=different-entity-id)  
 [different-entity-id-source](https://github.com/edtoken/redux-tide/tree/master/website/src/different-entity-id)
 
-## Create one action for different entity id
-### Warning! 
+### Create one action for different entity id
 If you want to create 1 action get || post || put || delete   
 for work with single entity but multiple entity ids, **for example: `GET post/:postId`**     
 **You should be use action.withPrefix method** - it's generate new uniq action id and **new uniq action reducer state**  
@@ -254,13 +315,24 @@ export default class ComponentWrapper extends Component {
 }
 ```
 
-Sorry, but it's required
+### Selector
+```javascript
+import {getActionData} from 'redux-tide';
+```
 
---- 
+```
+{String} actionId - your action id
+{*} sourceResult - your source response from server (not mapped response)
+{String} status - pending|success|error
+{Number} time - timestamp of action
+{Boolean} hasError - has error or not
+{String} errorText - text of error
+{Boolean} isFetching - status === 'pending'
+{Object|Array} payload - denormalized response for current action
+{Object|Array} prevPayload - denormalized previous response
+ 
+```
 
-# Other information
-
-## Using selectors
 ```javascript
 import {getActionData} from 'redux-tide';
 import {
@@ -271,6 +343,7 @@ import {
 } from './actions';
 
 export default connect(
+  // single selector function for all your actions
   (state, props) => getActionData(getAllPosts)
 )(SomeComponent)
 
@@ -303,23 +376,8 @@ const makeGetMergedActionData = (postId) => {
     
 ```
 
-### Selector response properties
-```
-{String} actionId - your action id
-{*} sourceResult - your source response from server (not mapped response)
-{String} status - pending|success|error
-{Number} time - timestamp of action
-{Boolean} hasError - has error or not
-{String} errorText - text of error
-{Boolean} isFetching - status === 'pending'
-{Object|Array} payload - denormalized response for current action
-{Object|Array} prevPayload - denormalized previous response
- 
-```
 
-
-
-## Create middleware
+### Middleware
 ```javascript
 import {
     createNewPost, 
@@ -378,9 +436,9 @@ export const middleware = store => next => action => {
 
 ```
 
-# Other options to create an action? 
+## Other options to create an action
 
-### How to use `.withPrefix`, `.withName`, `.clone` methods?
+#### How to use `.withPrefix`, `.withName`, `.clone` methods?
 **For details you can look example:**   
 [different-entity-id-example](https://edtoken.github.io/redux-tide?ex=different-entity-id)   
 [different-entity-id-source](https://github.com/edtoken/redux-tide/tree/master/website/src/different-entity-id)
@@ -412,7 +470,7 @@ dispatch(getUser.withName('user').withPrefix(userId))
 getActionData(getUser.withName('user').withPrefix(userId))
 ```
 
-### Custom server response mapper
+#### Custom server response mapper
 ```javascript
 // calling url 'user' but replace backend success response to resp.data
 // You always can be get source response data 
@@ -425,7 +483,7 @@ export const getUserAction = createAction(
 )
 ```
 
-### Call dispatch or getState in query builder method
+#### Call dispatch or getState in query builder method
 ```javascript
 
 // you can pass multi level functions or promises 
@@ -442,7 +500,7 @@ export const getUserAction = createAction(
     }
 )
 ```
-## Whats else?
+### Whats else?
 
 ```javascript
 // actions.js 
@@ -528,7 +586,7 @@ const UserContainer = connect(
 )(UserComponent)
 ```
 
-## Additional information, "createAction" public methods
+### Additional information, "createAction" public methods
 ```javascript
 // when you did action, you can use action public methods 
 export const getAllPosts = createAction(
@@ -550,19 +608,13 @@ export const getAllPosts = createAction(
 
 For details, please look [source](https://github.com/edtoken/redux-tide/blob/master/src/action.js#L348)
 
-## Contributions
+### Contributions
 Use [GitHub issues](https://github.com/edtoken/redux-tide/issues) for requests.   
 I actively welcome pull requests; learn how to contribute.   
 
-## Changelog
+### Changelog
 [CHANGELOG.md](https://github.com/edtoken/redux-tide/blob/master/CHANGELOG.md).
 
-## Future
-* Improve documentation
-* Improve tests
-* Refactor code
-* Delete it ``` setDenormalize(denormalize) ``` in your store.js file :) 
-* Add new selectors
-* Maybe? make redux-tide-storage (make storage) and redux-tide-orm (only selectors) packages
 
-### Drink tea :)
+### License
+MIT

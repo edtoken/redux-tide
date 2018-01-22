@@ -72,6 +72,15 @@ export const ENTITIES_REDUCER_NAME = `${ACTION_TYPE_PREFIX}-entities`
 export const ACTION_EMPTY_TYPE_NAME = `${ACTION_TYPE_PREFIX}-empty`
 
 /**
+ * Action type name for clear entity data from entity reducer
+ *
+ * @memberOf config
+ * @const
+ * @type {String}
+ */
+export const ACTION_CLEAN_TYPE_NAME = `${ACTION_TYPE_PREFIX}-clean`
+
+/**
  * replaced default response mapper to callback
  *
  * @memberOf config
@@ -97,5 +106,5 @@ export const setDenormalize = denormalize => {
 }
 
 if (IS_TEST_ENVIRONMENT) {
-  setDenormalize.denormalize = require('normalizr').denormalize
+  setDenormalize(require('normalizr').denormalize)
 }
