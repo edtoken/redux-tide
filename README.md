@@ -5,7 +5,7 @@
 [coverage-report](https://edtoken.github.io/redux-tide/coverage/lcov-report/index.html)  
 Simple library for redux-normalized state and actions/selectors for it  
 
-[![Join the chat at https://gitter.im/redux-tide/Lobby](https://badges.gitter.im/redux-tide/Lobby.svg)](https://gitter.im/redux-tide/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  
+[![Join the chat at https://gitter.im/practice-feature/redux-tide](https://badges.gitter.im/practice-feature/redux-tide.svg)](https://gitter.im/practice-feature/redux-tide?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  
 
 [![Build Status](https://api.travis-ci.org/edtoken/redux-tide.svg?branch=master)](https://travis-ci.org/edtoken/redux-tide)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5952e9edfa038e49658f/maintainability)](https://codeclimate.com/github/edtoken/redux-tide/maintainability)
