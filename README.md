@@ -1,11 +1,11 @@
 # Redux tide
 
-[![Join the chat at https://gitter.im/redux-tide/Lobby](https://badges.gitter.im/redux-tide/Lobby.svg)](https://gitter.im/redux-tide/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [website](https://edtoken.github.io/redux-tide)  
 [docs](https://edtoken.github.io/redux-tide/docs)  
 [coverage-report](https://edtoken.github.io/redux-tide/coverage/lcov-report/index.html)  
-Simple library for redux-normalized state and actions/selectors for it
+Simple library for redux-normalized state and actions/selectors for it  
+
+[![Join the chat at https://gitter.im/redux-tide/Lobby](https://badges.gitter.im/redux-tide/Lobby.svg)](https://gitter.im/redux-tide/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  
 
 [![Build Status](https://api.travis-ci.org/edtoken/redux-tide.svg?branch=master)](https://travis-ci.org/edtoken/redux-tide)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5952e9edfa038e49658f/maintainability)](https://codeclimate.com/github/edtoken/redux-tide/maintainability)
