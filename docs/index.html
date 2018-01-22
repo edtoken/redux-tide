@@ -48,67 +48,117 @@
 
 
     <section class="readme">
-        <article><h1>Redux tide</h1><p><a href="https://edtoken.github.io/redux-tide">website</a><br><a href="https://edtoken.github.io/redux-tide/docs">docs</a><br><a href="https://edtoken.github.io/redux-tide/coverage/lcov-report/index.html">coverage-report</a><br>Simple library for redux-normalized state and actions/selectors for it</p>
-<p><a href="https://travis-ci.org/edtoken/redux-tide"><img src="https://api.travis-ci.org/edtoken/redux-tide.svg?branch=master" alt="Build Status"></a>
+        <article><h1>Redux tide</h1><p>Simple library for helping created redux-normalized state.<br>ActionCreator + ActionSelector, reducers are created automatically    </p>
+<h3>Table of Contents</h3><ul>
+<li><a href="#features">Features</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#action">Action</a></li>
+<li><a href="#reducer">Reducer</a></li>
+<li><a href="#middleware">Middleware</a></li>
+<li><a href="#selector">Selector</a></li>
+<li><a href="#contributions">Contributions</a></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<p><a href="https://edtoken.github.io/redux-tide">website</a><br><a href="https://edtoken.github.io/redux-tide/docs">docs</a><br><a href="https://edtoken.github.io/redux-tide/coverage/lcov-report/index.html">coverage-report</a>  </p>
+<p><a href="https://gitter.im/practice-feature/redux-tide?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/practice-feature/redux-tide.svg" alt="Join the chat at https://gitter.im/practice-feature/redux-tide"></a>  </p>
+<p><a href="https://badge.fury.io/js/redux-tide"><img src="https://badge.fury.io/js/redux-tide.svg" alt="npm version"></a>
+<a href="https://travis-ci.org/edtoken/redux-tide"><img src="https://api.travis-ci.org/edtoken/redux-tide.svg?branch=master" alt="Build Status"></a>
 <a href="https://codeclimate.com/github/edtoken/redux-tide/maintainability"><img src="https://api.codeclimate.com/v1/badges/5952e9edfa038e49658f/maintainability" alt="Maintainability"></a>
-<a href="https://badge.fury.io/js/redux-tide"><img src="https://badge.fury.io/js/redux-tide.svg" alt="npm version"></a>
-<a href="https://coveralls.io/github/edtoken/redux-tide?branch=master"><img src="https://coveralls.io/repos/github/edtoken/redux-tide/badge.svg?branch=master" alt="Coverage Status"></a>
+<a href="https://www.npmjs.com/package/redux-tide"><img src="https://img.shields.io/npm/dm/redux-tide.svg?style=flat-square" alt="npm downloads"></a>
 <a href="https://inch-ci.org/github/edtoken/redux-tide"><img src="https://inch-ci.org/github/edtoken/redux-tide.svg?branch=master" alt="Inline docs"></a>
 <a href="http://hits.dwyl.com/edtoken/redux-tide"><img src="http://hits.dwyl.com/edtoken/redux-tide.svg" alt="HitCount"></a></p>
 <p><a href="https://nodei.co/npm/redux-tide/"><img src="https://nodei.co/npm/redux-tide.png?downloads=true&amp;downloadRank=true&amp;stars=true" alt="NPM"></a></p>
-<p><a href="https://nodei.co/npm/redux-tide/"><img src="https://nodei.co/npm-dl/redux-tide.png?height=3" alt="NPM"></a></p>
-<h2>Motivation</h2><p>You don't need to create reducers for rest-api data<br>You should create reducers only for business front-end logic  </p>
-<h2>Examples</h2><p>*Please, look how to work this examples<br><a href="https://edtoken.github.io/redux-tide/?ex=blog">blog</a> - using with axios and REST api<br><a href="https://github.com/edtoken/redux-tide/tree/master/website/src/blog">blog-source</a> - blog demo source code<br><a href="https://edtoken.github.io/redux-tide?ex=different-entity-id">different-entity-id-example</a><br><a href="https://github.com/edtoken/redux-tide/tree/master/website/src/different-entity-id">different-entity-id-source</a><br><a href="https://edtoken.github.io/redux-tide?ex=merged-actions-data">merged-actions-data-example</a><br><a href="https://github.com/edtoken/redux-tide/tree/master/website/src/merged-actions-data">merged-actions-data-source</a>  </p>
-<p><a href="https://cl.ly/3d183v352O24">video</a> - short video for demonstration</p>
-<h2>Installation</h2><pre class="prettyprint source"><code>npm install redux-tide --save</code></pre><hr>
-<h2>4 Steps for using redux-tide</h2><h3>4.1 install required libraries</h3><p>Your project must have: <a href="https://github.com/paularmstrong/normalizr">normalizr</a>, <a href="https://redux.js.org/">redux</a>, <a href="https://github.com/reactjs/react-redux">react-redux</a>, <a href="https://github.com/gaearon/redux-thunk">redux-thunk</a></p>
-<h3>4.2 install library</h3><p><code>npm install redux-tide --save</code></p>
-<h3>4.3 Define entity-schema</h3><pre class="prettyprint source lang-javascript"><code>// entity-schema.js
-import {schema} from 'normalizr'
+<hr>
+<h3>Motivation</h3><p>You don't need to create reducers for rest-api data<br>You should create reducers only for business front-end logic  </p>
+<h3>Features</h3><ol>
+<li>Simple actionCreator for any of your async library</li>
+<li>Normalization state</li>
+<li>Auto create reducers</li>
+<li>Simple single selector for all your actions</li>
+</ol>
+<h3>Overview</h3><p><em>Redux-Tide</em> - Do not force you to use only it,<br>This is a small library helping you create normalization, actions, reducers and selector<br>You can use it with any of other libraries<br>You can add redux tide in any even old/new project<br>Redux tide - it's concept for save your backend data, normalize, and selector for it    </p>
+<pre class="prettyprint source"><code>                                        ┌───────────┐
+                                        │   Some    │
+                                        │Reducers...│    ┌──────────┐
+                                        └───────────┘    │   Some   │    ┌───────────┐
+                                        ╔═══════════╗    │ Selector │    │   Some    │
+╔════════╗  ┌────────────┐  ┌────────┐┌▶║  Actions  ║    └──────────┘ ┌─▶│ Component │
+║ Action ╠──▶ Async Rest ├──▶Response├┤ ║   Meta    ╠─┐               │  └───────────┘
+╚════════╝  └────────────┘  └────────┘│ ╚═══════════╝ │  ╔══════════╗ │
+                                      │ ╔═══════════╗ ├─▶║ Selector ╠─┘
+                                      │ ║Normalized ║ │  ╚══════════╝
+                                      └▶║   Data    ║─┘
+                                        ╚═══════════╝</code></pre><h3>Examples</h3><p><a href="https://edtoken.github.io/redux-tide/?ex=blog">blog</a> - using with axios and REST api<br><a href="https://github.com/edtoken/redux-tide/tree/master/website/src/blog">blog-source</a> - blog demo source code<br><a href="https://edtoken.github.io/redux-tide?ex=different-entity-id">different-entity-id-example</a><br><a href="https://github.com/edtoken/redux-tide/tree/master/website/src/different-entity-id">different-entity-id-source</a><br><a href="https://edtoken.github.io/redux-tide?ex=merged-actions-data">merged-actions-data-example</a><br><a href="https://github.com/edtoken/redux-tide/tree/master/website/src/merged-actions-data">merged-actions-data-source</a>  </p>
+<h3>Installation</h3><p>To install the stable version:</p>
+<pre class="prettyprint source"><code>npm install redux-tide --save</code></pre><h4>Complementary Packages</h4><p>Your project should have
+<a href="https://github.com/paularmstrong/normalizr">normalizr</a>, <a href="https://redux.js.org/">redux</a>, <a href="https://github.com/reactjs/react-redux">react-redux</a>, <a href="https://github.com/gaearon/redux-thunk">redux-thunk</a></p>
+<pre class="prettyprint source"><code>npm install normalizr --save
+npm install redux --save
+npm install react-redux --save
+npm install redux-thunk --save</code></pre><hr>
+<h3>Discussion</h3><p>You can connect to <a href="https://gitter.im/practice-feature/redux-tide">Gitter chat room</a><br><a href="https://gitter.im/practice-feature/redux-tide?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/practice-feature/redux-tide.svg" alt="Join the chat at https://gitter.im/practice-feature/redux-tide"></a></p>
+<h3>Usage</h3><ol>
+<li>You might install library    <pre class="prettyprint source"><code>npm install redux-tide --save</code></pre></li>
+<li><p>Install <a href="https://github.com/paularmstrong/normalizr">normalizr</a>, <a href="https://redux.js.org/">redux</a>, <a href="https://github.com/reactjs/react-redux">react-redux</a>, <a href="https://github.com/gaearon/redux-thunk">redux-thunk</a>, you can use help <a href="#complementary-packages">Complementary Packages</a></p>
+</li>
+<li><p>Define entity-schema   </p>
+<pre class="prettyprint source lang-javascript"><code> // entity-schema.js
+ import {schema} from 'normalizr'
 
-const postsSchema = new schema.Entity('posts')
-const commentsSchema = new schema.Entity('comments')
+ const postsSchema = new schema.Entity('posts')
+ const commentsSchema = new schema.Entity('comments')
 
-postsSchema.define({
-  comments: [commentsSchema]
-})
-commentsSchema.define({
-  post: postsSchema
-})
+ postsSchema.define({
+   comments: [commentsSchema]
+ })
+ commentsSchema.define({
+   post: postsSchema
+ })
 
-const appSchema = {
-  commentsSchema,
-  postsSchema
-}
+ const appSchema = {
+   commentsSchema,
+   postsSchema
+ }
 
-export {
-    postsSchema,
-    commentsSchema,
-    appSchema
-}</code></pre><h3>4.4 Modify your store.js file</h3><pre class="prettyprint source lang-javascript"><code>// store.js
-import {denormalize} from 'normalizr';
-import {createReducers, setDefaultResponseMapper, setDenormalize} from 'redux-tide';
-import {appSchema} from './entity-schema'
+ export {
+     postsSchema,
+     commentsSchema,
+     appSchema
+ }</code></pre></li>
+<li><p>Modify your store.js file </p>
+<pre class="prettyprint source lang-javascript"><code> // store.js
+ import {denormalize} from 'normalizr';
+ import {createReducers, setDefaultResponseMapper, setDenormalize} from 'redux-tide';
+ import {appSchema} from './entity-schema'
 
-// required
-setDenormalize(denormalize)
+ // required
+ setDenormalize(denormalize)
 
-// not required
-setDefaultResponseMapper((resp) => {
-  // your response
-  return resp.data
-})
+ // not required
+ setDefaultResponseMapper((resp) => {
+   // your response
+   return resp.data
+ })
 
-// your store
-export default createStore(
-  combineReducers({
-    // your reducers
-    ...createReducers(...appSchema)
-  }),
-  initialState,
-  composedEnhancers
-)</code></pre><h3>READY! Now you can create actions and use it</h3><hr>
-<h1>What is next?</h1><h2>Create actions</h2><pre class="prettyprint source lang-javascript"><code>import {createAction} from 'redux-tide';
+ // your store
+ export default createStore(
+   combineReducers({
+     // your reducers
+     ...createReducers(...appSchema)
+   }),
+   initialState,
+   composedEnhancers
+ )</code></pre></li>
+<li>Ready! Now you can use it. <a href="#action">Create action</a></li>
+</ol>
+<hr>
+<h3>Discussion</h3><p>You can connect to <a href="https://gitter.im/practice-feature/redux-tide">Gitter chat room</a><br><a href="https://gitter.im/practice-feature/redux-tide?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/practice-feature/redux-tide.svg" alt="Join the chat at https://gitter.im/practice-feature/redux-tide"></a></p>
+<h3>Action</h3><p>Example of RestApi class <a href="https://github.com/edtoken/redux-tide/blob/master/website/src/RESTApi.js#L3">source</a><br>You can look <em>entity-schema.js</em> example from <a href="#usage">Usage section</a></p>
+<pre class="prettyprint source lang-javascript"><code>import {createAction} from 'redux-tide';
 import {del, get, post, put} from '../RESTApi'
 import {postsSchema} from 'entity-schema';
 import {OPEN_EDIT} from './action-types'
@@ -170,10 +220,10 @@ export const openEditPost = (postId) => {
     type:OPEN_EDIT,
     postId
   }
-}</code></pre><h2>How to reset action store data?</h2><p>When you need to force a clear state of action, please use</p>
+}</code></pre><h4>How to reset action store data?</h4><p>When you need to force a clear state of action, please use</p>
 <pre class="prettyprint source lang-javascript"><code>dispatch(createNewPost.empty())</code></pre><p>OR </p>
-<pre class="prettyprint source lang-javascript"><code>dispatch(getPostById.withPrefix(props.postId))</code></pre><h2>How to use with array of connected components ?</h2><p>Please read <strong>Create one action for different entity id</strong> section<br>And look examples:<br><a href="https://edtoken.github.io/redux-tide?ex=different-entity-id">different-entity-id-example</a><br><a href="https://github.com/edtoken/redux-tide/tree/master/website/src/different-entity-id">different-entity-id-source</a></p>
-<h2>Create one action for different entity id</h2><h3>Warning!</h3><p>If you want to create 1 action get || post || put || delete<br>for work with single entity but multiple entity ids, <strong>for example: <code>GET post/:postId</code></strong><br><strong>You should be use action.withPrefix method</strong> - it's generate new uniq action id and <strong>new uniq action reducer state</strong>  </p>
+<pre class="prettyprint source lang-javascript"><code>dispatch(getPostById.withPrefix(props.postId).empty())</code></pre><h4>How to use one action with array of connected components ?</h4><p>Please read <a href="#create-one-action-for-different-entity-id">Create one action for different entity id</a> section and <a href="#other-options-to-create-an-action">Other options to create an action</a><br>And look examples:<br><a href="https://edtoken.github.io/redux-tide?ex=different-entity-id">different-entity-id-example</a><br><a href="https://github.com/edtoken/redux-tide/tree/master/website/src/different-entity-id">different-entity-id-source</a></p>
+<h3>Create one action for different entity id</h3><p>If you want to create 1 action get || post || put || delete<br>for work with single entity but multiple entity ids, <strong>for example: <code>GET post/:postId</code></strong><br><strong>You should be use action.withPrefix method</strong> - it's generate new uniq action id and <strong>new uniq action reducer state</strong>  </p>
 <p><strong>For details you can look example:</strong><br><a href="https://edtoken.github.io/redux-tide?ex=different-entity-id">different-entity-id-example</a><br><a href="https://github.com/edtoken/redux-tide/tree/master/website/src/different-entity-id">different-entity-id-source</a></p>
 <p><em>if you dont't make it - your next call</em> <code>dispatch(getPostById(nextPostId))</code><br><em>overwrite your preview call data</em>  <code>dispatch(getPostById(prevPostId))</code></p>
 <pre class="prettyprint source lang-javascript"><code>// actions.js
@@ -221,9 +271,15 @@ export default class ComponentWrapper extends Component {
   render(){
     return(&lt;PostFormComponent postId={this.props.postId}/>)
   }
-}</code></pre><p>Sorry, but it's required</p>
-<hr>
-<h1>Other information</h1><h2>Using selectors</h2><pre class="prettyprint source lang-javascript"><code>import {getActionData} from 'redux-tide';
+}</code></pre><h3>Selector</h3><pre class="prettyprint source lang-javascript"><code>import {getActionData} from 'redux-tide';</code></pre><pre class="prettyprint source"><code>{String} actionId - your action id
+{*} sourceResult - your source response from server (not mapped response)
+{String} status - pending|success|error
+{Number} time - timestamp of action
+{Boolean} hasError - has error or not
+{String} errorText - text of error
+{Boolean} isFetching - status === 'pending'
+{Object|Array} payload - denormalized response for current action
+{Object|Array} prevPayload - denormalized previous response</code></pre><pre class="prettyprint source lang-javascript"><code>import {getActionData} from 'redux-tide';
 import {
     createNewPost, 
     delPostById, 
@@ -232,6 +288,7 @@ import {
 } from './actions';
 
 export default connect(
+  // single selector function for all your actions
   (state, props) => getActionData(getAllPosts)
 )(SomeComponent)
 
@@ -260,15 +317,7 @@ const makeGetMergedActionData = (postId) => {
           return Object.assign(memo, item)
         }, {someData})
       }
-    )</code></pre><h3>Selector response properties</h3><pre class="prettyprint source"><code>{String} actionId - your action id
-{*} sourceResult - your source response from server (not mapped response)
-{String} status - pending|success|error
-{Number} time - timestamp of action
-{Boolean} hasError - has error or not
-{String} errorText - text of error
-{Boolean} isFetching - status === 'pending'
-{Object|Array} payload - denormalized response for current action
-{Object|Array} prevPayload - denormalized previous response</code></pre><h2>Create middleware</h2><pre class="prettyprint source lang-javascript"><code>import {
+    )</code></pre><h3>Middleware</h3><pre class="prettyprint source lang-javascript"><code>import {
     createNewPost, 
     delPostById, 
     getAllPosts, 
@@ -321,7 +370,7 @@ export const middleware = store => next => action => {
             }
             break
     }
-}</code></pre><h1>Other options to create an action?</h1><h3>How to use <code>.withPrefix</code>, <code>.withName</code>, <code>.clone</code> methods?</h3><p><strong>For details you can look example:</strong><br><a href="https://edtoken.github.io/redux-tide?ex=different-entity-id">different-entity-id-example</a><br><a href="https://github.com/edtoken/redux-tide/tree/master/website/src/different-entity-id">different-entity-id-source</a></p>
+}</code></pre><h2>Other options to create an action</h2><h4>How to use <code>.withPrefix</code>, <code>.withName</code>, <code>.clone</code> methods?</h4><p><strong>For details you can look example:</strong><br><a href="https://edtoken.github.io/redux-tide?ex=different-entity-id">different-entity-id-example</a><br><a href="https://github.com/edtoken/redux-tide/tree/master/website/src/different-entity-id">different-entity-id-source</a></p>
 <p>This methods returns same action<br>But generate new uniq dispatch type and new uniq action state<br>You should be call <code>.withPrefix</code>, <code>.withName</code>, <code>.clone</code> when you are dispatch event and use getActionData</p>
 <pre class="prettyprint source lang-javascript"><code>
 dispatch(getUserAction.withPrefix(userId)(userId))
@@ -343,7 +392,7 @@ dispatch(getUserAction.withPrefix(userId)) // action type id and state key name 
 dispatch(getUser.withName('user').withPrefix(userId))
 
 // AND selector
-getActionData(getUser.withName('user').withPrefix(userId))</code></pre><h3>Custom server response mapper</h3><pre class="prettyprint source lang-javascript"><code>// calling url 'user' but replace backend success response to resp.data
+getActionData(getUser.withName('user').withPrefix(userId))</code></pre><h4>Custom server response mapper</h4><pre class="prettyprint source lang-javascript"><code>// calling url 'user' but replace backend success response to resp.data
 // You always can be get source response data 
 // from selector getActionData property sourceResult
 export const getUserAction = createAction(
@@ -351,7 +400,7 @@ export const getUserAction = createAction(
     get, 
     'user', 
     (resp) => {resp.data}
-)</code></pre><h3>Call dispatch or getState in query builder method</h3><pre class="prettyprint source lang-javascript"><code>
+)</code></pre><h4>Call dispatch or getState in query builder method</h4><pre class="prettyprint source lang-javascript"><code>
 // you can pass multi level functions or promises 
 // (args) => (dispatch, getState) => (dispatch, getState) => (dispatch, getState) => ...
 // calling url 'user/${userId}'
@@ -364,7 +413,7 @@ export const getUserAction = createAction(
             // return Promise (axios call or other)
         }
     }
-)</code></pre><h2>Whats else?</h2><pre class="prettyprint source lang-javascript"><code>// actions.js 
+)</code></pre><h3>Whats else?</h3><pre class="prettyprint source lang-javascript"><code>// actions.js 
 
 export const get = (url) => {// returns Promise ajax call}
 
@@ -444,7 +493,7 @@ const UserContainer = connect(
     (dispatch)=>({
         getUser:(userId) => (dispatch(getUserByIdAction.withPrefix(userId)(userId))
     })
-)(UserComponent)</code></pre><h2>Additional information, &quot;createAction&quot; public methods</h2><pre class="prettyprint source lang-javascript"><code>// when you did action, you can use action public methods 
+)(UserComponent)</code></pre><h3>Additional information, &quot;createAction&quot; public methods</h3><pre class="prettyprint source lang-javascript"><code>// when you did action, you can use action public methods 
 export const getAllPosts = createAction(
     postsSchema, 
     get, 
@@ -459,17 +508,9 @@ export const getAllPosts = createAction(
 // getAllPosts.withPrefix(customPrefixId) // customPrefixId might be postId 
 // getAllPosts.withName(yourCustomName)
 // getAllPosts.empty()</code></pre><p>For details, please look <a href="https://github.com/edtoken/redux-tide/blob/master/src/action.js#L348">source</a></p>
-<h2>Contributions</h2><p>Use <a href="https://github.com/edtoken/redux-tide/issues">GitHub issues</a> for requests.<br>I actively welcome pull requests; learn how to contribute.   </p>
-<h2>Changelog</h2><p><a href="https://github.com/edtoken/redux-tide/blob/master/CHANGELOG.md">CHANGELOG.md</a>.</p>
-<h2>Future</h2><ul>
-<li>Improve documentation</li>
-<li>Improve tests</li>
-<li>Refactor code</li>
-<li>Delete it <code>setDenormalize(denormalize)</code> in your store.js file :) </li>
-<li>Add new selectors</li>
-<li>Maybe? make redux-tide-storage (make storage) and redux-tide-orm (only selectors) packages</li>
-</ul>
-<h3>Drink tea :)</h3></article>
+<h3>Contributions</h3><p>Use <a href="https://github.com/edtoken/redux-tide/issues">GitHub issues</a> for requests.<br>I actively welcome pull requests; learn how to contribute.   </p>
+<h3>Changelog</h3><p><a href="https://github.com/edtoken/redux-tide/blob/master/CHANGELOG.md">CHANGELOG.md</a>.</p>
+<h3>License</h3><p>MIT</p></article>
     </section>
 
 
@@ -482,7 +523,7 @@ export const getAllPosts = createAction(
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Jan 17 2018 01:33:06 GMT+0300 (MSK) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jan 23 2018 01:04:21 GMT+0300 (MSK) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
