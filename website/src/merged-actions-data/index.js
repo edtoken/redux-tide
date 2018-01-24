@@ -96,7 +96,8 @@ class DifferentEntityIdExampleComponent extends Component {
 
     return (<div>
       <h1>Merged Actions Data</h1>
-      <p>Source code <a href="https://github.com/edtoken/redux-tide/tree/master/website/src/merged-actions-data"
+      <p>Source code <a
+        href="https://github.com/edtoken/redux-tide/tree/master/website/src/merged-actions-data"
                         target='_blank'>source</a></p>
 
       <Alert bsStyle="info">
