@@ -1,6 +1,6 @@
-import {createAction} from "../../../src/action";
+import {createAction} from 'redux-tide'
 import * as api from '../RESTApi'
-import {postsSchema} from "./schema";
+import {postsSchema} from "./schema"
 
 /**
  * Ajax axios call get all posts

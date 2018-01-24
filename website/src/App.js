@@ -1,23 +1,40 @@
-import React, {Component} from 'react';
-import logo from './logo.svg';
-import {Navbar, Nav, NavItem} from 'react-bootstrap'
-import './App.css';
+import React, {Component} from 'react'
+import logo from './logo.svg'
+import {Nav, Navbar, NavItem} from 'react-bootstrap'
+import './App.css'
 
 const README = require('../../README.md')
 
 const exampleName = document.location.search.replace('?ex=', '')
-const PUBLIC_URL = process.env.PUBLIC_URL || '/'
+const PUBLIC_URL = (document && document.location && document.location.host === 'localhost:3000') ?  process.env.PUBLIC_URL || '/' : 'https://edtoken.github.io/redux-tide'
 
-const exampleComponents = {
-  'blog': require('./blog'),
-  'different-entity-id': require('./different-entity-id'),
-  'merged-actions-data': require('./merged-actions-data')
-}
+const EXAMPLES = [
+  {
+    'title': 'Blog example',
+    'path': 'blog',
+    'component': require('./blog')
+  },
+  {
+    'title': 'Different entity id',
+    'path': 'different-entity-id',
+    'component': require('./different-entity-id')
+  },
+  {
+    'title': 'Merged actions data',
+    'path': 'merged-actions-data',
+    'component': require('./merged-actions-data')
+  },
+  {
+    'title': 'Delete entity from state',
+    'path': 'delete-entity-from-state',
+    'component': require('./delete-entity-from-state')
+  }
+]
 
 class App extends Component {
 
   render() {
-    const ExampleComponent = exampleName && exampleComponents[exampleName] ? exampleComponents[exampleName].default : undefined
+    const ExampleComponent = exampleName ? EXAMPLES.find(item => item.path === exampleName).component.default : undefined
 
     return (
       <div className="App">
@@ -30,11 +47,11 @@ class App extends Component {
 
           <a
             className="github-button"
-            href={`${PUBLIC_URL}`}
+            href="https://github.com/edtoken/redux-tide"
             data-icon="octicon-star"
             data-size="large"
             data-show-count="true"
-            aria-label="Star edtoken/redux-tide on GitHub">Star</a>
+            aria-label="Star @edtoken/redux-tide on GitHub">Star</a>
 
           <br/>
 
@@ -53,15 +70,12 @@ class App extends Component {
                 <NavItem href={`${PUBLIC_URL}`}>
                   Index
                 </NavItem>
-                <NavItem href={`${PUBLIC_URL}?ex=blog`}>
-                  Blog example
-                </NavItem>
-                <NavItem href={`${PUBLIC_URL}?ex=different-entity-id`}>
-                  Different entity id
-                </NavItem>
-                <NavItem href={`${PUBLIC_URL}?ex=merged-actions-data`}>
-                  Merged actions data
-                </NavItem>
+                {EXAMPLES.map((item, num) => {
+                  return <NavItem key={['example', 'nav', num, item.path].join('-')}
+                                  href={`${PUBLIC_URL}?ex=${item.path}`}>
+                    {item.title}
+                  </NavItem>
+                })}
               </Nav>
             </Navbar>
           </div>
@@ -87,8 +101,8 @@ class App extends Component {
           <ExampleComponent/>
         </div>}
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

@@ -22,7 +22,7 @@ ActionCreator + ActionSelector, reducers are created automatically
 [coverage-report](https://edtoken.github.io/redux-tide/coverage/lcov-report/index.html)  
 
 
-[![Join the chat at https://gitter.im/practice-feature/redux-tide](https://badges.gitter.im/practice-feature/redux-tide.svg)](https://gitter.im/practice-feature/redux-tide?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  
+[![Join the chat at https://gitter.im/practice-feature/redux-tide](https://badges.gitter.im/practice-feature/redux-tide.svg)](https://gitter.im/practice-feature/redux-tide?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)      
 
 [![npm version](https://badge.fury.io/js/redux-tide.svg)](https://badge.fury.io/js/redux-tide)
 [![Build Status](https://api.travis-ci.org/edtoken/redux-tide.svg?branch=master)](https://travis-ci.org/edtoken/redux-tide)
@@ -96,7 +96,7 @@ npm install redux-thunk --save
 ------
 ### Discussion
 You can connect to [Gitter chat room](https://gitter.im/practice-feature/redux-tide)  
-[![Join the chat at https://gitter.im/practice-feature/redux-tide](https://badges.gitter.im/practice-feature/redux-tide.svg)](https://gitter.im/practice-feature/redux-tide?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/practice-feature/redux-tide](https://badges.gitter.im/practice-feature/redux-tide.svg)](https://gitter.im/practice-feature/redux-tide?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)   
 
 ### Usage
 1. You might install library    

@@ -78,7 +78,7 @@ export const ACTION_EMPTY_TYPE_NAME = `${ACTION_TYPE_PREFIX}-empty`
  * @const
  * @type {String}
  */
-export const ACTION_CLEAN_TYPE_NAME = `${ACTION_TYPE_PREFIX}-clean`
+export const ACTION_DELETE_TYPE_NAME = `${ACTION_TYPE_PREFIX}-clean`
 
 /**
  * replaced default response mapper to callback

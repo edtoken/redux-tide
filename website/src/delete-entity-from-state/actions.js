@@ -25,3 +25,10 @@ export const updatePost = createAction(
     data
   ]
 )
+
+
+export const deletePost = createAction(
+  postsSchema,
+  api.del,
+  postId => `posts/${postId}`
+)

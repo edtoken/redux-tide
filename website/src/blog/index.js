@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
-import {Provider} from 'react-redux'
-import {connect} from 'react-redux'
+import React, {Component} from 'react'
+import {connect, Provider} from 'react-redux'
 
 import {ConnectedRouter} from 'react-router-redux'
-import {Table, Pager, Modal, Button, FormControl, ControlLabel, Alert} from 'react-bootstrap'
-import {Spinner} from "../Spinner";
+import {Alert, Button, ControlLabel, FormControl, Modal, Pager, Table} from 'react-bootstrap'
+import {Spinner} from "../Spinner"
+
+import store, {history} from './store'
 
 import DevTools from '../DevTools'
-import store, {history} from './store'
-import {getAllPost, fetchPost, updatePost} from "./actions";
-import {getActionData} from "../../../src";
+import {fetchPost, getAllPost, updatePost} from "./actions"
+import {getActionData} from 'redux-tide'
 
 class BlogPostFormComponent extends Component {
 
@@ -291,7 +291,7 @@ class BlogExampleComponent extends Component {
         <br/>
         Please look into the <b>DevTools panel</b> and <b>Network requests</b>
         <br/>
-        <br/> You can hide <b>DevTools</b>, click <b>Ctrl+H</b>
+        <br/> You can open <b>DevTools</b>, click <b>Ctrl+H</b>
       </Alert>
 
       <BlogPostsTable

@@ -6,6 +6,7 @@ import { fromJS } from 'immutable'
 import { normalize } from 'normalizr'
 
 import {
+  ACTION_DELETE_TYPE_NAME,
   ACTION_EMPTY_TYPE_NAME,
   ACTION_TYPE_PREFIX,
   ACTIONS_REDUCER_NAME,
@@ -65,6 +66,12 @@ const makeActionsReducer = defaultActionsState => {
     if (!actionState) {
       state = state.set(actionId, fromJS(actionDefaultData))
       actionState = state.get(actionId)
+    }
+
+    // delete entity id from actions
+    if (action.type === ACTION_DELETE_TYPE_NAME) {
+      console.log('action delete', actionState)
+      return state
     }
 
     actionState = actionState.merge({
@@ -135,6 +142,12 @@ const makeEntitiesReducer = defaultEntitiesState => {
     const newEntitiesItems = normalizedPayloadSource
       ? normalizedPayloadSource.entities
       : {}
+
+    // delete entity id from actions
+    if (action.type === ACTION_DELETE_TYPE_NAME) {
+      console.log('reducer delete')
+      return state
+    }
 
     // merge entity item data
     for (let entityName in newEntitiesItems) {

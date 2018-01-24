@@ -1,15 +1,13 @@
 import 'should'
 import sinon from 'sinon'
 import { schema } from 'normalizr'
+import {
+  createAction,
+  makeActionHandler,
+  makeActionUniqId
+} from '../src/action'
 
 require('should-sinon')
-
-import {
-  makeActionHandler,
-  makeActionUniqId,
-  makeAction,
-  createAction
-} from '../src/action'
 
 describe('action makeActionUniqId ', function() {
   it('makeActionUniqId returns uniquie ids', function() {

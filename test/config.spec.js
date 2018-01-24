@@ -1,23 +1,22 @@
 import 'should'
 import sinon from 'sinon'
 import { schema } from 'normalizr'
-
-require('should-sinon')
-
 import {
-  IS_TEST_ENVIRONMENT,
-  STATUSES,
+  ACTION_EMPTY_TYPE_NAME,
   ACTION_ID_KEY,
   ACTION_IDS_KEY,
   ACTION_TYPE_PREFIX,
   ACTIONS_REDUCER_NAME,
   ENTITIES_REDUCER_NAME,
-  ACTION_EMPTY_TYPE_NAME,
+  IS_TEST_ENVIRONMENT,
   setDefaultResponseMapper,
-  setDenormalize
+  setDenormalize,
+  STATUSES
 } from '../src/config'
 
 import { createAction } from '../src/action'
+
+require('should-sinon')
 
 describe('config is valid', function() {
   it('should define all required variables', function() {

@@ -3,8 +3,8 @@
  */
 
 import {
+  ACTION_DELETE_TYPE_NAME,
   ACTION_EMPTY_TYPE_NAME,
-  ACTION_CLEAN_TYPE_NAME,
   ACTION_ID_KEY,
   ACTION_IDS_KEY,
   ACTION_TYPE_PREFIX,
@@ -447,28 +447,31 @@ const makeAction = function(
     }
   }
 
-  // /**
-  //  * Clean entity from entity reducer
-  //  *
-  //  * @memberOf action.makeAction.Action
-  //  * @type {Function}
-  //  *
-  //  * @example
-  //  * store.dispatch(userLoginAction.clean())
-  //  *
-  //  * @returns {Undefined} - returns None, only clear entity data
-  //  */
-  // this.action.clean = () => {
-  //   return (dispatch, getState) => {
-  //     dispatch({
-  //       time: new Date().getTime(),
-  //       type: ACTION_CLEAN_TYPE_NAME,
-  //       prefix: ACTION_TYPE_PREFIX,
-  //       actionId: this.actionId,
-  //       actionSchema: this.schema
-  //     })
-  //   }
-  // }
+  /**
+   * Delete entity from entity reducer
+   *
+   * @memberOf action.makeAction.Action
+   * @type {Function}
+   *
+   * @example
+   * store.dispatch(userDeleteAction.delete())
+   *
+   * @example
+   * store.dispatch(userDeleteAction.withPrefix(userId).delete())
+   *
+   * @returns {Undefined} - returns None, only delete entity data
+   */
+  this.action.delete = () => {
+    return (dispatch, getState) => {
+      dispatch({
+        time: new Date().getTime(),
+        type: ACTION_DELETE_TYPE_NAME,
+        prefix: ACTION_TYPE_PREFIX,
+        actionId: this.actionId,
+        actionSchema: this.schema
+      })
+    }
+  }
 
   return this.action
 }

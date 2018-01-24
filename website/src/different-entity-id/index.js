@@ -1,25 +1,23 @@
-import React, {Component} from 'react';
-import {Provider} from 'react-redux'
-import {connect} from 'react-redux'
+import React, {Component} from 'react'
+import {connect, Provider} from 'react-redux'
 
 import {ConnectedRouter} from 'react-router-redux'
-import {Table, Pager, ProgressBar, Modal, Button, FormControl, ControlLabel, Alert} from 'react-bootstrap'
+import {Alert} from 'react-bootstrap'
 
 import DevTools from '../DevTools'
 import store, {history} from './store'
-import {fetchPost, fetchSinglePost, updatePost, updateSinglePost} from "./actions";
-import {getActionData} from "../../../src";
+import {fetchPost, fetchSinglePost, updatePost, updateSinglePost} from "./actions"
+import {getActionData} from 'redux-tide'
 
 class CommonPostComponent extends Component {
 
   componentWillMount() {
-    console.log('fetch', this.props.postId)
     this.props.fetch(this.props.postId)
   }
 
   componentWillReceiveProps(nextProps) {
     // it's need only for SinglePostCorrectComponent
-    const prevProps = this.props;
+    const prevProps = this.props
     this.props = nextProps
 
     if (this.props.postId && this.props.postId !== prevProps.postId) {
@@ -62,8 +60,8 @@ class CommonPostComponent extends Component {
 const PostCorrectComponent = connect(
   (state, props) => getActionData(fetchPost.withPrefix(props.postId)),
   dispatch => ({
-    fetch: (postId) => dispatch(fetchPost.withPrefix(postId)(postId)),
-    update: (postId, data) => dispatch(updatePost.withPrefix(postId)(postId, data))
+    fetch: postId => dispatch(fetchPost.withPrefix(postId)(postId)),
+    update: (postId, data) => dispatch(updatePost.withPrefix(postId)(postId, data)),
   })
 )(CommonPostComponent)
 
@@ -79,8 +77,8 @@ const PostIncorrectComponent = connect(
 const SinglePostCorrectComponent = connect(
   state => getActionData(fetchSinglePost),
   dispatch => ({
-    fetch: (postId) => dispatch(fetchSinglePost(postId)),
-    update: (postId, data) => (dispatch(updateSinglePost(postId, data)))
+    fetch: postId => dispatch(fetchSinglePost(postId)),
+    update: (postId, data) => dispatch(updateSinglePost(postId, data))
   })
 )(CommonPostComponent)
 
@@ -113,7 +111,8 @@ class DifferentEntityIdExampleComponent extends Component {
 
     return (<div>
       <h1>Different entity Id</h1>
-      <p>Source code <a href="https://github.com/edtoken/redux-tide/tree/master/website/src/different-entity-id" target='_blank'>source</a></p>
+      <p>Source code <a href="https://github.com/edtoken/redux-tide/tree/master/website/src/different-entity-id"
+                        target='_blank'>source</a></p>
 
       <Alert bsStyle="info">
         Demonstrate how to use `.withPrefix`, `.withName`, `.clone` methods <br/>
@@ -140,7 +139,8 @@ class DifferentEntityIdExampleComponent extends Component {
           <Alert bsStyle="info">
             If you are have 1 component to 1 action <br/>
             you can use without <span className="label label-info">withPrefix</span> method, it's not required <br/>
-            <b>Please change postId from input to <span className='label label-info'>2</span>, <br/>Then click update and look <span className='label label-info'>correct-post-2</span></b>
+            <b>Please change postId from input to <span className='label label-info'>2</span>, <br/>Then click update
+              and look <span className='label label-info'>correct-post-2</span></b>
           </Alert>
 
           <input

@@ -1,4 +1,4 @@
-import { uniqPrefix, parseError } from '../src/helper'
+import { parseError, uniqPrefix } from '../src/helper'
 
 describe('helper uniqPrefix', function() {
   it('created uniq prefixed', function() {

@@ -1,14 +1,13 @@
-import React, {Component} from 'react';
-import {Provider} from 'react-redux'
-import {connect} from 'react-redux'
+import React, {Component} from 'react'
+import {connect, Provider} from 'react-redux'
 
 import {ConnectedRouter} from 'react-router-redux'
-import {Table, Pager, ProgressBar, Modal, Button, FormControl, ControlLabel, Alert} from 'react-bootstrap'
+import {Alert} from 'react-bootstrap'
 
 import DevTools from '../DevTools'
 import store, {history} from './store'
-import {fetchPost, fetchSinglePost, updatePost, updateSinglePost} from "./actions";
-import {getActionData, getMergedActionsData} from "../../../src";
+import {fetchPost, fetchSinglePost, updatePost, updateSinglePost} from "./actions"
+import {getActionData, getMergedActionsData} from "../../../src"
 
 class CommonPostComponent extends Component {
 
@@ -97,7 +96,8 @@ class DifferentEntityIdExampleComponent extends Component {
 
     return (<div>
       <h1>Merged Actions Data</h1>
-      <p>Source code <a href="https://github.com/edtoken/redux-tide/tree/master/website/src/merged-actions-data" target='_blank'>source</a></p>
+      <p>Source code <a href="https://github.com/edtoken/redux-tide/tree/master/website/src/merged-actions-data"
+                        target='_blank'>source</a></p>
 
       <Alert bsStyle="info">
         Demonstrate how to use `getMergedActionsData` selector<br/>

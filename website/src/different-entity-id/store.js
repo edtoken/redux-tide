@@ -1,9 +1,9 @@
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import {routerMiddleware} from 'react-router-redux'
-import {denormalize} from 'normalizr';
+import {denormalize} from 'normalizr'
 import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
-import {createReducers, setDefaultResponseMapper, setDenormalize} from '../../../src/index';
+import {createReducers, setDefaultResponseMapper, setDenormalize} from 'redux-tide'
 import DevTools from '../DevTools'
 import {customReducer} from './reducer'
 import {appSchema} from './schema'
