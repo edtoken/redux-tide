@@ -46,13 +46,13 @@ const makeActionDenormalizedPayload = (
   schema,
   entities
 ) => {
+  // return empty immutable object
   if (!payloadIds) {
     return undefined
   }
 
-  const result = denormalize(payloadIds, [schema], entities)
-    .filter(v => v)
-    .map(item => item.toJS())
+  const result = denormalize(payloadIds, [schema], entities).filter(v => v)
+
   return isArray ? result : result[0]
 }
 
@@ -66,7 +66,7 @@ const makeActionDenormalizedPayloads = (
   actionState
 ) => {
   if (!actionDataKey) {
-    return {}
+    return undefined
   }
 
   if (!entityState) {
@@ -168,7 +168,14 @@ export const getMergedActionsData = (...actions) => {
       const sortedByUpate = actionsData.sort((a, b) => a.time - b.time)
 
       return sortedByUpate.reduce((memo, item) => {
-        return Object.assign(memo, item)
+        return Object.assign(memo, item, {
+          payload: memo.payload
+            ? memo.payload.merge(item.payload)
+            : item.payload,
+          prevPayload: memo.prevPayload
+            ? memo.prevPayload.merge(item.prevPayload)
+            : item.prevPayload
+        })
       })
     }
   )

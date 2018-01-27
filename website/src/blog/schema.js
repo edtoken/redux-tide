@@ -5,12 +5,12 @@ const commentsSchema = new schema.Entity('comments')
 const postsSchema = new schema.Entity('posts')
 
 postsSchema.define({
-  // author: profileSchema,
-  // comments: [commentsSchema]
+  author: profileSchema,
+  comments: [commentsSchema]
 })
 
 commentsSchema.define({
-  // postId: postsSchema
+  postId: postsSchema
 })
 
 export {

@@ -39,7 +39,7 @@ class BlogPostFormComponent extends Component {
     //   return
     // }
 
-    this.setState({form: this.props.payload || {}})
+    this.setState({form: this.props.payload ? this.props.payload.toJS() : {}})
   }
 
   componentWillMount() {
@@ -67,6 +67,8 @@ class BlogPostFormComponent extends Component {
     const disableEdit = isFetching
     const completed = saved && this.props.status === 'success'
 
+    console.log('payload', payload)
+
     return (<div className="static-modal">
         <Modal show={true} onHide={this.props.onHide}>
           <Modal.Header closeButton>
@@ -87,9 +89,6 @@ class BlogPostFormComponent extends Component {
               reload), <br/>
               But you are calling only <b>PUT post/postId</b>
             </Alert>
-
-            <h3>fetchPost payload:</h3>
-            <pre><code>{JSON.stringify(payload, null, 2)}</code></pre>
 
             {isFetching && <div>
               <Spinner/>
@@ -125,6 +124,11 @@ class BlogPostFormComponent extends Component {
               {!completed && 'Save changes'}
             </Button>
           </Modal.Footer>
+
+          <div className="container-fluid">
+            <h3>fetchPost payload:</h3>
+            <pre><code>{JSON.stringify(payload, null, 2)}</code></pre>
+          </div>
         </Modal>
       </div>
     )
@@ -212,11 +216,11 @@ class BlogPostsTableComponent extends Component {
 
           {hasPayload && payload.map((item, num) => {
             return <tr
-              key={['table-post', item.id, num].join('-')}
-              onClick={() => this.props.handleOpenPost(item.id)}>
-              <td>{item.userId}</td>
-              <td>{item.id}</td>
-              <td>{item.title}</td>
+              key={['table-post', item.get('id'), num].join('-')}
+              onClick={() => this.props.handleOpenPost(item.get('id'))}>
+              <td>{item.get('userId')}</td>
+              <td>{item.get('id')}</td>
+              <td>{item.get('title')}</td>
               <td>
 
               </td>
@@ -283,8 +287,15 @@ class BlogExampleComponent extends Component {
 
     return (<div>
       <h1>Blog Example</h1>
-      <p>Source code <a href="https://github.com/edtoken/redux-tide/tree/master/website/src/blog"
-                        target='_blank'>source</a></p>
+      <p>
+        Preview in SandBox&nbsp;<a
+          href='https://codesandbox.io/s/github/edtoken/redux-tide/tree/master/website?module=/src/blog/index.js&moduleview=1'
+          target='_blank'>codesandbox.io</a>
+      </p>
+
+      <p>Source code&nbsp;<a
+        href='https://github.com/edtoken/redux-tide/tree/master/website/src/blog'
+        target='_blank'>source</a></p>
 
       <Alert bsStyle="info">
         Demonstrate how to create list and single item requests, sync data between it, witout reducers

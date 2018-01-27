@@ -46,6 +46,7 @@ it('selector getActionData', function() {
   }
 
   const result = getActionData(action)(state)
+  result.payload = result.payload.toJS()
 
   result.should.be.deepEqual({
     status: '',

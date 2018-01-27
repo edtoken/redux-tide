@@ -7,7 +7,7 @@ import {postsSchema} from "./schema"
  *
  * @type {Action}
  */
-export const getAllPost = createAction(postsSchema, api.get, query => [`posts`, query])
+export const getAllPost = createAction(postsSchema, api.get, query => [`posts?_embed=comments`, query])
 
 
 /**
@@ -17,10 +17,10 @@ export const getAllPost = createAction(postsSchema, api.get, query => [`posts`, 
  *
  * @type {Action}
  */
-export const fetchPost = createAction(postsSchema, api.get, postId => `posts/${postId}`)
+export const fetchPost = createAction(postsSchema, api.get, postId => `posts/${postId}?_embed=comments`)
 
 export const updatePost = createAction(postsSchema, api.put, (postId, data) => [
-  `posts/${postId}`,
+  `posts/${postId}?_embed=comments`,
   undefined,
   data
 ])

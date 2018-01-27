@@ -13,14 +13,14 @@ import {postsSchema} from "./schema"
 export const fetchPost = createAction(
   postsSchema,
   api.get,
-  postId => `posts/${postId}`
+  postId => `posts/${postId}?_embed=comments`
 )
 
 export const updatePost = createAction(
   postsSchema,
   api.put,
   (postId, data) => [
-    `posts/${postId}`,
+    `posts/${postId}?_embed=comments`,
     undefined,
     data
   ]
@@ -29,7 +29,7 @@ export const updatePost = createAction(
 export const deletePost = createAction(
   postsSchema,
   api.del,
-  postId => `posts/${postId}`
+  postId => `posts/${postId}?_embed=comments`
 )
 
 

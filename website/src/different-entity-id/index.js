@@ -111,6 +111,12 @@ class DifferentEntityIdExampleComponent extends Component {
 
     return (<div>
       <h1>Different entity Id</h1>
+      <p>
+        Preview in SandBox&nbsp;<a
+        href='https://codesandbox.io/s/github/edtoken/redux-tide/tree/master/website?module=/src/different-entity-id/index.js&moduleview=1'
+        target='_blank'>codesandbox.io</a>
+      </p>
+
       <p>Source code <a href="https://github.com/edtoken/redux-tide/tree/master/website/src/different-entity-id"
                         target='_blank'>source</a></p>
 

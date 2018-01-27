@@ -56,7 +56,9 @@ class CommonPostComponent extends Component {
       <br/>
       <br/>
       {hasError && <div className="alert alert-danger">{errorText}</div>}
-      <pre>{JSON.stringify(payload, null, 2)}</pre>
+      <pre>{JSON.stringify({
+        title: payload ? payload.get('title') : ''
+      }, null, 2)}</pre>
     </div>)
   }
 }
@@ -74,33 +76,6 @@ const CommonPost = connect(
   })
 )(CommonPostComponent)
 
-class PostsListComponent extends Component {
-
-  render() {
-    return (<div>
-      <h4>Posts List</h4>
-    </div>)
-  }
-}
-
-const PostsList = connect(
-  (state, props) => ({}),
-  (dispatch) => ({})
-)(PostsListComponent)
-
-class PostsTableComponent extends Component {
-  render() {
-    return (<div>
-      <h4>Posts Table</h4>
-    </div>)
-  }
-}
-
-const PostsTable = connect(
-  (state, props) => ({}),
-  (dispatch) => ({})
-)(PostsTableComponent)
-
 class DeleteTntityFromStateExampleComponent extends Component {
 
   constructor(props) {
@@ -111,6 +86,13 @@ class DeleteTntityFromStateExampleComponent extends Component {
 
     return (<div>
       <h1>Delete Entity from state</h1>
+
+      <p>
+        Preview in SandBox&nbsp;<a
+        href='https://codesandbox.io/s/github/edtoken/redux-tide/tree/master/website?module=/src/delete-entity-from-state/index.js&moduleview=1'
+        target='_blank'>codesandbox.io</a>
+      </p>
+
       <p>Source code <a
         href="https://github.com/edtoken/redux-tide/tree/master/website/src/delete-entity-from-state"
         target='_blank'>source</a>
@@ -124,18 +106,10 @@ class DeleteTntityFromStateExampleComponent extends Component {
         <div className="col-md-6">
           <h1>With delete <small className='text-success'>It's correct</small></h1>
           <CommonPost postId={1}/>
-          <hr/>
-          <PostsTable isCorrect/>
-          <hr/>
-          <PostsList isCorrect/>
         </div>
         <div className="col-md-6">
           <h1>Without delete <small className='text-danger'>It's no correct</small></h1>
           <CommonPost postId={1}/>
-          <hr/>
-          <PostsTable/>
-          <hr/>
-          <PostsList/>
         </div>
       </div>
     </div>)

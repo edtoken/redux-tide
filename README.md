@@ -29,7 +29,9 @@ ActionCreator + ActionSelector, reducers are created automatically
 [![Maintainability](https://api.codeclimate.com/v1/badges/5952e9edfa038e49658f/maintainability)](https://codeclimate.com/github/edtoken/redux-tide/maintainability)
 [![npm downloads](https://img.shields.io/npm/dm/redux-tide.svg?style=flat-square)](https://www.npmjs.com/package/redux-tide)
 [![Coverage Status](https://coveralls.io/repos/github/edtoken/redux-tide/badge.svg?branch=master)](https://coveralls.io/github/edtoken/redux-tide?branch=master)
-[![Inline docs](https://inch-ci.org/github/edtoken/redux-tide.svg?branch=master)](https://inch-ci.org/github/edtoken/redux-tide)
+[![Inline docs](https://inch-ci.org/github/edtoken/redux-tide.svg?branch=master)](https://inch-ci.org/github/edtoken/redux-tide)  
+[![dependencies Status](https://david-dm.org/edtoken/redux-tide/status.svg)](https://david-dm.org/edtoken/redux-tide)
+[![devDependencies Status](https://david-dm.org/edtoken/redux-tide/dev-status.svg)](https://david-dm.org/edtoken/redux-tide?type=dev)
 [![HitCount](http://hits.dwyl.com/edtoken/redux-tide.svg)](http://hits.dwyl.com/edtoken/redux-tide)
 
 [![NPM](https://nodei.co/npm/redux-tide.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/redux-tide/)
