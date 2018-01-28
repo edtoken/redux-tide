@@ -62,12 +62,13 @@ class BlogPostFormComponent extends Component {
   }
 
   render() {
-    const {isFetching, hasError, errorText, payload} = this.props
+    const {isFetching, hasError, errorText, payload, args} = this.props
     const {saved, form} = this.state
     const disableEdit = isFetching
     const completed = saved && this.props.status === 'success'
 
-    console.log('payload', payload)
+    // console.log('args', args)
+    // console.log('payload', payload)
 
     return (<div className="static-modal">
         <Modal show={true} onHide={this.props.onHide}>
@@ -108,6 +109,7 @@ class BlogPostFormComponent extends Component {
               <FormControl
                 componentClass="textarea"
                 name="body"
+                style={{minHeight: '80px'}}
                 defaultValue={form.body}
                 placeholder="Enter text"
                 onChange={(e) => (this._handleChange(e))}
@@ -127,7 +129,8 @@ class BlogPostFormComponent extends Component {
 
           <div className="container-fluid">
             <h3>fetchPost payload:</h3>
-            <pre><code>{JSON.stringify(payload, null, 2)}</code></pre>
+            {payload && <pre><code>{JSON.stringify({...payload.toJS(), comments: ['... Comments List ...']}, null, 2)}</code></pre>}
+
           </div>
         </Modal>
       </div>
@@ -289,8 +292,8 @@ class BlogExampleComponent extends Component {
       <h1>Blog Example</h1>
       <p>
         Preview in SandBox&nbsp;<a
-          href='https://codesandbox.io/s/github/edtoken/redux-tide/tree/master/website?module=/src/blog/index.js&moduleview=1'
-          target='_blank'>codesandbox.io</a>
+        href='https://codesandbox.io/s/github/edtoken/redux-tide/tree/master/website?module=/src/blog/index.js&moduleview=1'
+        target='_blank'>codesandbox.io</a>
       </p>
 
       <p>Source code&nbsp;<a

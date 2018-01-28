@@ -2,7 +2,9 @@
 
 # 0.1.5
 Change selector payload type of data, now it's *Immutable JSON or unndefined* please see [test-source](https://github.com/edtoken/redux-tide/blob/master/test/selector.spec.js#L48)    
-Implement `action.delete` functionality, for details please see [source](https://github.com/edtoken/redux-tide/blob/master/src/action.js#L464) and [example](https://edtoken.github.io/redux-tide/?ex=delete-entity-from-state) and [example-source](https://github.com/edtoken/redux-tide/blob/master/website/src/delete-entity-from-state/index.js#L1)   
+Add query builder result to action store and selector response `args`  
+Implement `action.remove`  
+Implement `action.recall`  
 Improve documentation  
 Improve examples, add new example  
 Add code sandbox examples  

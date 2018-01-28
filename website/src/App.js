@@ -25,9 +25,9 @@ const EXAMPLES = [
     'component': require('./merged-actions-data')
   },
   {
-    'title': 'Delete entity from state',
-    'path': 'delete-entity-from-state',
-    'component': require('./delete-entity-from-state')
+    'title': 'Remove entity from state',
+    'path': 'remove-entity-from-state',
+    'component': require('./remove-entity-from-state')
   }
 ]
 

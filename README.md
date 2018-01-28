@@ -326,6 +326,7 @@ import {getActionData} from 'redux-tide';
 ```
 {String} actionId - your action id
 {*} sourceResult - your source response from server (not mapped response)
+{*} args - your args from query builder action method
 {String} status - pending|success|error
 {Number} time - timestamp of action
 {Boolean} hasError - has error or not

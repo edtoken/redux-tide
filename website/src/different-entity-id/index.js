@@ -51,7 +51,7 @@ class CommonPostComponent extends Component {
       <br/>
       <br/>
       {hasError && <div className="alert alert-danger">{errorText}</div>}
-      <pre>{JSON.stringify(payload, null, 2)}</pre>
+      {payload && <pre><code>{JSON.stringify({...payload.toJS(), comments: ['... Comments List ...']}, null, 2)}</code></pre>}
     </div>)
   }
 }

@@ -78,14 +78,10 @@ const CommonPost = connect(
 
 class DeleteTntityFromStateExampleComponent extends Component {
 
-  constructor(props) {
-    super(props)
-  }
-
   render() {
 
     return (<div>
-      <h1>Delete Entity from state</h1>
+      <h1>Remove Entity from state</h1>
 
       <p>
         Preview in SandBox&nbsp;<a
@@ -99,7 +95,9 @@ class DeleteTntityFromStateExampleComponent extends Component {
       </p>
 
       <Alert bsStyle="info">
-        Demonstrate how to use `dispatch(action.delete())` method<br/>
+        Demonstrate how to use `dispatch(action.remove())` method<br/>
+        When you do `DELETE users/:user_id`, you need to delete entity from normalized store <br/>
+        For this, you can use `dispatch(deleteUserAction.remove())` or `dispatch(deleteUserAction.withPrefix(userId).remove())`
       </Alert>
 
       <div className="row">

@@ -124,6 +124,7 @@ const _makeGetActionData = (action, actionId, entityName, actionSchema) => {
         makeDefaultActionData(),
         {
           actionId,
+          args: actionState.get('args'),
           sourceResult: actionState.get('sourceResult'),
           status: actionState.get('status'),
           time: actionState.get('time'),
