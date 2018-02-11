@@ -140,7 +140,7 @@ const makeActionHandler = (
      * payloadSource: Object|Array
      * }}
      */
-    return Object.freeze({
+    return {
       time: new Date().getTime(),
       type: `${actionId}`,
       prefix: ACTION_TYPE_PREFIX,
@@ -158,7 +158,7 @@ const makeActionHandler = (
       sourceResult,
       payload,
       payloadSource
-    })
+    }
   }
 }
 

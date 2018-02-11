@@ -229,12 +229,22 @@ export const createNewPost = createAction(
     ]
 )
 
+export const getPostById = createAction(
+    postsSchema, 
+    get, 
+    (postId) => {
+        return (dispatch, getState)=>{
+            // return Promise (axios call or other)
+        }
+    }
+)
+
 // basic redux action can be use
 export const openEditPost = (postId) => {
   return {
     type:OPEN_EDIT,
     postId
-  }
+  }  
 }
 
 ```
