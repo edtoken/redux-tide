@@ -1,6 +1,6 @@
-import {createAction} from "../../../src/action";
+import {createAction} from 'redux-tide'
 import * as api from '../RESTApi'
-import {postsSchema} from "./schema";
+import {postsSchema} from "./schema"
 
 
 /**
@@ -13,14 +13,14 @@ import {postsSchema} from "./schema";
 export const fetchPost = createAction(
   postsSchema,
   api.get,
-  postId => `posts/${postId}`
+  postId => `posts/${postId}?_embed=comments`
 )
 
 export const updatePost = createAction(
   postsSchema,
   api.put,
   (postId, data) => [
-    `posts/${postId}`,
+    `posts/${postId}?_embed=comments`,
     undefined,
     data
   ]

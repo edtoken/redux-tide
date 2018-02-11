@@ -26,14 +26,9 @@ export const updatePost = createAction(
   ]
 )
 
+
 export const deletePost = createAction(
   postsSchema,
   api.del,
-  postId => `posts/${postId}?_embed=comments`
+  postId => `posts/${postId}`
 )
-
-
-// if 1 action to 1 component you can use this without .withPrefix, it's not required
-export const fetchSinglePost = fetchPost.clone()
-
-export const updateSinglePost = updatePost.clone()

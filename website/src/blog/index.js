@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
-import {Provider} from 'react-redux'
-import {connect} from 'react-redux'
+import React, {Component} from 'react'
+import {connect, Provider} from 'react-redux'
 
 import {ConnectedRouter} from 'react-router-redux'
-import {Table, Pager, Modal, Button, FormControl, ControlLabel, Alert} from 'react-bootstrap'
-import {Spinner} from "../Spinner";
+import {Alert, Button, ControlLabel, FormControl, Modal, Pager, Table} from 'react-bootstrap'
+import {Spinner} from "../Spinner"
+
+import store, {history} from './store'
 
 import DevTools from '../DevTools'
-import store, {history} from './store'
-import {getAllPost, fetchPost, updatePost} from "./actions";
-import {getActionData} from "../../../src";
+import {fetchPost, getAllPost, updatePost} from "./actions"
+import {getActionData} from 'redux-tide'
 
 class BlogPostFormComponent extends Component {
 
@@ -39,7 +39,7 @@ class BlogPostFormComponent extends Component {
     //   return
     // }
 
-    this.setState({form: this.props.payload || {}})
+    this.setState({form: this.props.payload ? this.props.payload.toJS() : {}})
   }
 
   componentWillMount() {
@@ -62,10 +62,13 @@ class BlogPostFormComponent extends Component {
   }
 
   render() {
-    const {isFetching, hasError, errorText, payload} = this.props
+    const {isFetching, hasError, errorText, payload, args} = this.props
     const {saved, form} = this.state
     const disableEdit = isFetching
     const completed = saved && this.props.status === 'success'
+
+    // console.log('args', args)
+    // console.log('payload', payload)
 
     return (<div className="static-modal">
         <Modal show={true} onHide={this.props.onHide}>
@@ -88,9 +91,6 @@ class BlogPostFormComponent extends Component {
               But you are calling only <b>PUT post/postId</b>
             </Alert>
 
-            <h3>fetchPost payload:</h3>
-            <pre><code>{JSON.stringify(payload, null, 2)}</code></pre>
-
             {isFetching && <div>
               <Spinner/>
             </div>}
@@ -109,6 +109,7 @@ class BlogPostFormComponent extends Component {
               <FormControl
                 componentClass="textarea"
                 name="body"
+                style={{minHeight: '80px'}}
                 defaultValue={form.body}
                 placeholder="Enter text"
                 onChange={(e) => (this._handleChange(e))}
@@ -125,6 +126,12 @@ class BlogPostFormComponent extends Component {
               {!completed && 'Save changes'}
             </Button>
           </Modal.Footer>
+
+          <div className="container-fluid">
+            <h3>fetchPost payload:</h3>
+            {payload && <pre><code>{JSON.stringify({...payload.toJS(), comments: ['... Comments List ...']}, null, 2)}</code></pre>}
+
+          </div>
         </Modal>
       </div>
     )
@@ -212,11 +219,11 @@ class BlogPostsTableComponent extends Component {
 
           {hasPayload && payload.map((item, num) => {
             return <tr
-              key={['table-post', item.id, num].join('-')}
-              onClick={() => this.props.handleOpenPost(item.id)}>
-              <td>{item.userId}</td>
-              <td>{item.id}</td>
-              <td>{item.title}</td>
+              key={['table-post', item.get('id'), num].join('-')}
+              onClick={() => this.props.handleOpenPost(item.get('id'))}>
+              <td>{item.get('userId')}</td>
+              <td>{item.get('id')}</td>
+              <td>{item.get('title')}</td>
               <td>
 
               </td>
@@ -283,15 +290,22 @@ class BlogExampleComponent extends Component {
 
     return (<div>
       <h1>Blog Example</h1>
-      <p>Source code <a href="https://github.com/edtoken/redux-tide/tree/master/website/src/blog"
-                        target='_blank'>source</a></p>
+      <p>
+        Preview in SandBox&nbsp;<a
+        href='https://codesandbox.io/s/github/edtoken/redux-tide/tree/master/website?module=/src/blog/index.js&moduleview=1'
+        target='_blank'>codesandbox.io</a>
+      </p>
+
+      <p>Source code&nbsp;<a
+        href='https://github.com/edtoken/redux-tide/tree/master/website/src/blog'
+        target='_blank'>source</a></p>
 
       <Alert bsStyle="info">
         Demonstrate how to create list and single item requests, sync data between it, witout reducers
         <br/>
         Please look into the <b>DevTools panel</b> and <b>Network requests</b>
         <br/>
-        <br/> You can hide <b>DevTools</b>, click <b>Ctrl+H</b>
+        <br/> You can open <b>DevTools</b>, click <b>Ctrl+H</b>
       </Alert>
 
       <BlogPostsTable

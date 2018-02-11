@@ -7,6 +7,7 @@ import { normalize } from 'normalizr'
 
 import {
   ACTION_EMPTY_TYPE_NAME,
+  ACTION_REMOVE_TYPE_NAME,
   ACTION_TYPE_PREFIX,
   ACTIONS_REDUCER_NAME,
   ENTITIES_REDUCER_NAME
@@ -32,6 +33,7 @@ const makeActionsReducer = defaultActionsState => {
     }
 
     const {
+      args,
       status,
       time,
       actionId,
@@ -47,8 +49,11 @@ const makeActionsReducer = defaultActionsState => {
 
     const entityKey = actionSchema.key
 
-    // action.clear
-    if (action.type === ACTION_EMPTY_TYPE_NAME) {
+    // action.clear || action.remove
+    if (
+      action.type === ACTION_EMPTY_TYPE_NAME ||
+      action.type === ACTION_REMOVE_TYPE_NAME
+    ) {
       return state.set(
         actionId,
         fromJS(Object.assign({ entityKey }, actionDefaultData, { time }))
@@ -68,6 +73,7 @@ const makeActionsReducer = defaultActionsState => {
     }
 
     actionState = actionState.merge({
+      args,
       status,
       time,
       hasError,

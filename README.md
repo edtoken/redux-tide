@@ -22,14 +22,16 @@ ActionCreator + ActionSelector, reducers are created automatically
 [coverage-report](https://edtoken.github.io/redux-tide/coverage/lcov-report/index.html)  
 
 
-[![Join the chat at https://gitter.im/practice-feature/redux-tide](https://badges.gitter.im/practice-feature/redux-tide.svg)](https://gitter.im/practice-feature/redux-tide?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)  
+[![Join the chat at https://gitter.im/practice-feature/redux-tide](https://badges.gitter.im/practice-feature/redux-tide.svg)](https://gitter.im/practice-feature/redux-tide?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)      
 
 [![npm version](https://badge.fury.io/js/redux-tide.svg)](https://badge.fury.io/js/redux-tide)
 [![Build Status](https://api.travis-ci.org/edtoken/redux-tide.svg?branch=master)](https://travis-ci.org/edtoken/redux-tide)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5952e9edfa038e49658f/maintainability)](https://codeclimate.com/github/edtoken/redux-tide/maintainability)
 [![npm downloads](https://img.shields.io/npm/dm/redux-tide.svg?style=flat-square)](https://www.npmjs.com/package/redux-tide)
 [![Coverage Status](https://coveralls.io/repos/github/edtoken/redux-tide/badge.svg?branch=master)](https://coveralls.io/github/edtoken/redux-tide?branch=master)
-[![Inline docs](https://inch-ci.org/github/edtoken/redux-tide.svg?branch=master)](https://inch-ci.org/github/edtoken/redux-tide)
+[![Inline docs](https://inch-ci.org/github/edtoken/redux-tide.svg?branch=master)](https://inch-ci.org/github/edtoken/redux-tide)  
+[![dependencies Status](https://david-dm.org/edtoken/redux-tide/status.svg)](https://david-dm.org/edtoken/redux-tide)
+[![devDependencies Status](https://david-dm.org/edtoken/redux-tide/dev-status.svg)](https://david-dm.org/edtoken/redux-tide?type=dev)
 [![HitCount](http://hits.dwyl.com/edtoken/redux-tide.svg)](http://hits.dwyl.com/edtoken/redux-tide)
 
 [![NPM](https://nodei.co/npm/redux-tide.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/redux-tide/)
@@ -96,7 +98,7 @@ npm install redux-thunk --save
 ------
 ### Discussion
 You can connect to [Gitter chat room](https://gitter.im/practice-feature/redux-tide)  
-[![Join the chat at https://gitter.im/practice-feature/redux-tide](https://badges.gitter.im/practice-feature/redux-tide.svg)](https://gitter.im/practice-feature/redux-tide?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/practice-feature/redux-tide](https://badges.gitter.im/practice-feature/redux-tide.svg)](https://gitter.im/practice-feature/redux-tide?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)   
 
 ### Usage
 1. You might install library    
@@ -227,12 +229,22 @@ export const createNewPost = createAction(
     ]
 )
 
+export const getPostById = createAction(
+    postsSchema, 
+    get, 
+    (postId) => {
+        return (dispatch, getState)=>{
+            // return Promise (axios call or other)
+        }
+    }
+)
+
 // basic redux action can be use
 export const openEditPost = (postId) => {
   return {
     type:OPEN_EDIT,
     postId
-  }
+  }  
 }
 
 ```
@@ -324,6 +336,7 @@ import {getActionData} from 'redux-tide';
 ```
 {String} actionId - your action id
 {*} sourceResult - your source response from server (not mapped response)
+{*} args - your args from query builder action method
 {String} status - pending|success|error
 {Number} time - timestamp of action
 {Boolean} hasError - has error or not

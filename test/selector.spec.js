@@ -2,7 +2,7 @@ import 'should'
 import { schema } from 'normalizr'
 import { fromJS } from 'immutable'
 
-import { ENTITIES_REDUCER_NAME, ACTIONS_REDUCER_NAME } from '../src/config'
+import { ACTIONS_REDUCER_NAME, ENTITIES_REDUCER_NAME } from '../src/config'
 import {
   getActionData,
   getEntityItemsByAction,
@@ -46,6 +46,7 @@ it('selector getActionData', function() {
   }
 
   const result = getActionData(action)(state)
+  result.payload = result.payload.toJS()
 
   result.should.be.deepEqual({
     status: '',

@@ -72,13 +72,13 @@ export const ENTITIES_REDUCER_NAME = `${ACTION_TYPE_PREFIX}-entities`
 export const ACTION_EMPTY_TYPE_NAME = `${ACTION_TYPE_PREFIX}-empty`
 
 /**
- * Action type name for clear entity data from entity reducer
+ * Action type name for delete entities from state
  *
  * @memberOf config
  * @const
  * @type {String}
  */
-export const ACTION_CLEAN_TYPE_NAME = `${ACTION_TYPE_PREFIX}-clean`
+export const ACTION_REMOVE_TYPE_NAME = `${ACTION_TYPE_PREFIX}-remove`
 
 /**
  * replaced default response mapper to callback

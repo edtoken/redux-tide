@@ -3,8 +3,8 @@
  */
 
 import {
+  ACTION_REMOVE_TYPE_NAME,
   ACTION_EMPTY_TYPE_NAME,
-  ACTION_CLEAN_TYPE_NAME,
   ACTION_ID_KEY,
   ACTION_IDS_KEY,
   ACTION_TYPE_PREFIX,
@@ -81,9 +81,10 @@ const makeActionHandler = (
    *
    * @param {String} error - action error text
    * @param {Object|Array} payloadSource - response from action result
+   * @param {Object|Array} args - arguments from queryBuilder
    * @returns {Object} - action dispatch body
    */
-  return function(error, payloadSource, sourceResult) {
+  return function(error, payloadSource, sourceResult, args) {
     if (status === 'success' && payloadSource === undefined) {
       error = 'Empty payload'
       status = 'error'
@@ -139,10 +140,11 @@ const makeActionHandler = (
      * payloadSource: Object|Array
      * }}
      */
-    return Object.freeze({
+    return {
       time: new Date().getTime(),
       type: `${actionId}`,
       prefix: ACTION_TYPE_PREFIX,
+      args,
       actionId,
       parentActionId,
       status,
@@ -156,22 +158,22 @@ const makeActionHandler = (
       sourceResult,
       payload,
       payloadSource
-    })
+    }
   }
 }
 
 const makeResultCallback = (responseMapper, success, error) => {
-  return function(dispatch, getState, err, result) {
+  return function(dispatch, getState, err, result, args) {
     try {
       const errorMessage = parseError(err)
 
       if (errorMessage) {
-        return dispatch(error(errorMessage, undefined))
+        return dispatch(error(errorMessage, undefined, undefined, args))
       }
 
-      dispatch(success(undefined, responseMapper(result), result))
+      dispatch(success(undefined, responseMapper(result), result, args))
     } catch (e) {
-      dispatch(error(String(`${e.message || e}`), undefined))
+      dispatch(error(String(`${e.message || e}`), undefined, undefined, args))
       throw e
     }
   }
@@ -208,25 +210,27 @@ const makeCallActionMethod = resultCallBack => {
 
     if (actionResult instanceof Promise) {
       return actionResult
-        .then(resp => resultCallBack(dispatch, getState, false, resp))
-        .catch(err => resultCallBack(dispatch, getState, err, undefined))
+        .then(resp => resultCallBack(dispatch, getState, false, resp, args))
+        .catch(err => resultCallBack(dispatch, getState, err, undefined, args))
     }
 
     if (typeof actionResult === 'function') {
       actionResult = actionResult.call(this, dispatch, getState)
 
       if (!actionResult) {
-        return resultCallBack(dispatch, getState, undefined, undefined)
+        return resultCallBack(dispatch, getState, undefined, undefined, args)
       }
 
       if (actionResult instanceof Promise) {
         return actionResult
-          .then(resp => resultCallBack(dispatch, getState, false, resp))
-          .catch(err => resultCallBack(dispatch, getState, err, undefined))
+          .then(resp => resultCallBack(dispatch, getState, false, resp, args))
+          .catch(err =>
+            resultCallBack(dispatch, getState, err, undefined, args)
+          )
       }
     }
 
-    return resultCallBack(dispatch, getState, false, actionResult)
+    return resultCallBack(dispatch, getState, false, actionResult, args)
   }
 }
 
@@ -435,7 +439,7 @@ const makeAction = function(
    *
    * @returns {Undefined} - returns None, only clear action data
    */
-  this.action.empty = () => {
+  this.action.reset = () => {
     return (dispatch, getState) => {
       dispatch({
         time: new Date().getTime(),
@@ -447,28 +451,28 @@ const makeAction = function(
     }
   }
 
-  // /**
-  //  * Clean entity from entity reducer
-  //  *
-  //  * @memberOf action.makeAction.Action
-  //  * @type {Function}
-  //  *
-  //  * @example
-  //  * store.dispatch(userLoginAction.clean())
-  //  *
-  //  * @returns {Undefined} - returns None, only clear entity data
-  //  */
-  // this.action.clean = () => {
-  //   return (dispatch, getState) => {
-  //     dispatch({
-  //       time: new Date().getTime(),
-  //       type: ACTION_CLEAN_TYPE_NAME,
-  //       prefix: ACTION_TYPE_PREFIX,
-  //       actionId: this.actionId,
-  //       actionSchema: this.schema
-  //     })
-  //   }
-  // }
+  /**
+   * Remove action entity id or ids from entities reducer
+   *
+   * @memberOf action.makeAction.Action
+   * @type {Function}
+   *
+   * @example
+   * store.dispatch(userLoginAction.remove())
+   *
+   * @returns {Undefined} - returns None, only remove entity items
+   */
+  this.action.remove = () => {
+    return (dispatch, getState) => {
+      dispatch({
+        time: new Date().getTime(),
+        type: ACTION_REMOVE_TYPE_NAME,
+        prefix: ACTION_TYPE_PREFIX,
+        actionId: this.actionId,
+        actionSchema: this.schema
+      })
+    }
+  }
 
   return this.action
 }

@@ -5,7 +5,7 @@ const apiInstance = axios.create({
 })
 
 const createRequest = method => {
-  return function(url, params = {}, data = {}) {
+  return function (url, params = {}, data = {}) {
     return apiInstance.request({
       method,
       url: url,

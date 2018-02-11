@@ -3,11 +3,11 @@ import { createReducers } from './reducer'
 import {
   denomalizeEntityItemById,
   getActionData,
-  getMergedActionsData,
   getEntityItemsByAction,
   getEntityItemsByEntityName,
   getEntityItemsBySchema,
-  getEntityReducer
+  getEntityReducer,
+  getMergedActionsData
 } from './selector'
 
 import {

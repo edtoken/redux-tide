@@ -1,19 +1,18 @@
-import React, {Component} from 'react';
-import {Provider} from 'react-redux'
-import {connect} from 'react-redux'
+import React, {Component} from 'react'
+import {connect, Provider} from 'react-redux'
 
 import {ConnectedRouter} from 'react-router-redux'
-import {Table, Pager, ProgressBar, Modal, Button, FormControl, ControlLabel, Alert} from 'react-bootstrap'
+import {Alert} from 'react-bootstrap'
 
 import DevTools from '../DevTools'
 import store, {history} from './store'
-import {fetchPost, fetchSinglePost, updatePost, updateSinglePost} from "./actions";
-import {getActionData, getMergedActionsData} from "../../../src";
+
+import {fetchPost, fetchSinglePost, updatePost, updateSinglePost} from './actions'
+import {getActionData, getMergedActionsData} from 'redux-tide'
 
 class CommonPostComponent extends Component {
 
   componentWillMount() {
-    console.log('fetch', this.props.postId)
     this.props.fetch(this.props.postId)
   }
 
@@ -42,7 +41,7 @@ class CommonPostComponent extends Component {
       <br/>
       <br/>
       {hasError && <div className="alert alert-danger">{errorText}</div>}
-      <pre>{JSON.stringify(payload, null, 2)}</pre>
+      {payload && <pre><code>{JSON.stringify({...payload.toJS(), comments: ['... Comments List ...']}, null, 2)}</code></pre>}
     </div>)
   }
 }
@@ -97,7 +96,16 @@ class DifferentEntityIdExampleComponent extends Component {
 
     return (<div>
       <h1>Merged Actions Data</h1>
-      <p>Source code <a href="https://github.com/edtoken/redux-tide/tree/master/website/src/merged-actions-data" target='_blank'>source</a></p>
+
+      <p>
+        Preview in SandBox&nbsp;<a
+        href='https://codesandbox.io/s/github/edtoken/redux-tide/tree/master/website?module=/src/merged-actions-data/index.js&moduleview=1'
+        target='_blank'>codesandbox.io</a>
+      </p>
+
+      <p>Source code <a
+        href="https://github.com/edtoken/redux-tide/tree/master/website/src/merged-actions-data"
+                        target='_blank'>source</a></p>
 
       <Alert bsStyle="info">
         Demonstrate how to use `getMergedActionsData` selector<br/>

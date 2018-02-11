@@ -1,5 +1,17 @@
 # Changelog
 
+# 0.1.5
+Change selector payload type of data, now it's *Immutable JSON or unndefined* please see [test-source](https://github.com/edtoken/redux-tide/blob/master/test/selector.spec.js#L48)    
+Add query builder result to action store and selector response `args`  
+Implement `action.remove`  
+Implement `action.recall`  
+Improve documentation  
+Improve examples, add new example  
+Add code sandbox examples  
+Add new badges 
+
+# 0.1.4
+
 # 0.1.3
 Fix critical bug in method `Action.empty`  
 small refactoring action.js, selector.js files  
